@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Armario
+  - Saco
+  - Vela
+  - Gaveta
+  - Porta
+  - LeftWall
+  - RightWall
+  - Floor
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Ground
+  - Walls
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Background
+    uniqueID: 2633596405
+    locked: 0
+  - name: Limits
+    uniqueID: 2743459649
+    locked: 0
+  - name: UI
+    uniqueID: 1081143485
+    locked: 0
+  - name: SceneObjects
+    uniqueID: 217136999
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
