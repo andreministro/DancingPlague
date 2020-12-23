@@ -12,6 +12,7 @@ TagManager:
   - LeftWall
   - RightWall
   - Floor
+  - Bau
   layers:
   - Default
   - TransparentFX
@@ -60,7 +61,4 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: FrontLayer
-    uniqueID: 37587623
     locked: 0

@@ -27,6 +27,7 @@ public class PlayerScript : MonoBehaviour
 
     public bool movePlayer;
     public bool cutScene;
+    public int cutSceneNumber = 1;
     public TextMeshProUGUI EText;
     public TextMeshProUGUI dialogueText;
 
@@ -36,7 +37,7 @@ public class PlayerScript : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         movePlayer = false;
-        cutScene = true; 
+        cutScene = true;
     }
 
     // Update is called once per frame
@@ -47,38 +48,7 @@ public class PlayerScript : MonoBehaviour
         //Player_Movement();
         if (cutScene)
         {
-            float stopPosition = 2.18f;
-            moveX = 0.8f;
-            if (gameObject.transform.position.x < stopPosition)
-            {
-                if (moveX == 0)
-                {
-                    animator.SetBool("IsRunning", false);
-                }
-                else
-                {
-                    animator.SetBool("IsRunning", true);
-                }
-                gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(moveX * playerspeed, gameObject.GetComponent<Rigidbody2D>().velocity.y);
-            }
-            else
-            {
-                moveX = 0.0f;
-                if (moveX == 0)
-                {
-                    animator.SetBool("IsRunning", false);
-                }
-                else
-                {
-                    animator.SetBool("IsRunning", true);
-                }
-                string newText = "mBom dia homem da minha vida!!<3\nsPai, comi o pao:(\npcabrao de merda.";
-                FlipPlayer();
-                StartCoroutine(gameObject.GetComponent<PlayerInter>().displayDialogueText(newText, true));
-                //End of CutScene
-                cutScene = false;
-                gameObject.GetComponent<PlayerInter>().playerInteractionsEnabled = true;
-            }
+            cutscene_Controller();
         }
         else
         {
@@ -201,6 +171,50 @@ public class PlayerScript : MonoBehaviour
     void Jump()
     {
         rb.velocity = Vector2.up * JumpPower;
+    }
+
+    void cutscene_Controller()
+    {
+        float stopPosition = 2.18f;
+        moveX = 0.8f;
+        if (gameObject.transform.position.x < stopPosition)
+        {
+            if (moveX == 0)
+            {
+                animator.SetBool("IsRunning", false);
+            }
+            else
+            {
+                animator.SetBool("IsRunning", true);
+            }
+            gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(moveX * playerspeed, gameObject.GetComponent<Rigidbody2D>().velocity.y);
+        }
+        else
+        {
+            moveX = 0.0f;
+            if (moveX == 0)
+            {
+                animator.SetBool("IsRunning", false);
+            }
+            else
+            {
+                animator.SetBool("IsRunning", true);
+            }
+            
+            string newText;
+            if (cutSceneNumber == 1)
+            {
+                newText = "mHello dear, did you sleep well?\npYes. Nights are getting colder.\nmYes, I know...\npCan you pass me the bread?";
+            }
+            else
+                newText = "pI can't seem to find it.\nsDad, I was so hungry and ate it, I'm sorry.\nm It's okay. I guess we can afford to buy another one, dear?\npYes, maybe one or two more. I will go to the market. Be right back";
+            
+            FlipPlayer();
+            StartCoroutine(gameObject.GetComponent<PlayerInter>().displayDialogueText(newText, true));
+            //End of CutScene
+            cutScene = false;
+            gameObject.GetComponent<PlayerInter>().playerInteractionsEnabled = true;
+        }
     }
 
 }

@@ -42,12 +42,11 @@ public class PlayerInter : MonoBehaviour
                         }
                     }
 
-                    if (triggered == "Gaveta")
+                    if (triggered == "Bau")
                     {
                         pressETxt.text = "";
-                        string newText = "Empty closet."; //Para teste
+                        string newText = "Empty."; //Para teste
                         StartCoroutine(displayDialogueText(newText, false));
-                        //DIZER Q TEM UMA CHAVE E QUE APANHOU?
                         if (firstVisitG)
                         {
                             completedMissions++;
@@ -58,7 +57,7 @@ public class PlayerInter : MonoBehaviour
                     if (triggered == "Saco")
                     {
                         pressETxt.text = "";
-                        string newText = "Empty closet.";
+                        string newText = "Empty.";
                         StartCoroutine(displayDialogueText(newText, false));
                         if (firstVisitS)
                         {
@@ -172,7 +171,8 @@ public class PlayerInter : MonoBehaviour
 
             if (other.tag == "Porta")
             {
-                pressETxt.text = "Open (Press E)";
+                if(completedMissions==3)
+                    pressETxt.text = "Open (Press E)";
                 triggered = other.tag;
                 offTrigger = false;
             }
@@ -198,7 +198,7 @@ public class PlayerInter : MonoBehaviour
                 offTrigger = true;
             }
 
-            if (other.tag == "Gaveta")
+            if (other.tag == "Bau")
             {
                 pressETxt.text = "";
                 triggered = "";
@@ -219,5 +219,11 @@ public class PlayerInter : MonoBehaviour
                 offTrigger = true;
             }
         }
+    }
+    public IEnumerator secondCutscene()
+    {
+        yield return new WaitUntil(() => completedMissions==3);
+        gameObject.GetComponent<PlayerScript>().cutSceneNumber = 2;
+        gameObject.GetComponent<PlayerScript>().cutScene = true;
     }
 } 
