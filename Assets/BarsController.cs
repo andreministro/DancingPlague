@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class BarsController : MonoBehaviour
 {
-    private float sanityBar;
-    public bool loosingSanity;
     public GameObject madnessImage;
-
+    public GameObject[] hungerBar;
+    public GameObject[] hungerFaces;
+    private int health;
     public bool isCoveringEars;
     public bool triggerArea = false;
+    public bool playerEating = false;
 
     private float maxScale = 14.0f;
     private float maxScaleAux = 7.0f;
@@ -20,18 +21,71 @@ public class BarsController : MonoBehaviour
         alphaLevel = 0.5f;
         madnessImage.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, alphaLevel);
         //madnessImage.SetActive(true);
+
+        health = 28;
+        for(int i=0; i <= health; i++)
+        {
+            hungerBar[i].SetActive(false);
+        }
+        for (int i = 0; i <= 2; i++)
+        {
+            hungerFaces[i].SetActive(false);
+        }
+        hungerBar[health].SetActive(true);
+        hungerFaces[0].SetActive(true);
+        StartCoroutine(hungerBarLoosing());
     }
 
     void Update()
     {
         triggerArea = true;
-        
+        if (playerEating)
+        {
+            hungerBarGaining();
+        }
         //sanityBarController();
     }
-    private void hungerBarController()
+    private IEnumerator hungerBarLoosing()
     {
-        
+        yield return new WaitForSeconds(1.0f); //signal
+        hungerBar[health].SetActive(false);
+        if (health > 0) { 
+            health--;
+            hungerBar[health].SetActive(true);
+            if (health < 10)
+            {
+                hungerFaces[1].SetActive(false);
+                hungerFaces[2].SetActive(true);
+            }
+            else if(health<20 && health >= 10)
+            {
+                hungerFaces[0].SetActive(false);
+                hungerFaces[1].SetActive(true);
+            }
+        }
+        StartCoroutine(hungerBarLoosing());
     }
+    private void hungerBarGaining()
+    {
+        playerEating = false;
+        hungerBar[health].SetActive(false);
+        if (health + 10 <= 28)
+            health += 10;
+        else
+            health = 28;
+        hungerBar[health].SetActive(true);
+        if (health < 20)
+        {
+            hungerFaces[2].SetActive(false);
+            hungerFaces[1].SetActive(true);
+        }
+        else
+        {
+            hungerFaces[1].SetActive(false);
+            hungerFaces[0].SetActive(true);
+        }
+    }
+
     private void sanityBarController()
     {
         float step = 0.04f;

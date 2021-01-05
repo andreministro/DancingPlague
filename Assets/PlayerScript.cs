@@ -40,7 +40,7 @@ public class PlayerScript : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         currentSceneName = SceneManager.GetActiveScene().name;
-        if (currentSceneName == "LVL1 - Home")
+        /*if (currentSceneName == "LVL1 - Home")
         {
             movePlayer = false;
             cutScene = true;
@@ -50,10 +50,10 @@ public class PlayerScript : MonoBehaviour
         {
             movePlayer = true;
             cutScene = false;
-        }
+        }*/
 
-        /*cutScene = false;
-        movePlayer = true;*/
+        cutScene = false;
+        movePlayer = true;
 
         //NÃO APAGAR ESTES FLIPS À TROLHA
         FlipPlayer();
