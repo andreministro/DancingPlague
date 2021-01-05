@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerInter : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class PlayerInter : MonoBehaviour
     {
         DialogBox.SetActive(false);
         playerInteractionsEnabled = false;
+        completedMissions = 0;
+        StartCoroutine(secondCutscene());
     }
 
     private bool firstVisitA = true, firstVisitG = true, firstVisitS = true;
@@ -34,7 +37,7 @@ public class PlayerInter : MonoBehaviour
                     {
                         pressETxt.text = "";
                         string newText = "Empty closet.";
-                        StartCoroutine(displayDialogueText(newText, false));
+                        StartCoroutine(displayDialogueText(newText, false,false));
                         if (firstVisitA)
                         {
                             completedMissions++;
@@ -46,7 +49,7 @@ public class PlayerInter : MonoBehaviour
                     {
                         pressETxt.text = "";
                         string newText = "Empty."; //Para teste
-                        StartCoroutine(displayDialogueText(newText, false));
+                        StartCoroutine(displayDialogueText(newText, false,false));
                         if (firstVisitG)
                         {
                             completedMissions++;
@@ -58,7 +61,7 @@ public class PlayerInter : MonoBehaviour
                     {
                         pressETxt.text = "";
                         string newText = "Empty.";
-                        StartCoroutine(displayDialogueText(newText, false));
+                        StartCoroutine(displayDialogueText(newText, false,false));
                         if (firstVisitS)
                         {
                             completedMissions++;
@@ -69,10 +72,9 @@ public class PlayerInter : MonoBehaviour
                     if (triggered == "Porta")
                     {
                         pressETxt.text = "";
-                        if (completedMissions == 3) //AJUSTAR AO NÚMERO CERTO
+                        if (completedMissions == 2) //AJUSTAR AO NÚMERO CERTO
                         {
-                            string newText = "Bye bye bitches";
-                            StartCoroutine(displayDialogueText(newText, false));
+                            SceneManager.LoadScene("LVL2 - Village");
                         }
                     }
                 }
@@ -80,7 +82,7 @@ public class PlayerInter : MonoBehaviour
         }
 
     }
-    public IEnumerator displayDialogueText(string newText, bool multipleDialogues)
+    public IEnumerator displayDialogueText(string newText, bool multipleDialogues, bool first)
     {
         triggered = ""; //um bocado cheat
         DialogBox.SetActive(true);
@@ -130,8 +132,10 @@ public class PlayerInter : MonoBehaviour
                 yield return new WaitForSeconds(0.02f);
             }
         }
-
-        yield return new WaitUntil(() => (Input.GetButtonDown("Interact") == true) || offTrigger == true);
+        if (first)
+            yield return new WaitForSeconds(2.0f);
+        else
+            yield return new WaitUntil(() => (Input.GetButtonDown("Interact") == true) || offTrigger == true);
         dialogueText.text = "";
         DialogBox.SetActive(false);
 
@@ -171,7 +175,7 @@ public class PlayerInter : MonoBehaviour
 
             if (other.tag == "Porta")
             {
-                if(completedMissions==3)
+                if(completedMissions==2)
                     pressETxt.text = "Open (Press E)";
                 triggered = other.tag;
                 offTrigger = false;
@@ -223,6 +227,7 @@ public class PlayerInter : MonoBehaviour
     public IEnumerator secondCutscene()
     {
         yield return new WaitUntil(() => completedMissions==3);
+        yield return new WaitForSeconds(0.5f);
         gameObject.GetComponent<PlayerScript>().cutSceneNumber = 2;
         gameObject.GetComponent<PlayerScript>().cutScene = true;
     }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -31,13 +32,33 @@ public class PlayerScript : MonoBehaviour
     public TextMeshProUGUI EText;
     public TextMeshProUGUI dialogueText;
 
+    private string currentSceneName;
+    private bool label;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        movePlayer = false;
-        cutScene = true;
+        currentSceneName = SceneManager.GetActiveScene().name;
+        if (currentSceneName == "LVL1 - Home")
+        {
+            movePlayer = false;
+            cutScene = true;
+            label = true;
+        }
+        else
+        {
+            movePlayer = true;
+            cutScene = false;
+        }
+
+        /*cutScene = false;
+        movePlayer = true;*/
+
+        //NÃO APAGAR ESTES FLIPS À TROLHA
+        FlipPlayer();
+        FlipPlayer();
+
     }
 
     // Update is called once per frame
@@ -48,7 +69,7 @@ public class PlayerScript : MonoBehaviour
         //Player_Movement();
         if (cutScene)
         {
-            cutscene_Controller();
+            cutscene_Controller(currentSceneName);
         }
         else
         {
@@ -142,12 +163,14 @@ public class PlayerScript : MonoBehaviour
 
         if (Input.GetButtonUp("Ears"))
         {
+            gameObject.GetComponent<BarsController>().isCoveringEars = false;
             isCoveringEars = false;
             animator.SetBool("IsCoveringEars", false);
         }
 
         if (isCoveringEars == true)
         {
+            gameObject.GetComponent<BarsController>().isCoveringEars = true;
             rb.velocity = new Vector2(moveX * 0, rb.velocity.y);
         }
 
@@ -163,9 +186,18 @@ public class PlayerScript : MonoBehaviour
     void FlipPlayer()
     {
         facingRight = !facingRight;
-        Vector2 localScale = gameObject.transform.localScale;
-        localScale.x *= -1;
-        transform.localScale = localScale;
+        Vector2 localScaleParent = gameObject.transform.localScale;
+        Vector2 localScaleChild= new Vector2(0,0);
+        localScaleParent.x *= -1;
+        foreach (Transform child in transform)
+        {
+            localScaleChild = child.transform.localScale;
+        }
+        transform.localScale = localScaleParent;
+        foreach (Transform child in transform)
+        {
+            child.transform.localScale= localScaleChild;
+        }
     }
 
     void Jump()
@@ -173,47 +205,52 @@ public class PlayerScript : MonoBehaviour
         rb.velocity = Vector2.up * JumpPower;
     }
 
-    void cutscene_Controller()
+    private void cutscene_Controller(string currentSceneName)
     {
-        float stopPosition = 2.18f;
-        moveX = 0.8f;
-        if (gameObject.transform.position.x < stopPosition)
+        if (currentSceneName == "LVL1 - Home")
         {
-            if (moveX == 0)
+            if (label)
             {
-                animator.SetBool("IsRunning", false);
+                StartCoroutine(gameObject.GetComponent<PlayerInter>().displayDialogueText("1518. Strasbourg, France", false, true));
+                label = false;
             }
-            else
+            float stopPosition = 2.18f;
+            if (gameObject.transform.position.x < stopPosition && cutScene)
             {
+                moveX = 0.8f;
+                if (facingRight == false)
+                    FlipPlayer();
+
                 animator.SetBool("IsRunning", true);
-            }
-            gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(moveX * playerspeed, gameObject.GetComponent<Rigidbody2D>().velocity.y);
-        }
-        else
-        {
-            moveX = 0.0f;
-            if (moveX == 0)
-            {
-                animator.SetBool("IsRunning", false);
-            }
-            else
-            {
+                gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(moveX * playerspeed, gameObject.GetComponent<Rigidbody2D>().velocity.y);
+                //if (gameObject.transform.position.x >= stopPosition) cutScene = false;
+                //Debug.Log(cutScene);
+            } 
+            /*else if(gameObject.transform.position.x > stopPosition && cutScene) {
+                moveX = -0.8f;
+                if (facingRight == false)
+                    FlipPlayer();
                 animator.SetBool("IsRunning", true);
+                gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(moveX * playerspeed, gameObject.GetComponent<Rigidbody2D>().velocity.y);
+                //if (gameObject.transform.position.x <= stopPosition) cutScene = false;
+                //Debug.Log(cutScene);
+            }*/
+            else {
+                moveX = 0.0f;
+                animator.SetBool("IsRunning", false);
+
+                string newText;
+                if (cutSceneNumber == 1)
+                    newText = "mHello dear, did you sleep well?\npYes. Nights are getting colder.\nmYes, I know...\npCan you pass me the bread?";
+                else
+                    newText = "pI can't seem to find it.\nsDad, I was so hungry and ate it, I'm sorry.\nm It's okay. I guess we can afford to buy another one, dear?\npYes, maybe one or two more. I will go to the market. Be right back";
+
+                FlipPlayer();
+                StartCoroutine(gameObject.GetComponent<PlayerInter>().displayDialogueText(newText, true,false));
+                //End of CutScene
+                cutScene = false;
+                gameObject.GetComponent<PlayerInter>().playerInteractionsEnabled = true;
             }
-            
-            string newText;
-            if (cutSceneNumber == 1)
-            {
-                newText = "mHello dear, did you sleep well?\npYes. Nights are getting colder.\nmYes, I know...\npCan you pass me the bread?";
-            }
-            else
-                newText = "pI can't seem to find it.\nsDad, I was so hungry and ate it, I'm sorry.\nm It's okay. I guess we can afford to buy another one, dear?\npYes, maybe one or two more. I will go to the market. Be right back";
-            
-            FlipPlayer();
-            StartCoroutine(gameObject.GetComponent<PlayerInter>().displayDialogueText(newText, true));
-            //End of CutScene
-            cutScene = false;
-            gameObject.GetComponent<PlayerInter>().playerInteractionsEnabled = true;
         }
     }
 
