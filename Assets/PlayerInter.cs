@@ -36,7 +36,7 @@ public class PlayerInter : MonoBehaviour
                     if (triggered == "Armario")
                     {
                         pressETxt.text = "";
-                        string newText = "Empty closet.";
+                        string newText = "Empty.";
                         StartCoroutine(displayDialogueText(newText, false,false));
                         if (firstVisitA)
                         {
@@ -72,7 +72,7 @@ public class PlayerInter : MonoBehaviour
                     if (triggered == "Porta")
                     {
                         pressETxt.text = "";
-                        if (completedMissions == 2) //AJUSTAR AO NÚMERO CERTO
+                        if (completedMissions == 3) //AJUSTAR AO NÚMERO CERTO
                         {
                             SceneManager.LoadScene("LVL2 - Village");
                         }
@@ -92,7 +92,7 @@ public class PlayerInter : MonoBehaviour
             string[] auxNewText = newText.Split('\n');
             foreach (string dText in auxNewText)
             {
-
+                DialogBox.SetActive(true);
                 int wordCounter = dText.Length;
                 int counter = 1;
                 while (counter != wordCounter)
@@ -159,7 +159,7 @@ public class PlayerInter : MonoBehaviour
                 offTrigger = false;
             }
 
-            if (other.tag == "Gaveta")
+            if (other.tag == "Bau")
             {
                 pressETxt.text = "Search (Press E)";
                 triggered = other.tag;
@@ -175,7 +175,7 @@ public class PlayerInter : MonoBehaviour
 
             if (other.tag == "Porta")
             {
-                if(completedMissions==2)
+                if(completedMissions==3)
                     pressETxt.text = "Open (Press E)";
                 triggered = other.tag;
                 offTrigger = false;
@@ -228,6 +228,7 @@ public class PlayerInter : MonoBehaviour
     {
         yield return new WaitUntil(() => completedMissions==3);
         yield return new WaitForSeconds(0.5f);
+        playerInteractionsEnabled = false;
         gameObject.GetComponent<PlayerScript>().cutSceneNumber = 2;
         gameObject.GetComponent<PlayerScript>().cutScene = true;
     }

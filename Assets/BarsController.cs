@@ -90,9 +90,11 @@ public class BarsController : MonoBehaviour
     {
         float step = 0.04f;
         float alphaStep = 0.005f;
+        float delayPlayerStep = 0.002f;
 
         if (isCoveringEars && triggerArea)
         {
+            gameObject.GetComponent<PlayerScript>().sanityPenalty =0.0f;
             if (madnessImage.transform.localScale.x - step < maxScaleAux)
             {
                 Vector2 localScale = new Vector2(madnessImage.transform.localScale.x + step, madnessImage.transform.localScale.y + step);
@@ -116,12 +118,14 @@ public class BarsController : MonoBehaviour
         else if(triggerArea)
         {
             madnessImage.SetActive(true);
+            if(gameObject.GetComponent<PlayerScript>().sanityPenalty<0.5f)
+                gameObject.GetComponent<PlayerScript>().sanityPenalty += delayPlayerStep;
             if (madnessImage.transform.localScale.x - step > minScale)
             {
                 Vector2 localScale = new Vector2(madnessImage.transform.localScale.x - step, madnessImage.transform.localScale.y - step);
                 madnessImage.transform.localScale = localScale;
             }
-            else if ((madnessImage.transform.localScale.x - step <= minScale) && alphaLevel<1.0f)
+            else if ((madnessImage.transform.localScale.x - step <= minScale) && alphaLevel<0.8f)
             {
                 alphaLevel += alphaStep;
                 madnessImage.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, alphaLevel);

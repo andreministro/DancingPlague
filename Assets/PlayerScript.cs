@@ -14,6 +14,7 @@ public class PlayerScript : MonoBehaviour
     private bool facingRight = true;
     public int JumpPower;
     private float moveX;
+    public float sanityPenalty;
 
     private bool isGrounded;
     public Transform feetPos;
@@ -40,7 +41,8 @@ public class PlayerScript : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         currentSceneName = SceneManager.GetActiveScene().name;
-        /*if (currentSceneName == "LVL1 - Home")
+        sanityPenalty = 0;
+        if (currentSceneName == "LVL1 - Home")
         {
             movePlayer = false;
             cutScene = true;
@@ -50,10 +52,10 @@ public class PlayerScript : MonoBehaviour
         {
             movePlayer = true;
             cutScene = false;
-        }*/
+        }
 
-        cutScene = false;
-        movePlayer = true;
+        //cutScene = false;
+        //movePlayer = true;
 
         //NÃO APAGAR ESTES FLIPS À TROLHA
         FlipPlayer();
@@ -80,12 +82,21 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-
-
     void Player_Movement()
     {
         //Controls 
         moveX = Input.GetAxis("Horizontal");
+        if (moveX < 0)
+        {
+            if(moveX+sanityPenalty<0)
+                moveX += sanityPenalty;
+        }
+        else if (moveX > 0)
+        {
+            if (moveX - sanityPenalty > 0)
+                moveX -= sanityPenalty;
+        }
+        //Debug.Log(moveX);
         rb.velocity = new Vector2(moveX * playerspeed, rb.velocity.y);
         
         if (moveX == 0)
@@ -223,18 +234,7 @@ public class PlayerScript : MonoBehaviour
 
                 animator.SetBool("IsRunning", true);
                 gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(moveX * playerspeed, gameObject.GetComponent<Rigidbody2D>().velocity.y);
-                //if (gameObject.transform.position.x >= stopPosition) cutScene = false;
-                //Debug.Log(cutScene);
             } 
-            /*else if(gameObject.transform.position.x > stopPosition && cutScene) {
-                moveX = -0.8f;
-                if (facingRight == false)
-                    FlipPlayer();
-                animator.SetBool("IsRunning", true);
-                gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(moveX * playerspeed, gameObject.GetComponent<Rigidbody2D>().velocity.y);
-                //if (gameObject.transform.position.x <= stopPosition) cutScene = false;
-                //Debug.Log(cutScene);
-            }*/
             else {
                 moveX = 0.0f;
                 animator.SetBool("IsRunning", false);
