@@ -43,7 +43,7 @@ public class BarsController : MonoBehaviour
         {
             hungerBarGaining();
         }
-        //sanityBarController();
+        sanityBarController();
     }
     private IEnumerator hungerBarLoosing()
     {

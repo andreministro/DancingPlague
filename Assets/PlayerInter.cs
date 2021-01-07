@@ -72,9 +72,9 @@ public class PlayerInter : MonoBehaviour
                     if (triggered == "Porta")
                     {
                         pressETxt.text = "";
-                        if (completedMissions == 3) //AJUSTAR AO NÚMERO CERTO
+                        if (completedMissions == 3)
                         {
-                            SceneManager.LoadScene("LVL2 - Village");
+                            SceneManager.LoadScene("LVL1 - Village");
                         }
                     }
                 }
