@@ -180,6 +180,20 @@ public class PlayerInter : MonoBehaviour
                 triggered = other.tag;
                 offTrigger = false;
             }
+
+            if (other.tag == "Pedra")
+            {
+                pressETxt.text = "Pickup rock";
+                Debug.Log("Entrou aqui");
+                triggered = other.tag;
+                offTrigger = false;
+            }
+            if (other.tag == "Roda")
+            {
+                pressETxt.text = "Pickup rock";
+                triggered = other.tag;
+                offTrigger = false;
+            }
         }
 
     }
@@ -217,6 +231,19 @@ public class PlayerInter : MonoBehaviour
             }
 
             if (other.tag == "Porta")
+            {
+                pressETxt.text = "";
+                triggered = "";
+                offTrigger = true;
+            }
+
+            if (other.tag == "Pedra")
+            {
+                pressETxt.text = "";
+                triggered = "";
+                offTrigger = true;
+            }
+            if (other.tag == "Roda")
             {
                 pressETxt.text = "";
                 triggered = "";

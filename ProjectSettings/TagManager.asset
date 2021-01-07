@@ -13,6 +13,8 @@ TagManager:
   - RightWall
   - Floor
   - Bau
+  - Roda
+  - Pedra
   layers:
   - Default
   - TransparentFX
