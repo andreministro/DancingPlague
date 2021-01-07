@@ -91,7 +91,7 @@ public class BarsController : MonoBehaviour
         float alphaStep = 0.005f;
         float delayPlayerStep = 0.002f;
 
-        if (isCoveringEars && triggerArea)
+        if (isCoveringEars)
         {
             gameObject.GetComponent<PlayerScript>().sanityPenalty =0.0f;
             if (madnessImage.transform.localScale.x - step < maxScaleAux)
@@ -101,7 +101,6 @@ public class BarsController : MonoBehaviour
             }
             else if (madnessImage.transform.localScale.x - step >= maxScaleAux && alphaLevel > 0.0f && madnessImage.activeSelf)
             {
-                //Debug.Log("aqui");
                 alphaLevel -= step;
                 madnessImage.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, alphaLevel);
             }
@@ -128,6 +127,28 @@ public class BarsController : MonoBehaviour
             {
                 alphaLevel += alphaStep;
                 madnessImage.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, alphaLevel);
+            }
+        }
+        else if (!triggerArea)
+        {
+            gameObject.GetComponent<PlayerScript>().sanityPenalty = 0.0f;
+            if (madnessImage.transform.localScale.x - step < maxScaleAux)
+            {
+                Vector2 localScale = new Vector2(madnessImage.transform.localScale.x + step, madnessImage.transform.localScale.y + step);
+                madnessImage.transform.localScale = localScale;
+            }
+            else if (madnessImage.transform.localScale.x - step >= maxScaleAux && alphaLevel > 0.0f && madnessImage.activeSelf)
+            {
+                alphaLevel -= step;
+                madnessImage.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, alphaLevel);
+            }
+            else
+            {
+                alphaLevel = 0.5f;
+                madnessImage.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, alphaLevel);
+                Vector2 localScale = new Vector2(maxScale, maxScale);
+                madnessImage.transform.localScale = localScale;
+                madnessImage.SetActive(false);
             }
         }
     }
