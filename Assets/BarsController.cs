@@ -38,7 +38,6 @@ public class BarsController : MonoBehaviour
 
     void Update()
     {
-        triggerArea = true;
         if (playerEating)
         {
             hungerBarGaining();
