@@ -191,8 +191,6 @@ public class PlayerScript : MonoBehaviour
             FlipPlayer();
         else if (moveX > 0.0f && facingRight == false)
             FlipPlayer();
-
-        EText.transform.position = new Vector2(transform.position.x+3.0f,transform.position.y+11.2f);
     }
 
     void FlipPlayer()

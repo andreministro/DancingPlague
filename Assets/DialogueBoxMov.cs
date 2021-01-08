@@ -15,7 +15,7 @@ public class DialogueBoxMov : MonoBehaviour
 
         float dialogueBoxcheat = -1.8f; //AJUSTAR DEPOIS 
         float hungercheat = 17.5f;
-        dialogBox.transform.position = new Vector2(transform.position.x+horizontalMin/2+dialogueBoxcheat, dialogBox.transform.position.y);
+        //dialogBox.transform.position = new Vector2(transform.position.x+horizontalMin/2+dialogueBoxcheat, dialogBox.transform.position.y);
 
         //hungerBar.transform.position = new Vector2(transform.position.x + horizontalMin / 2+hungercheat, hungerBar.transform.position.y);
     }

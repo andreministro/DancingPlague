@@ -23,8 +23,14 @@ public class BarsController : MonoBehaviour
         //madnessImage.SetActive(true);
 
         health = 28;
+        /*hungerBar[health] = GameObject.Find("/Canvas/HungerBar/vida");
+        for (int i=health; i >= 0; i--)
+        {
+            hungerBar[i] = GameObject.Find("/Canvas/HungerBar/vida-" + i);
+        }*/
         for(int i=0; i <= health; i++)
         {
+            Debug.Log(i);
             hungerBar[i].SetActive(false);
         }
         for (int i = 0; i <= 2; i++)

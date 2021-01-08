@@ -263,6 +263,19 @@ public class PlayerInter : MonoBehaviour
                 triggered = "";
                 offTrigger = true;
             }
+            if (other.tag == "Barrel")
+            {
+                pressETxt.text = "";
+                triggered = "";
+                offTrigger = true;
+            }
+
+            if (other.tag == "Wood")
+            {
+                pressETxt.text = "";
+                triggered = "";
+                offTrigger = true;
+            }
         }
     }
     public IEnumerator secondCutscene()
