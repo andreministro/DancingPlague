@@ -1,58 +1,106 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using TMPro;
 
 public class BarsController : MonoBehaviour
 {
+    public TextMeshProUGUI pressETxt;
+
     public GameObject madnessImage;
+    public GameObject armacao;
     public GameObject[] hungerBar;
     public GameObject[] hungerFaces;
     private int health;
     public bool isCoveringEars;
     public bool triggerArea = false;
     public bool playerEating = false;
+    public bool first = true;
 
     private float maxScale = 14.0f;
     private float maxScaleAux = 7.0f;
     private float minScale = 2.0f;
     private float alphaLevel;
+
+    private float maxHealth=28;
     void Start()
     {
-        alphaLevel = 0.5f;
-        madnessImage.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, alphaLevel);
-        //madnessImage.SetActive(true);
+        if (SceneManager.GetActiveScene().name == "LVL1 - Home")
+        {
+            health = 25;
+            for (int i = 0; i <= maxHealth; i++)
+            {
+                hungerBar[i].SetActive(false);
+            }
+            for (int i = 0; i <= 2; i++)
+            {
+                hungerFaces[i].SetActive(false);
+            }
+            hungerBar[health].SetActive(true);
+            hungerFaces[0].SetActive(true);
+        }
+        else if (SceneManager.GetActiveScene().name != "LVL1 - Home")
+        {
+            alphaLevel = 0.5f;
+            madnessImage.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, alphaLevel);
 
-        health = 28;
-        /*hungerBar[health] = GameObject.Find("/Canvas/HungerBar/vida");
-        for (int i=health; i >= 0; i--)
-        {
-            hungerBar[i] = GameObject.Find("/Canvas/HungerBar/vida-" + i);
-        }*/
-        for(int i=0; i <= health; i++)
-        {
-            Debug.Log(i);
-            hungerBar[i].SetActive(false);
+            health = 28;
+            /*hungerBar[health] = GameObject.Find("/Canvas/HungerBar/vida");
+            for (int i=health; i >= 0; i--)
+            {
+                hungerBar[i] = GameObject.Find("/Canvas/HungerBar/vida-" + i);
+            }*/
+            for (int i = 0; i <= maxHealth; i++)
+            {
+                hungerBar[i].SetActive(false);
+            }
+            for (int i = 0; i <= 2; i++)
+            {
+                hungerFaces[i].SetActive(false);
+            }
+            
+            hungerBar[health].SetActive(true);
+            if (health < 10)
+                hungerFaces[2].SetActive(true);
+            else if (health < 20)
+                hungerFaces[1].SetActive(true);
+            else
+                hungerFaces[0].SetActive(true);
+            
+            StartCoroutine(hungerBarLoosing());
         }
-        for (int i = 0; i <= 2; i++)
-        {
-            hungerFaces[i].SetActive(false);
-        }
-        hungerBar[health].SetActive(true);
-        hungerFaces[0].SetActive(true);
-        StartCoroutine(hungerBarLoosing());
     }
 
     void Update()
     {
+        /*if (SceneManager.GetActiveScene().name == "LVL1 - Home") {
+            if (gameObject.GetComponent<PlayerScript>().cutScene==false){
+                {
+                    hungerBar[health].SetActive(true);
+                    hungerFaces[0].SetActive(true);
+                    armacao.SetActive(true);
+                }
+            }
+            else
+            {
+                armacao.SetActive(false);
+                hungerBar[health].SetActive(false);
+                hungerFaces[0].SetActive(false);
+            }
+        }
+        else
+        {*/
         if (playerEating)
         {
             hungerBarGaining();
         }
         sanityBarController();
+        
     }
     private IEnumerator hungerBarLoosing()
     {
-        yield return new WaitForSeconds(1.0f); //signal
+        yield return new WaitForSeconds(30.0f);
         hungerBar[health].SetActive(false);
         if (health > 0) { 
             health--;
@@ -99,6 +147,9 @@ public class BarsController : MonoBehaviour
 
         if (isCoveringEars)
         {
+            if (pressETxt.text != "")
+                pressETxt.text = "";
+
             gameObject.GetComponent<PlayerScript>().sanityPenalty =0.0f;
             if (madnessImage.transform.localScale.x - step < maxScaleAux)
             {
@@ -121,6 +172,11 @@ public class BarsController : MonoBehaviour
         }
         else if(triggerArea)
         {
+            if (first)
+            {
+                pressETxt.text = "Cover ears (Press R)";
+                first = false;
+            }
             madnessImage.SetActive(true);
             if(gameObject.GetComponent<PlayerScript>().sanityPenalty<0.5f)
                 gameObject.GetComponent<PlayerScript>().sanityPenalty += delayPlayerStep;

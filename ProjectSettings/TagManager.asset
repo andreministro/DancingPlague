@@ -17,6 +17,7 @@ TagManager:
   - Pedra
   - Barrel
   - Wood
+  - PortaEntrarCasa
   layers:
   - Default
   - TransparentFX

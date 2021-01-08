@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LVL1 - Village.unity
     guid: 876af23acad1bfc4d9a4b3184dd8df47
+  - enabled: 1
+    path: Assets/Scenes/LVL1 - BackHome.unity
+    guid: 64e77905e88b12c43ba1eaaa1e3fdf1f
   m_configObjects: {}

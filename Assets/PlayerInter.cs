@@ -72,10 +72,21 @@ public class PlayerInter : MonoBehaviour
                     if (triggered == "Porta")
                     {
                         pressETxt.text = "";
-                        if (completedMissions == 3)
+                        if (SceneManager.GetActiveScene().name == "LVL1 - BackHome")
                         {
                             SceneManager.LoadScene("LVL1 - Village");
                         }
+                        else
+                        {
+                            if (completedMissions == 3)
+                            {
+                                SceneManager.LoadScene("LVL1 - Village");
+                            }
+                        }
+                    }
+                    if (triggered == "PortaEntrarCasa")
+                    {
+                        SceneManager.LoadScene("LVL1 - BackHome");
                     }
                 }
             }
@@ -175,10 +186,17 @@ public class PlayerInter : MonoBehaviour
 
             if (other.tag == "Porta")
             {
-                if(completedMissions==3)
-                    pressETxt.text = "Open (Press E)";
-                triggered = other.tag;
-                offTrigger = false;
+                if (SceneManager.GetActiveScene().name == "LVL1 - BackHome") {
+                    triggered = other.tag;
+                    offTrigger = false;
+                }
+                else
+                {
+                    if (completedMissions == 3)
+                        pressETxt.text = "Open (Press E)";
+                    triggered = other.tag;
+                    offTrigger = false;
+                }
             }
 
             if (other.tag == "Pedra")
@@ -205,6 +223,11 @@ public class PlayerInter : MonoBehaviour
             if (other.tag == "Wood")
             {
                 pressETxt.text = "Pickup wood";
+                triggered = other.tag;
+                offTrigger = false;
+            }
+            if (other.tag == "PortaEntrarCasa")
+            {
                 triggered = other.tag;
                 offTrigger = false;
             }
