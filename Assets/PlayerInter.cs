@@ -190,7 +190,21 @@ public class PlayerInter : MonoBehaviour
             }
             if (other.tag == "Roda")
             {
-                pressETxt.text = "Pickup rock";
+                pressETxt.text = "Search wheel";
+                triggered = other.tag;
+                offTrigger = false;
+            }
+
+            if (other.tag == "Barrel")
+            {
+                pressETxt.text = "Pickup herbs";
+                triggered = other.tag;
+                offTrigger = false;
+            }
+
+            if (other.tag == "Wood")
+            {
+                pressETxt.text = "Pickup wood";
                 triggered = other.tag;
                 offTrigger = false;
             }

@@ -15,6 +15,8 @@ TagManager:
   - Bau
   - Roda
   - Pedra
+  - Barrel
+  - Wood
   layers:
   - Default
   - TransparentFX

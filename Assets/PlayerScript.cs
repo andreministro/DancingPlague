@@ -48,8 +48,9 @@ public class PlayerScript : MonoBehaviour
             cutScene = true;
             label = true;
         }
-        else
+        else if (currentSceneName == "LVL1 - Village")
         {
+            gameObject.GetComponent<PlayerInter>().playerInteractionsEnabled = true;
             movePlayer = true;
             cutScene = false;
         }

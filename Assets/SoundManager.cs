@@ -4,16 +4,13 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    public static AudioClip blockHitsound, blockBreaksound, paddleHitsound, blockPointsound;
+    public static AudioClip dirt_footstep;
     static AudioSource audioSrc;
 
     // Start is called before the first frame update
     void Start()
     {
-        blockHitsound = Resources.Load<AudioClip> ("BLOCKKNOCK");
-        blockBreaksound = Resources.Load<AudioClip>("BLOCKSMASH");
-        paddleHitsound = Resources.Load<AudioClip>("PADDLEKNOCK");
-        blockPointsound = Resources.Load<AudioClip>("POINTBLOCK");
+        dirt_footstep = Resources.Load<AudioClip> ("footstep_dirt");
 
         audioSrc = GetComponent<AudioSource>();
     }
@@ -29,19 +26,7 @@ public class SoundManager : MonoBehaviour
         switch (clip)
         {
             case "blockhit":
-                audioSrc.PlayOneShot(blockHitsound);
-                break;
-
-            case "blockbreak":
-                audioSrc.PlayOneShot(blockBreaksound);
-                break;
-
-            case "paddlehit":
-                audioSrc.PlayOneShot(paddleHitsound);
-                break;
-
-            case "pointhit":
-                audioSrc.PlayOneShot(blockPointsound);
+                audioSrc.PlayOneShot(dirt_footstep);
                 break;
 
         }
