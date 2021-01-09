@@ -11,8 +11,11 @@ public class PlayerInter : MonoBehaviour
     public TextMeshProUGUI pressETxt;
     public GameObject DialogBox;
 
+    public GameObject rock;
+    public GameObject rockEText;
+
     private string triggered = "";
-    private int completedMissions; //Para obrigar o jogador a fazer tudo antes de sair de casa
+    private int completedMissions;
     private bool offTrigger = false;
 
     public bool playerInteractionsEnabled;
@@ -48,7 +51,7 @@ public class PlayerInter : MonoBehaviour
                     if (triggered == "Bau")
                     {
                         pressETxt.text = "";
-                        string newText = "Empty."; //Para teste
+                        string newText = "Empty.";
                         StartCoroutine(displayDialogueText(newText, false,false));
                         if (firstVisitG)
                         {
@@ -74,81 +77,46 @@ public class PlayerInter : MonoBehaviour
                         pressETxt.text = "";
                         if (SceneManager.GetActiveScene().name == "LVL1 - BackHome")
                         {
+                            saveDataThroughScenes();
                             SceneManager.LoadScene("LVL1 - Village");
                         }
                         else
                         {
                             if (completedMissions == 3)
                             {
+                                saveDataThroughScenes();
                                 SceneManager.LoadScene("LVL1 - Village");
                             }
                         }
                     }
                     if (triggered == "PortaEntrarCasa")
                     {
+                        saveDataThroughScenes();
                         SceneManager.LoadScene("LVL1 - BackHome");
                     }
+
+                    if(triggered== "Barrel") {
+                        string newText = "Herbs found.";
+                        StartCoroutine(displayDialogueText(newText, false, false));
+                        StartCoroutine(pickUpItem("Barrel"));
+                    }
+                    if (triggered == "Pedra")
+                    {
+                        StartCoroutine(pickUpItem("Pedra"));
+                    }
+                    if (triggered == "Roda")
+                    {
+                        //string newText = "Herbs found.";
+                        //StartCoroutine(displayDialogueText(newText, false, false));
+                        StartCoroutine(pickUpItem("Roda"));
+                    }
+                    if (triggered == "Wood")
+                    {
+                        StartCoroutine(pickUpItem("Wood"));
+                    }
                 }
             }
         }
-
-    }
-    public IEnumerator displayDialogueText(string newText, bool multipleDialogues, bool first)
-    {
-        triggered = ""; //um bocado cheat
-        DialogBox.SetActive(true);
-        if (multipleDialogues)
-        {
-            gameObject.GetComponent<PlayerScript>().movePlayer = false;
-            string[] auxNewText = newText.Split('\n');
-            foreach (string dText in auxNewText)
-            {
-                DialogBox.SetActive(true);
-                int wordCounter = dText.Length;
-                int counter = 1;
-                while (counter != wordCounter)
-                {
-                    if (dText[0].Equals('m'))
-                    {
-                        dialogueText.color = Color.magenta;
-                    }
-                    else if (dText[0].Equals('p'))
-                    {
-                        dialogueText.color = Color.black;
-                    }
-                    else if (dText[0].Equals('s'))
-                    {
-                        dialogueText.color = Color.blue;
-                    }
-                    else
-                    {
-                        //Externos
-                        dialogueText.color = Color.gray;
-                    }
-                    dialogueText.text = dText.Substring(1, counter++);
-                    yield return new WaitForSeconds(0.02f);
-                }
-                yield return new WaitUntil(() => (Input.GetButtonDown("Interact") == true));
-            }
-            gameObject.GetComponent<PlayerScript>().movePlayer = true;
-        }
-        else
-        {
-            int wordCounter = newText.Length + 1;
-            int counter = 1;
-
-            while (counter != wordCounter)
-            {
-                dialogueText.text = newText.Substring(0, counter++);
-                yield return new WaitForSeconds(0.02f);
-            }
-        }
-        if (first)
-            yield return new WaitForSeconds(2.0f);
-        else
-            yield return new WaitUntil(() => (Input.GetButtonDown("Interact") == true) || offTrigger == true);
-        dialogueText.text = "";
-        DialogBox.SetActive(false);
 
     }
 
@@ -202,7 +170,6 @@ public class PlayerInter : MonoBehaviour
             if (other.tag == "Pedra")
             {
                 pressETxt.text = "Pickup rock";
-                Debug.Log("Entrou aqui");
                 triggered = other.tag;
                 offTrigger = false;
             }
@@ -215,7 +182,7 @@ public class PlayerInter : MonoBehaviour
 
             if (other.tag == "Barrel")
             {
-                pressETxt.text = "Pickup herbs";
+                pressETxt.text = "Search barrel";
                 triggered = other.tag;
                 offTrigger = false;
             }
@@ -228,6 +195,7 @@ public class PlayerInter : MonoBehaviour
             }
             if (other.tag == "PortaEntrarCasa")
             {
+                pressETxt.text = "Enter home";
                 triggered = other.tag;
                 offTrigger = false;
             }
@@ -299,7 +267,71 @@ public class PlayerInter : MonoBehaviour
                 triggered = "";
                 offTrigger = true;
             }
+            if (other.tag == "PortaEntrarCasa")
+            {
+                pressETxt.text = "";
+                triggered = "";
+                offTrigger = true;
+            }
         }
+    }
+    public IEnumerator displayDialogueText(string newText, bool multipleDialogues, bool first)
+    {
+        triggered = ""; //um bocado cheat
+        DialogBox.SetActive(true);
+        if (multipleDialogues)
+        {
+            gameObject.GetComponent<PlayerScript>().movePlayer = false;
+            string[] auxNewText = newText.Split('\n');
+            foreach (string dText in auxNewText)
+            {
+                DialogBox.SetActive(true);
+                int wordCounter = dText.Length;
+                int counter = 1;
+                while (counter != wordCounter)
+                {
+                    if (dText[0].Equals('m'))
+                    {
+                        dialogueText.color = Color.magenta;
+                    }
+                    else if (dText[0].Equals('p'))
+                    {
+                        dialogueText.color = Color.black;
+                    }
+                    else if (dText[0].Equals('s'))
+                    {
+                        dialogueText.color = Color.blue;
+                    }
+                    else
+                    {
+                        //Externos
+                        dialogueText.color = Color.gray;
+                    }
+                    dialogueText.text = dText.Substring(1, counter++);
+                    yield return new WaitForSeconds(0.02f);
+                }
+                yield return new WaitUntil(() => (Input.GetButtonDown("Interact") == true));
+            }
+            gameObject.GetComponent<PlayerScript>().movePlayer = true;
+        }
+        else
+        {
+            int wordCounter = newText.Length + 1;
+            int counter = 1;
+
+            while (counter != wordCounter)
+            {
+                dialogueText.text = newText.Substring(0, counter++);
+                yield return new WaitForSeconds(0.02f);
+            }
+        }
+        if (first)
+            yield return new WaitForSeconds(2.0f);
+        else
+            yield return new WaitUntil(() => (Input.GetButtonDown("Interact") == true) || offTrigger == true);
+        dialogueText.text = "";
+        DialogBox.SetActive(false);
+
     }
     public IEnumerator secondCutscene()
     {
@@ -308,5 +340,40 @@ public class PlayerInter : MonoBehaviour
         playerInteractionsEnabled = false;
         gameObject.GetComponent<PlayerScript>().cutSceneNumber = 2;
         gameObject.GetComponent<PlayerScript>().cutScene = true;
+    }
+    private void saveDataThroughScenes()
+    {
+        PlayerPrefs.SetInt("Hungerbar", gameObject.GetComponent<BarsController>().health);
+        PlayerPrefs.SetInt("firstSanity", gameObject.GetComponent<BarsController>().first ? 1 : 0);
+    }
+
+    private IEnumerator pickUpItem(string item)
+    {
+        pressETxt.text = "+1";
+        if (item == "Pedra")
+        {
+            rock.GetComponent<Renderer>().enabled = false;
+            rockEText.SetActive(true);
+        }
+        if (item == "Wood")
+        {
+            //wood.GetComponent<Renderer>().enabled = false;
+        }
+        if (item == "Barrel")
+        {
+            
+        }
+        if (item == "Roda")
+        {
+            
+        }
+
+        yield return new WaitForSeconds(1.0f);
+        if (item == "Pedra")
+        {
+            rock.SetActive(false);
+            rockEText.SetActive(false);
+        }
+        
     }
 } 

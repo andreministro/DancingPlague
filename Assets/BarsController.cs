@@ -12,11 +12,11 @@ public class BarsController : MonoBehaviour
     public GameObject armacao;
     public GameObject[] hungerBar;
     public GameObject[] hungerFaces;
-    private int health;
+    public int health;
     public bool isCoveringEars;
     public bool triggerArea = false;
     public bool playerEating = false;
-    public bool first = true;
+    public bool first;
 
     private float maxScale = 14.0f;
     private float maxScaleAux = 7.0f;
@@ -28,6 +28,7 @@ public class BarsController : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "LVL1 - Home")
         {
+            first = true;
             health = 25;
             for (int i = 0; i <= maxHealth; i++)
             {
@@ -44,8 +45,9 @@ public class BarsController : MonoBehaviour
         {
             alphaLevel = 0.5f;
             madnessImage.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, alphaLevel);
+            first = PlayerPrefs.GetInt("firstSanity") == 1 ? true : false;
 
-            health = 28;
+            health = PlayerPrefs.GetInt("Hungerbar", gameObject.GetComponent<BarsController>().health);
             /*hungerBar[health] = GameObject.Find("/Canvas/HungerBar/vida");
             for (int i=health; i >= 0; i--)
             {
@@ -142,8 +144,8 @@ public class BarsController : MonoBehaviour
     private void sanityBarController()
     {
         float step = 0.04f;
-        float alphaStep = 0.005f;
-        float delayPlayerStep = 0.002f;
+        float alphaStep = 0.004f;
+        float delayPlayerStep = 0.001f;
 
         if (isCoveringEars)
         {
