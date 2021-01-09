@@ -357,7 +357,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.9968255, y: 1}
+    m_SensorSize: {x: 2.4358354, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -374,7 +374,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 95707527}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.732233, y: 0.042407036, z: -10}
+  m_LocalPosition: {x: 2.6700406, y: 0.042407036, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 826334308}
@@ -5426,8 +5426,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3351f4a45a43ed24983799a91102230a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pressETxt: {fileID: 189487804}
   madnessImage: {fileID: 174342603}
-  armacao: {fileID: 0}
+  armacao: {fileID: 1007661500}
   hungerBar:
   - {fileID: 2057028658}
   - {fileID: 1404579585}
@@ -5465,6 +5466,7 @@ MonoBehaviour:
   isCoveringEars: 0
   triggerArea: 0
   playerEating: 0
+  first: 1
 --- !u!114 &1691527379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5831,7 +5833,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1771978387}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.732233, y: 0.042407036, z: -10}
+  m_LocalPosition: {x: 2.6700406, y: 0.042407036, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
