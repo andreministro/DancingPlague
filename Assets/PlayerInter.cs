@@ -11,8 +11,8 @@ public class PlayerInter : MonoBehaviour
     public TextMeshProUGUI pressETxt;
     public GameObject DialogBox;
 
-    public GameObject rock;
-    public GameObject rockEText;
+    public GameObject rock, barrel, roda, wood;
+    public GameObject rockEText, barrelEText, rodaEText, woodEText;
 
     private string triggered = "";
     private int completedMissions;
@@ -355,18 +355,18 @@ public class PlayerInter : MonoBehaviour
             rock.GetComponent<Renderer>().enabled = false;
             rockEText.SetActive(true);
         }
-        if (item == "Wood")
+        /*if (item == "Wood")
         {
-            //wood.GetComponent<Renderer>().enabled = false;
+            woodEText.SetActive(true);
         }
         if (item == "Barrel")
         {
-            
+            barrelEText.SetActive(true);
         }
         if (item == "Roda")
         {
-            
-        }
+            rodaEText.SetActive(true);
+        }*/
 
         yield return new WaitForSeconds(1.0f);
         if (item == "Pedra")
@@ -374,6 +374,22 @@ public class PlayerInter : MonoBehaviour
             rock.SetActive(false);
             rockEText.SetActive(false);
         }
-        
+        if (item == "Wood")
+        {
+            wood.SetActive(false);
+            //woodEText.SetActive(false);
+        }
+        if (item == "Barrel")
+        {
+            barrel.SetActive(false);
+            //barrelEText.SetActive(false);
+        }
+        if (item == "Roda")
+        {
+            roda.SetActive(false);
+            //rodaEText.SetActive(false);
+
+        }
+
     }
 } 

@@ -8,7 +8,7 @@ public class DialogueBoxMov : MonoBehaviour
     public GameObject hungerBar;
     void Update()
     {
-        Camera camera = Camera.main;
+        /*Camera camera = Camera.main;
         float halfHeight = camera.orthographicSize;
         float halfWidth = camera.aspect * halfHeight;
         float horizontalMin = -halfWidth;
@@ -18,5 +18,6 @@ public class DialogueBoxMov : MonoBehaviour
         //dialogBox.transform.position = new Vector2(transform.position.x+horizontalMin/2+dialogueBoxcheat, dialogBox.transform.position.y);
 
         //hungerBar.transform.position = new Vector2(transform.position.x + horizontalMin / 2+hungercheat, hungerBar.transform.position.y);
+        */
     }
 }

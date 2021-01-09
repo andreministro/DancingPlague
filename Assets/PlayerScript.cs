@@ -35,7 +35,7 @@ public class PlayerScript : MonoBehaviour
 
     private string currentSceneName;
     private bool label;
-    // Start is called before the first frame update
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -63,16 +63,11 @@ public class PlayerScript : MonoBehaviour
             cutScene = false;
         }
 
-        //cutScene = false;
-        //movePlayer = true;
-
-        //NÃO APAGAR ESTES FLIPS À TROLHA
         FlipPlayer();
         FlipPlayer();
 
     }
 
-    // Update is called once per frame
     void Update()
     {
         isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, whatIsGround);
@@ -105,7 +100,6 @@ public class PlayerScript : MonoBehaviour
             if (moveX - sanityPenalty > 0)
                 moveX -= sanityPenalty;
         }
-        //Debug.Log(moveX);
         rb.velocity = new Vector2(moveX * playerspeed, rb.velocity.y);
         
         if (moveX == 0)
