@@ -25,6 +25,7 @@ public class PlayerScript : MonoBehaviour
     public float jumpTime;
     private bool isJumping;
     private bool isCrouching;
+    private bool isCrawling;
     private bool isCoveringEars;
 
     public bool movePlayer;
@@ -154,6 +155,19 @@ public class PlayerScript : MonoBehaviour
             isCrouching = true;
             animator.SetBool("IsCrouching", true);
             standCollider.enabled = false;
+
+            if (Input.GetButtonDown("Horizontal") && Input.GetButtonDown("Crouch") && isCrouching == true)
+            {
+                isCrawling = true;
+                animator.SetBool("IsCrawling", true);
+                rb.velocity = new Vector2(moveX * 0.95f, rb.velocity.y);
+            }
+            
+            if(Input.GetButtonUp("Horizontal"))
+            {
+                isCrawling = false;
+                animator.SetBool("IsCrawling", false);
+            }
         }
 
         if (Input.GetButtonUp("Crouch"))
@@ -161,11 +175,6 @@ public class PlayerScript : MonoBehaviour
             isCrouching = false;
             animator.SetBool("IsCrouching", false);
             standCollider.enabled = true;
-        }
-
-        if(isCrouching == true)
-        {
-            rb.velocity = new Vector2(moveX * 0, rb.velocity.y);
         }
 
         //COVER EARS

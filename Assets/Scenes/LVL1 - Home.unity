@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1358,7 +1358,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.549959, y: -1.9884548, z: -10}
+  m_LocalPosition: {x: -12.594581, y: -1.9884548, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2026,7 +2026,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.4358354, y: 1}
+    m_SensorSize: {x: 2.0333333, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -2043,7 +2043,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 776996889}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.549959, y: -1.9884548, z: -10}
+  m_LocalPosition: {x: -12.594581, y: -1.9884548, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1511732760}
@@ -2474,8 +2474,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   jumpTime: 0.1
-  movePlayer: 0
-  cutScene: 1
+  movePlayer: 1
+  cutScene: 0
   cutSceneNumber: 1
   EText: {fileID: 52336844}
   dialogueText: {fileID: 1867918687}
@@ -2586,6 +2586,14 @@ MonoBehaviour:
   dialogueText: {fileID: 1867918687}
   pressETxt: {fileID: 52336844}
   DialogBox: {fileID: 1548218813}
+  rock: {fileID: 0}
+  barrel: {fileID: 0}
+  roda: {fileID: 0}
+  wood: {fileID: 0}
+  rockEText: {fileID: 0}
+  barrelEText: {fileID: 0}
+  rodaEText: {fileID: 0}
+  woodEText: {fileID: 0}
   playerInteractionsEnabled: 1
 --- !u!95 &916269562
 Animator:
@@ -2671,6 +2679,7 @@ MonoBehaviour:
   - {fileID: 252722523}
   - {fileID: 1185583988}
   - {fileID: 1809816033}
+  health: 0
   isCoveringEars: 0
   triggerArea: 0
   playerEating: 0
