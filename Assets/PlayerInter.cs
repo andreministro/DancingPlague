@@ -14,6 +14,8 @@ public class PlayerInter : MonoBehaviour
     public GameObject rock, barrel, roda, wood;
     public GameObject rockEText, barrelEText, rodaEText, woodEText;
 
+    public GameObject bauAberto;
+
     private string triggered = "";
     private int completedMissions;
     private bool offTrigger = false;
@@ -23,8 +25,12 @@ public class PlayerInter : MonoBehaviour
     {
         DialogBox.SetActive(false);
         playerInteractionsEnabled = false;
-        completedMissions = 0;
-        StartCoroutine(secondCutscene());
+        if(SceneManager.GetActiveScene().name== "LVL1 - Home")
+        {
+            completedMissions = 0;
+            StartCoroutine(secondCutscene());
+            bauAberto.SetActive(false);
+        }
     }
 
     private bool firstVisitA = true, firstVisitG = true, firstVisitS = true;
@@ -50,6 +56,7 @@ public class PlayerInter : MonoBehaviour
 
                     if (triggered == "Bau")
                     {
+                        bauAberto.SetActive(true);
                         pressETxt.text = "";
                         string newText = "Empty.";
                         StartCoroutine(displayDialogueText(newText, false,false));

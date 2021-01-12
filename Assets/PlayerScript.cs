@@ -102,16 +102,16 @@ public class PlayerScript : MonoBehaviour
                 moveX -= sanityPenalty;
         }
         rb.velocity = new Vector2(moveX * playerspeed, rb.velocity.y);
-        
-        if (moveX == 0)
+
+        if (moveX == 0 || Input.GetButton("Crouch") || Input.GetButton("Ears"))
         {
             animator.SetBool("IsRunning", false);
         }
         else
         {
+            animator.SetBool("IsCrawling", false);
             animator.SetBool("IsRunning", true);
         }
-
         //JUMP
         if (Input.GetButtonDown("Jump") && isGrounded == true)
         {
@@ -150,20 +150,22 @@ public class PlayerScript : MonoBehaviour
         }
 
         //CROUCH
-        if(Input.GetButtonDown("Crouch") && isGrounded == true)
+        if(Input.GetButton("Crouch") && isGrounded == true)
         {
             isCrouching = true;
             animator.SetBool("IsCrouching", true);
             standCollider.enabled = false;
 
-            if (Input.GetButtonDown("Horizontal") && Input.GetButtonDown("Crouch") && isCrouching == true)
+            //if (Input.GetButton("Horizontal") && Input.GetButton("Crouch") && isCrouching == true)
+            if (moveX!=0)
             {
                 isCrawling = true;
                 animator.SetBool("IsCrawling", true);
-                rb.velocity = new Vector2(moveX * 0.95f, rb.velocity.y);
+                //rb.velocity = new Vector2(moveX, rb.velocity.y);
+                //rb.velocity = new Vector2(moveX * 0.95f, rb.velocity.y);
             }
             
-            if(Input.GetButtonUp("Horizontal"))
+            else//if(Input.GetButtonUp("Horizontal"))
             {
                 isCrawling = false;
                 animator.SetBool("IsCrawling", false);
@@ -203,7 +205,6 @@ public class PlayerScript : MonoBehaviour
         else if (moveX > 0.0f && facingRight == false)
             FlipPlayer();
     }
-
     void FlipPlayer()
     {
         facingRight = !facingRight;
