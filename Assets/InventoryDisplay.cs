@@ -153,12 +153,10 @@ public class InventoryDisplay : MonoBehaviour
     }
     void ScrollDown()
     {
-        Debug.Log("You have clicked the button!");
         scrolldown = true;
     }
     void ScrollUp()
     {
-        //Debug.Log("You have clicked the button!");
         scrollup = true;
     }
     void ItemSelecionado1()
