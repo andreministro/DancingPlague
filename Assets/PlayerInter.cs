@@ -12,9 +12,12 @@ public class PlayerInter : MonoBehaviour
     public GameObject DialogBox;
 
     public GameObject rock, barrel, roda, wood;
-    public GameObject rockEText, barrelEText, rodaEText, woodEText;
+    public GameObject rockEText, herbsEText, rodaEText, woodEText;
 
     public GameObject bauAberto;
+    public GameObject inventory;
+
+    public bool firstPick=true;
 
     private string triggered = "";
     private int completedMissions;
@@ -24,6 +27,7 @@ public class PlayerInter : MonoBehaviour
     void Start()
     {
         DialogBox.SetActive(false);
+        inventory.SetActive(false);
         playerInteractionsEnabled = false;
         if(SceneManager.GetActiveScene().name== "LVL1 - Home")
         {
@@ -38,6 +42,11 @@ public class PlayerInter : MonoBehaviour
     {
         if (playerInteractionsEnabled)
         {
+            if (Input.GetButtonDown("Inventory"))
+            {
+                displayInventory();
+            }
+
             if (triggered != "")
             {
                 if (Input.GetButtonDown("Interact"))
@@ -113,9 +122,8 @@ public class PlayerInter : MonoBehaviour
                     }
                     if (triggered == "Roda")
                     {
-                        //string newText = "Herbs found.";
-                        //StartCoroutine(displayDialogueText(newText, false, false));
-                        StartCoroutine(pickUpItem("Roda"));
+                        string newText = "Nothing found.";
+                        StartCoroutine(displayDialogueText(newText, false, false));
                     }
                     if (triggered == "Wood")
                     {
@@ -356,24 +364,29 @@ public class PlayerInter : MonoBehaviour
 
     private IEnumerator pickUpItem(string item)
     {
+        if (firstPick)
+        {
+            Debug.Log("entrou");
+            string newText = "Press I to show inventory.";
+            StartCoroutine(displayDialogueText(newText, false, false));
+            firstPick = false;
+        }
         pressETxt.text = "+1";
         if (item == "Pedra")
         {
             rock.GetComponent<Renderer>().enabled = false;
             rockEText.SetActive(true);
         }
-        /*if (item == "Wood")
+        if (item == "Wood")
         {
+            wood.GetComponent<Renderer>().enabled = false;
             woodEText.SetActive(true);
         }
         if (item == "Barrel")
         {
-            barrelEText.SetActive(true);
+            barrel.GetComponent<Renderer>().enabled = false;
+            herbsEText.SetActive(true);
         }
-        if (item == "Roda")
-        {
-            rodaEText.SetActive(true);
-        }*/
 
         yield return new WaitForSeconds(1.0f);
         if (item == "Pedra")
@@ -381,22 +394,30 @@ public class PlayerInter : MonoBehaviour
             rock.SetActive(false);
             rockEText.SetActive(false);
         }
-        if (item == "Wood")
+        else if (item == "Wood")
         {
             wood.SetActive(false);
-            //woodEText.SetActive(false);
+            woodEText.SetActive(false);
         }
-        if (item == "Barrel")
+        else if (item == "Barrel")
         {
             barrel.SetActive(false);
-            //barrelEText.SetActive(false);
+            herbsEText.SetActive(false);
         }
-        if (item == "Roda")
+
+    }
+    private void displayInventory()
+    {
+        if (inventory.activeSelf)
         {
-            roda.SetActive(false);
-            //rodaEText.SetActive(false);
-
+            //sair
+            inventory.SetActive(false);
+            inventory.GetComponent<InventoryDisplay>().exit = true;
         }
-
+        else
+        {
+            StartCoroutine(inventory.GetComponent<InventoryDisplay>().display());
+            inventory.SetActive(true);
+        }
     }
 } 
