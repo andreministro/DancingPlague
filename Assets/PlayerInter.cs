@@ -110,8 +110,13 @@ public class PlayerInter : MonoBehaviour
                         saveDataThroughScenes();
                         SceneManager.LoadScene("LVL1 - BackHome");
                     }
+                    if (triggered == "PortaEntrarMercado")
+                    {
+                        saveDataThroughScenes();
+                        //SceneManager.LoadScene("LVL1 - BackHome");
+                    }
 
-                    if(triggered== "Barrel") {
+                    if (triggered== "Barrel") {
                         string newText = "Herbs found.";
                         StartCoroutine(displayDialogueText(newText, false, false));
                         StartCoroutine(pickUpItem("Barrel"));
@@ -214,6 +219,12 @@ public class PlayerInter : MonoBehaviour
                 triggered = other.tag;
                 offTrigger = false;
             }
+            if (other.tag == "PortaEntrarMercado")
+            {
+                pressETxt.text = "Enter market";
+                triggered = other.tag;
+                offTrigger = false;
+            }
         }
 
     }
@@ -283,6 +294,12 @@ public class PlayerInter : MonoBehaviour
                 offTrigger = true;
             }
             if (other.tag == "PortaEntrarCasa")
+            {
+                pressETxt.text = "";
+                triggered = "";
+                offTrigger = true;
+            }
+            if (other.tag == "PortaEntrarMercado")
             {
                 pressETxt.text = "";
                 triggered = "";
@@ -364,13 +381,13 @@ public class PlayerInter : MonoBehaviour
 
     private IEnumerator pickUpItem(string item)
     {
-        if (firstPick)
+        /*if (firstPick)
         {
             Debug.Log("entrou");
             string newText = "Press I to show inventory.";
             StartCoroutine(displayDialogueText(newText, false, false));
             firstPick = false;
-        }
+        }*/
         pressETxt.text = "+1";
         if (item == "Pedra")
         {

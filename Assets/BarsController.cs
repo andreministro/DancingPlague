@@ -117,10 +117,16 @@ public class BarsController : MonoBehaviour
                 hungerFaces[0].SetActive(false);
                 hungerFaces[1].SetActive(true);
             }
+            StartCoroutine(hungerBarLoosing());
         }
-        StartCoroutine(hungerBarLoosing());
+        else
+        {
+            //Dead
+
+        }
+        
     }
-    private void hungerBarGaining()
+    public void hungerBarGaining()
     {
         playerEating = false;
         hungerBar[health].SetActive(false);

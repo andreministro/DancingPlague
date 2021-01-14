@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class InventoryDisplay : MonoBehaviour
 {
     public List<string> displayItems;
+
+    public TextMeshProUGUI janelaTxt;
 
     public Button setaDOWN;
     public Button setaUP;
@@ -14,16 +17,27 @@ public class InventoryDisplay : MonoBehaviour
     public Button ItemNaoSelecionado2;
     public Button ItemNaoSelecionado3;
 
+    public GameObject outputCraft;
+    public GameObject FirstCraft;
+    public GameObject SecondCraft;
+    public GameObject ThirdCraft;
+    public GameObject Player;
+    public GameObject[] slots;
+
+    private string item1="", item2="", item3="";
+
     void Start()
     {
         displayItems = new List<string>();
-        displayItems.Add("Balde");
-        displayItems.Add("BaldeVazio");
-        displayItems.Add("Erva");
-        displayItems.Add("ErvaBad");
-        displayItems.Add("Oleo");
-        displayItems.Add("Pedra");
+        //displayItems.Add("Balde");
+        //displayItems.Add("BaldeVazio");
+        //displayItems.Add("Wood");
+        //displayItems.Add("Wood");
+        //displayItems.Add("Erva");
         displayItems.Add("Wood");
+        displayItems.Add("ErvaBad");
+        //displayItems.Add("Oleo");
+        //displayItems.Add("Pedra");
 
         Button btn = setaDOWN.GetComponent<Button>();
         btn.onClick.AddListener(ScrollDown);
@@ -36,6 +50,7 @@ public class InventoryDisplay : MonoBehaviour
         btn.onClick.AddListener(ItemSelecionado2);
         btn = ItemNaoSelecionado3.GetComponent<Button>();
         btn.onClick.AddListener(ItemSelecionado3);
+
 
     }
     private void activeImage(Button itemSelecionado, string itemName)
@@ -62,14 +77,14 @@ public class InventoryDisplay : MonoBehaviour
     }
     private bool scrollup = false, scrolldown = false;
     public bool exit;
-    public IEnumerator display()
+    private void cleanDisplay()
     {
         Image[] images = ItemNaoSelecionado1.GetComponentsInChildren<Image>();
         foreach (Image img in images)
         {
-            if(img.name!= "ItemNaoSelecionado1")
+            if (img.name != "ItemNaoSelecionado1")
                 img.enabled = false;
-            
+
         }
         images = ItemNaoSelecionado2.GetComponentsInChildren<Image>();
         foreach (Image img in images)
@@ -85,28 +100,62 @@ public class InventoryDisplay : MonoBehaviour
                 img.enabled = false;
 
         }
+        images = FirstCraft.GetComponentsInChildren<Image>();
+        foreach (Image img in images)
+        {
+            img.enabled = false;
+
+        }
+        images = SecondCraft.GetComponentsInChildren<Image>();
+        foreach (Image img in images)
+        {
+            img.enabled = false;
+
+        }
+        images = ThirdCraft.GetComponentsInChildren<Image>();
+        foreach (Image img in images)
+        {
+            img.enabled = false;
+
+        }
+        images = outputCraft.GetComponentsInChildren<Image>();
+        foreach (Image img in images)
+        {
+            img.enabled = false;
+
+        }
+        foreach(GameObject slot in slots)
+        {
+            slot.SetActive(false);
+        }
+    }
+    public IEnumerator display()
+    {
+        cleanDisplay();
         exit = false;
         int posFirst = 0;
 
         while (true)
         {
             scrollup = false; scrolldown = false;
-            Debug.Log("pos=" + posFirst);
             if (displayItems.Count > posFirst && displayItems[posFirst] != null)
             {
-                Debug.Log(displayItems[posFirst]);
                 activeImage(ItemNaoSelecionado1, displayItems[posFirst]);
+                item1 = displayItems[posFirst];
             }
+            else item1 = "";
             if (displayItems.Count > posFirst + 1 && displayItems[posFirst + 1] != null)
             {
-                Debug.Log(displayItems[posFirst + 1]);
                 activeImage(ItemNaoSelecionado2, displayItems[posFirst + 1]);
+                item2 = displayItems[posFirst+1];
             }
+            else item2 = "";
             if (displayItems.Count > posFirst + 2 && displayItems[posFirst + 2] != null)
             {
-                Debug.Log(displayItems[posFirst+2]);
                 activeImage(ItemNaoSelecionado3, displayItems[posFirst + 2]);
+                item3 = displayItems[posFirst+2];
             }
+            else item3 = "";
 
             yield return new WaitUntil(() => (scrollup == true || scrolldown == true || exit==true));
 
@@ -159,16 +208,162 @@ public class InventoryDisplay : MonoBehaviour
     {
         scrollup = true;
     }
+
+    private void clearSlots()
+    {
+        Image[] images = FirstCraft.GetComponentsInChildren<Image>();
+        foreach (Image img in images)
+        {
+            img.enabled = false;
+
+        }
+        images = SecondCraft.GetComponentsInChildren<Image>();
+        foreach (Image img in images)
+        {
+            img.enabled = false;
+
+        }
+        images = ThirdCraft.GetComponentsInChildren<Image>();
+        foreach (Image img in images)
+        {
+            img.enabled = false;
+
+        }
+        images = outputCraft.GetComponentsInChildren<Image>();
+        foreach (Image img in images)
+        {
+            img.enabled = false;
+
+        }
+        foreach (GameObject slot in slots)
+        {
+            slot.SetActive(false);
+        }
+        buildWood = 1;
+        buildHerb = 1;
+    }
+    private void craftImage(GameObject slotNumber, string itemName)
+    {
+        Image[] images = slotNumber.GetComponentsInChildren<Image>();
+        foreach (Image img in images)
+        {
+            if (img.name == itemName)
+            {
+                img.enabled = true;
+            }
+        }
+    }
+    private int buildWood=1;
+    private int buildHerb = 1;
     void ItemSelecionado1()
     {
-        
+        if (item1=="Wood") {
+            janelaTxt.text = "exemplo xxx madeira faz um balde dheifsd sfjeisfjisd.";
+            if (buildWood == 1)
+            {
+                clearSlots();
+                craftImage(FirstCraft, "Wood");
+                slots[0].SetActive(true);
+                buildWood++;
+            }
+            else if (buildWood == 2)
+            {
+                craftImage(SecondCraft, "Wood");
+                slots[1].SetActive(true);
+                buildWood++;
+            }
+            else if (buildWood == 3)
+            {
+                craftImage(ThirdCraft, "Wood");
+                slots[2].SetActive(true);
+                craftImage(outputCraft, "BaldeVazio");
+                slots[3].SetActive(true);
+                displayItems.Add("BaldeVazio");
+                buildWood = 0;
+            }
+        }
+        else if (item1 == "ErvaBad")
+        {
+            janelaTxt.text = "exemplo xxx mcomida";
+            if (buildHerb == 1)
+            {
+                clearSlots();
+                craftImage(FirstCraft, "ErvaBad");
+                slots[0].SetActive(true);
+                buildHerb++;
+            }
+            else if (buildHerb == 2)
+            {
+                craftImage(SecondCraft, "ErvaBad");
+                slots[1].SetActive(true);
+                craftImage(outputCraft, "Erva");
+                slots[3].SetActive(true);
+                displayItems.Add("Erva");
+                buildHerb = 0;
+            }
+        }
+        else if(item1 == "Erva")
+        {
+            //Eat
+            Player.GetComponent<BarsController>().hungerBarGaining();
+        }
     }
     void ItemSelecionado2()
     {
+        if (item2 == "Wood")
+        {
+            if (buildWood == 1)
+            {
+                clearSlots();
+                craftImage(FirstCraft, "Wood");
+                slots[0].SetActive(true);
+                buildWood++;
+            }
+            else if (buildWood == 2)
+            {
+                craftImage(SecondCraft, "Wood");
+                slots[1].SetActive(true);
+                buildWood++;
+            }
+            else if (buildWood == 3)
+            {
+                craftImage(ThirdCraft, "Wood");
+                slots[2].SetActive(true);
+                craftImage(outputCraft, "BaldeVazio");
+                slots[3].SetActive(true);
+                displayItems.Add("BaldeVazio");
+                buildWood = 0;
+            }
+        }
+        else if (item2 == "ErvaBad")
+        {
+            janelaTxt.text = "exemplo xxx mcomida junta duas";
+            if (buildHerb == 1)
+            {
+                clearSlots();
+                craftImage(FirstCraft, "ErvaBad");
+                slots[0].SetActive(true);
+                buildHerb++;
+            }
+            else if (buildHerb == 2)
+            {
+                craftImage(SecondCraft, "ErvaBad");
+                slots[1].SetActive(true);
+                craftImage(outputCraft, "Erva");
+                slots[3].SetActive(true);
+                displayItems.Add("Erva");
+                buildHerb = 0;
+            }
+        }
+        else if (item2 == "Erva")
+        {
+            //Eat
+            Player.GetComponent<BarsController>().hungerBarGaining();
+        }
 
     }
     void ItemSelecionado3()
     {
-
+        Debug.Log("ItemNaoSelecionado3");
     }
 }
