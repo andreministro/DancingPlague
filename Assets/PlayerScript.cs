@@ -27,6 +27,7 @@ public class PlayerScript : MonoBehaviour
     private bool isCrouching;
     private bool isCrawling;
     private bool isCoveringEars;
+    private bool isCoveringEW;
 
     public bool movePlayer;
     public bool cutScene;
@@ -109,9 +110,11 @@ public class PlayerScript : MonoBehaviour
         }
         else
         {
+            animator.SetBool("IsCoveringEW", false);
             animator.SetBool("IsCrawling", false);
             animator.SetBool("IsRunning", true);
         }
+
         //JUMP
         if (Input.GetButtonDown("Jump") && isGrounded == true)
         {
@@ -156,16 +159,12 @@ public class PlayerScript : MonoBehaviour
             animator.SetBool("IsCrouching", true);
             standCollider.enabled = false;
 
-            //if (Input.GetButton("Horizontal") && Input.GetButton("Crouch") && isCrouching == true)
             if (moveX!=0)
             {
                 isCrawling = true;
                 animator.SetBool("IsCrawling", true);
-                //rb.velocity = new Vector2(moveX, rb.velocity.y);
-                //rb.velocity = new Vector2(moveX * 0.95f, rb.velocity.y);
             }
-            
-            else//if(Input.GetButtonUp("Horizontal"))
+            else
             {
                 isCrawling = false;
                 animator.SetBool("IsCrawling", false);
@@ -180,10 +179,21 @@ public class PlayerScript : MonoBehaviour
         }
 
         //COVER EARS
-        if(Input.GetButtonDown("Ears"))
+        if(Input.GetButton("Ears") && isGrounded == true)
         {
             isCoveringEars = true;
             animator.SetBool("IsCoveringEars", true);
+
+            if (moveX != 0)
+            {
+                isCoveringEW = true;
+                animator.SetBool("IsCoveringEW", true);
+            }
+            else
+            {
+                isCoveringEW = false;
+                animator.SetBool("IsCoveringEW", false);
+            }
         }
 
         if (Input.GetButtonUp("Ears"))
@@ -196,7 +206,6 @@ public class PlayerScript : MonoBehaviour
         if (isCoveringEars == true)
         {
             gameObject.GetComponent<BarsController>().isCoveringEars = true;
-            rb.velocity = new Vector2(moveX * 0, rb.velocity.y);
         }
 
         //Player Direction
