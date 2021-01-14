@@ -71,30 +71,12 @@ public class BarsController : MonoBehaviour
                 hungerFaces[1].SetActive(true);
             else
                 hungerFaces[0].SetActive(true);
-            Debug.Log(health);
             StartCoroutine(hungerBarLoosing());
         }
     }
 
     void Update()
     {
-        /*if (SceneManager.GetActiveScene().name == "LVL1 - Home") {
-            if (gameObject.GetComponent<PlayerScript>().cutScene==false){
-                {
-                    hungerBar[health].SetActive(true);
-                    hungerFaces[0].SetActive(true);
-                    armacao.SetActive(true);
-                }
-            }
-            else
-            {
-                armacao.SetActive(false);
-                hungerBar[health].SetActive(false);
-                hungerFaces[0].SetActive(false);
-            }
-        }
-        else
-        {*/
         if (playerEating)
         {
             hungerBarGaining();
@@ -104,7 +86,6 @@ public class BarsController : MonoBehaviour
     }
     private IEnumerator hungerBarLoosing()
     {
-        Debug.Log("hungerBarLoosing");
         yield return new WaitForSeconds(30.0f);
         hungerBar[health].SetActive(false);
         if (health > 0) { 
@@ -125,7 +106,24 @@ public class BarsController : MonoBehaviour
         else
         {
             //Dead
-            GameOver.SetActive(true);
+            //Animação cair no chão
+
+
+            //GameOver.SetActive(true);
+
+            //Restart
+            health = 28;
+            for (int i = 0; i <= maxHealth; i++)
+            {
+                hungerBar[i].SetActive(false);
+            }
+            for (int i = 0; i <= 2; i++)
+            {
+                hungerFaces[i].SetActive(false);
+            }
+            hungerBar[health].SetActive(true);
+            hungerFaces[0].SetActive(true);
+            StartCoroutine(hungerBarLoosing());
         }
         
     }
@@ -133,8 +131,8 @@ public class BarsController : MonoBehaviour
     {
         playerEating = false;
         hungerBar[health].SetActive(false);
-        if (health + 10 <= 28)
-            health += 10;
+        if (health + 15 <= 28)
+            health += 15;
         else
             health = 28;
         hungerBar[health].SetActive(true);
@@ -200,6 +198,13 @@ public class BarsController : MonoBehaviour
             {
                 alphaLevel += alphaStep;
                 madnessImage.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, alphaLevel);
+            }
+            else
+            {
+                //Dead
+                //Animação dancar
+                //Comer ecrã
+                //GameOver.SetActive(true);
             }
         }
         else if (!triggerArea)

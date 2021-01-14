@@ -36,6 +36,7 @@ public class InventoryDisplay : MonoBehaviour
         //displayItems.Add("Erva");
         displayItems.Add("Wood");
         displayItems.Add("ErvaBad");
+        displayItems.Add("Corda");
         //displayItems.Add("Oleo");
         //displayItems.Add("Pedra");
 
@@ -239,68 +240,140 @@ public class InventoryDisplay : MonoBehaviour
         {
             slot.SetActive(false);
         }
-        buildWood = 1;
-        buildHerb = 1;
+        woodCounter = 1;
+        badHerbCounter = 1;
     }
-    private void craftImage(GameObject slotNumber, string itemName)
+
+    private int objectsSelected = 0;
+    private int slotCounter = 1;
+    private int woodCounter = 0;
+    private int badHerbCounter = 0;
+    private int stoneCounter = 0;
+    private int oilCounter = 0;
+    private int cordaCounter = 0;
+    private bool build = false;
+    private void craftImage(string itemName)
     {
-        Image[] images = slotNumber.GetComponentsInChildren<Image>();
-        foreach (Image img in images)
+        GameObject slotNumber = null;
+        Image[] images;
+        Debug.Log(slotCounter);
+        string auxItemName="";
+
+        if (badHerbCounter == 2 && woodCounter == 0 && stoneCounter == 0 && oilCounter == 0 && cordaCounter == 0)
         {
-            if (img.name == itemName)
+            auxItemName = "Erva";
+            slotNumber = outputCraft;
+            slots[3].SetActive(true);
+            build = true;
+        }
+        else if (badHerbCounter == 0 && woodCounter == 2 && stoneCounter == 0 && oilCounter == 0 && cordaCounter == 1)
+        {
+            auxItemName = "BaldeVazio";
+            slotNumber = outputCraft;
+            slots[3].SetActive(true);
+            build = true;
+        }
+        else if (badHerbCounter == 0 && woodCounter == 1 && stoneCounter == 1 && oilCounter == 1 && cordaCounter == 0)
+        {
+            auxItemName = "Torcha";
+            slotNumber = outputCraft;
+            slots[3].SetActive(true);
+            build = true;
+        }
+        if (build)
+        {
+            images = slotNumber.GetComponentsInChildren<Image>();
+            foreach (Image img in images)
             {
-                img.enabled = true;
+                if (img.name == auxItemName)
+                {
+                    img.enabled = true;
+                }
+            }
+            
+            if (slotCounter == 2)
+            {
+                slotNumber = SecondCraft;
+                slots[1].SetActive(true);
+            }
+            else if (slotCounter == 3)
+            {
+                slotNumber = ThirdCraft;
+                slots[2].SetActive(true);
+            }
+            images = slotNumber.GetComponentsInChildren<Image>();
+            foreach (Image img in images)
+            {
+                if (img.name == itemName)
+                {
+                    img.enabled = true;
+                }
+            }
+
+        }
+        else {
+            if (slotCounter <= 3)
+            {
+                if (slotCounter == 1)
+                {
+                    slotNumber = FirstCraft;
+                    slots[0].SetActive(true);
+                }
+                else if (slotCounter == 2)
+                {
+                    slotNumber = SecondCraft;
+                    slots[1].SetActive(true);
+                }
+                else if (slotCounter == 3)
+                {
+                    slotNumber = ThirdCraft;
+                    slots[2].SetActive(true);
+                }
+
+                images = slotNumber.GetComponentsInChildren<Image>();
+                foreach (Image img in images)
+                {
+                    if (img.name == itemName)
+                    {
+                        img.enabled = true;
+                    }
+                }
             }
         }
     }
-    private int buildWood=1;
-    private int buildHerb = 1;
     void ItemSelecionado1()
     {
+        if (build || slotCounter>3)
+        {
+
+            clearSlots();
+            slotCounter = 1;
+            build = false;
+            woodCounter = 0;
+            badHerbCounter = 0;
+            stoneCounter = 0;
+            oilCounter = 0;
+            cordaCounter = 0;
+        }
         if (item1=="Wood") {
             janelaTxt.text = "exemplo xxx madeira faz um balde dheifsd sfjeisfjisd.";
-            if (buildWood == 1)
-            {
-                clearSlots();
-                craftImage(FirstCraft, "Wood");
-                slots[0].SetActive(true);
-                buildWood++;
-            }
-            else if (buildWood == 2)
-            {
-                craftImage(SecondCraft, "Wood");
-                slots[1].SetActive(true);
-                buildWood++;
-            }
-            else if (buildWood == 3)
-            {
-                craftImage(ThirdCraft, "Wood");
-                slots[2].SetActive(true);
-                craftImage(outputCraft, "BaldeVazio");
-                slots[3].SetActive(true);
-                displayItems.Add("BaldeVazio");
-                buildWood = 0;
-            }
+            woodCounter++;
+            craftImage("Wood");
+            slotCounter++;
         }
         else if (item1 == "ErvaBad")
         {
             janelaTxt.text = "exemplo xxx mcomida";
-            if (buildHerb == 1)
-            {
-                clearSlots();
-                craftImage(FirstCraft, "ErvaBad");
-                slots[0].SetActive(true);
-                buildHerb++;
-            }
-            else if (buildHerb == 2)
-            {
-                craftImage(SecondCraft, "ErvaBad");
-                slots[1].SetActive(true);
-                craftImage(outputCraft, "Erva");
-                slots[3].SetActive(true);
-                displayItems.Add("Erva");
-                buildHerb = 0;
-            }
+            badHerbCounter++;
+            craftImage("ErvaBad");
+            slotCounter++;
+        }
+        else if (item1 == "Corda")
+        {
+            janelaTxt.text = "exemplo xxx mcomida";
+            cordaCounter++;
+            craftImage("Corda");
+            slotCounter++;
         }
         else if(item1 == "Erva")
         {
@@ -310,50 +383,38 @@ public class InventoryDisplay : MonoBehaviour
     }
     void ItemSelecionado2()
     {
+        if (build || slotCounter > 3)
+        {
+
+            clearSlots();
+            slotCounter = 1;
+            build = false;
+            woodCounter = 0;
+            badHerbCounter = 0;
+            stoneCounter = 0;
+            oilCounter = 0;
+            cordaCounter = 0;
+        }
         if (item2 == "Wood")
         {
-            if (buildWood == 1)
-            {
-                clearSlots();
-                craftImage(FirstCraft, "Wood");
-                slots[0].SetActive(true);
-                buildWood++;
-            }
-            else if (buildWood == 2)
-            {
-                craftImage(SecondCraft, "Wood");
-                slots[1].SetActive(true);
-                buildWood++;
-            }
-            else if (buildWood == 3)
-            {
-                craftImage(ThirdCraft, "Wood");
-                slots[2].SetActive(true);
-                craftImage(outputCraft, "BaldeVazio");
-                slots[3].SetActive(true);
-                displayItems.Add("BaldeVazio");
-                buildWood = 0;
-            }
+            janelaTxt.text = "exemplo xxx madeira faz um balde dheifsd sfjeisfjisd.";
+            woodCounter++;
+            craftImage("Wood");
+            slotCounter++;
         }
         else if (item2 == "ErvaBad")
         {
-            janelaTxt.text = "exemplo xxx mcomida junta duas";
-            if (buildHerb == 1)
-            {
-                clearSlots();
-                craftImage(FirstCraft, "ErvaBad");
-                slots[0].SetActive(true);
-                buildHerb++;
-            }
-            else if (buildHerb == 2)
-            {
-                craftImage(SecondCraft, "ErvaBad");
-                slots[1].SetActive(true);
-                craftImage(outputCraft, "Erva");
-                slots[3].SetActive(true);
-                displayItems.Add("Erva");
-                buildHerb = 0;
-            }
+            janelaTxt.text = "exemplo xxx mcomida";
+            badHerbCounter++;
+            craftImage("ErvaBad");
+            slotCounter++;
+        }
+        else if (item2 == "Corda")
+        {
+            janelaTxt.text = "exemplo xxx mcomida";
+            cordaCounter++;
+            craftImage("Corda");
+            slotCounter++;
         }
         else if (item2 == "Erva")
         {
@@ -364,6 +425,43 @@ public class InventoryDisplay : MonoBehaviour
     }
     void ItemSelecionado3()
     {
-        Debug.Log("ItemNaoSelecionado3");
+        if (build || slotCounter > 3)
+        {
+
+            clearSlots();
+            slotCounter = 1;
+            build = false;
+            woodCounter = 0;
+            badHerbCounter = 0;
+            stoneCounter = 0;
+            oilCounter = 0;
+            cordaCounter = 0;
+        }
+        if (item3 == "Wood")
+        {
+            janelaTxt.text = "exemplo xxx madeira faz um balde dheifsd sfjeisfjisd.";
+            woodCounter++;
+            craftImage("Wood");
+            slotCounter++;
+        }
+        else if (item3 == "ErvaBad")
+        {
+            janelaTxt.text = "exemplo xxx mcomida";
+            badHerbCounter++;
+            craftImage("ErvaBad");
+            slotCounter++;
+        }
+        else if (item3 == "Corda")
+        {
+            janelaTxt.text = "exemplo xxx mcomida";
+            cordaCounter++;
+            craftImage("Corda");
+            slotCounter++;
+        }
+        else if (item3 == "Erva")
+        {
+            //Eat
+            Player.GetComponent<BarsController>().hungerBarGaining();
+        }
     }
 }

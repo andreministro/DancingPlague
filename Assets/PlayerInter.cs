@@ -27,7 +27,7 @@ public class PlayerInter : MonoBehaviour
     void Start()
     {
         DialogBox.SetActive(false);
-        //inventory.SetActive(false);
+        inventory.SetActive(false);
         playerInteractionsEnabled = false;
         Debug.Log(SceneManager.GetActiveScene().name);
         if(SceneManager.GetActiveScene().name== "LVL1 - Home")
@@ -43,10 +43,10 @@ public class PlayerInter : MonoBehaviour
     {
         if (playerInteractionsEnabled)
         {
-            /*if (Input.GetButtonDown("Inventory"))
+            if (Input.GetButtonDown("Inventory"))
             {
                 displayInventory();
-            }*/
+            }
 
             if (triggered != "")
             {
@@ -190,7 +190,7 @@ public class PlayerInter : MonoBehaviour
 
             if (other.tag == "Pedra")
             {
-                pressETxt.text = "Pickup rock";
+                pressETxt.text = "Pickup stone";
                 triggered = other.tag;
                 offTrigger = false;
             }
