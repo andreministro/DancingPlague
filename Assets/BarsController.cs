@@ -9,6 +9,7 @@ public class BarsController : MonoBehaviour
     public TextMeshProUGUI pressETxt;
 
     public GameObject madnessImage;
+    public GameObject GameOver;
     public GameObject armacao;
     public GameObject[] hungerBar;
     public GameObject[] hungerFaces;
@@ -26,6 +27,7 @@ public class BarsController : MonoBehaviour
     private float maxHealth=28;
     void Start()
     {
+        //GameOver.SetActive(false);
         if (SceneManager.GetActiveScene().name == "LVL1 - Home")
         {
             first = true;
@@ -69,7 +71,7 @@ public class BarsController : MonoBehaviour
                 hungerFaces[1].SetActive(true);
             else
                 hungerFaces[0].SetActive(true);
-            
+            Debug.Log(health);
             StartCoroutine(hungerBarLoosing());
         }
     }
@@ -102,6 +104,7 @@ public class BarsController : MonoBehaviour
     }
     private IEnumerator hungerBarLoosing()
     {
+        Debug.Log("hungerBarLoosing");
         yield return new WaitForSeconds(30.0f);
         hungerBar[health].SetActive(false);
         if (health > 0) { 
@@ -122,7 +125,7 @@ public class BarsController : MonoBehaviour
         else
         {
             //Dead
-
+            GameOver.SetActive(true);
         }
         
     }

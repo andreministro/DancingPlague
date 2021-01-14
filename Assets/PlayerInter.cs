@@ -27,8 +27,9 @@ public class PlayerInter : MonoBehaviour
     void Start()
     {
         DialogBox.SetActive(false);
-        inventory.SetActive(false);
+        //inventory.SetActive(false);
         playerInteractionsEnabled = false;
+        Debug.Log(SceneManager.GetActiveScene().name);
         if(SceneManager.GetActiveScene().name== "LVL1 - Home")
         {
             completedMissions = 0;
@@ -42,10 +43,10 @@ public class PlayerInter : MonoBehaviour
     {
         if (playerInteractionsEnabled)
         {
-            if (Input.GetButtonDown("Inventory"))
+            /*if (Input.GetButtonDown("Inventory"))
             {
                 displayInventory();
-            }
+            }*/
 
             if (triggered != "")
             {
