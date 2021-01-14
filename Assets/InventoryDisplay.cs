@@ -37,8 +37,8 @@ public class InventoryDisplay : MonoBehaviour
         displayItems.Add("Wood");
         displayItems.Add("ErvaBad");
         displayItems.Add("Corda");
-        //displayItems.Add("Oleo");
-        //displayItems.Add("Pedra");
+        displayItems.Add("Oleo");
+        displayItems.Add("Pedra");
 
         Button btn = setaDOWN.GetComponent<Button>();
         btn.onClick.AddListener(ScrollDown);
@@ -244,7 +244,6 @@ public class InventoryDisplay : MonoBehaviour
         badHerbCounter = 1;
     }
 
-    private int objectsSelected = 0;
     private int slotCounter = 1;
     private int woodCounter = 0;
     private int badHerbCounter = 0;
@@ -265,6 +264,7 @@ public class InventoryDisplay : MonoBehaviour
             slotNumber = outputCraft;
             slots[3].SetActive(true);
             build = true;
+            displayItems.Add("Erva");
         }
         else if (badHerbCounter == 0 && woodCounter == 2 && stoneCounter == 0 && oilCounter == 0 && cordaCounter == 1)
         {
@@ -272,6 +272,7 @@ public class InventoryDisplay : MonoBehaviour
             slotNumber = outputCraft;
             slots[3].SetActive(true);
             build = true;
+            displayItems.Add("BaldeVazio");
         }
         else if (badHerbCounter == 0 && woodCounter == 1 && stoneCounter == 1 && oilCounter == 1 && cordaCounter == 0)
         {
@@ -279,6 +280,7 @@ public class InventoryDisplay : MonoBehaviour
             slotNumber = outputCraft;
             slots[3].SetActive(true);
             build = true;
+            displayItems.Add("Torcha");
         }
         if (build)
         {
@@ -356,29 +358,56 @@ public class InventoryDisplay : MonoBehaviour
             cordaCounter = 0;
         }
         if (item1=="Wood") {
-            janelaTxt.text = "exemplo xxx madeira faz um balde dheifsd sfjeisfjisd.";
+            janelaTxt.text = "Regular piece of wood, might we useful for building a torch or a bucket.\nBe careful with the splinters";
             woodCounter++;
             craftImage("Wood");
             slotCounter++;
         }
         else if (item1 == "ErvaBad")
         {
-            janelaTxt.text = "exemplo xxx mcomida";
+            janelaTxt.text = "Disgusting looking herb. My wife normally mix a bunch of these when we are low on food.";
             badHerbCounter++;
             craftImage("ErvaBad");
             slotCounter++;
         }
         else if (item1 == "Corda")
         {
-            janelaTxt.text = "exemplo xxx mcomida";
+            janelaTxt.text = "Regular firm and sturdy rope, must used for holding stuff in place.";
             cordaCounter++;
             craftImage("Corda");
+            slotCounter++;
+        }
+        else if (item1 == "Pedra")
+        {
+            janelaTxt.text = "Grey and boring, maybe the sparks create a fire.";
+            stoneCounter++;
+            craftImage("Pedra");
+            slotCounter++;
+        }
+        else if (item1 == "Oleo")
+        {
+            janelaTxt.text = "Where did you even find this? Expensive oil used to create fires.\nIt's slippery and stinky with a deep black colour.";
+            oilCounter++;
+            craftImage("Oleo");
             slotCounter++;
         }
         else if(item1 == "Erva")
         {
             //Eat
+            janelaTxt.text = "Emergency food, produced by mixing dirty herbs.\n+ 15 health";
             Player.GetComponent<BarsController>().hungerBarGaining();
+        }
+        else if (item1 == "Torcha")
+        {
+            janelaTxt.text = "Used for cooking, lighting and other enumerous uselful situation.\nBe careful to not burn yourself";
+        }
+        else if (item1 == "Balde")
+        {
+            janelaTxt.text = "It's a water bucket, it is holding water.";
+        }
+        else if (item1 == "BaldeVazio")
+        {
+            janelaTxt.text = "It's a empty bucket, it can hold water.";
         }
     }
     void ItemSelecionado2()
@@ -397,29 +426,56 @@ public class InventoryDisplay : MonoBehaviour
         }
         if (item2 == "Wood")
         {
-            janelaTxt.text = "exemplo xxx madeira faz um balde dheifsd sfjeisfjisd.";
+            janelaTxt.text = "Regular piece of wood, might we useful for building a torch or a bucket.\nBe careful with the splinters";
             woodCounter++;
             craftImage("Wood");
             slotCounter++;
         }
         else if (item2 == "ErvaBad")
         {
-            janelaTxt.text = "exemplo xxx mcomida";
+            janelaTxt.text = "Disgusting looking herb. My wife normally mix a bunch of these when we are low on food.";
             badHerbCounter++;
             craftImage("ErvaBad");
             slotCounter++;
         }
         else if (item2 == "Corda")
         {
-            janelaTxt.text = "exemplo xxx mcomida";
+            janelaTxt.text = "Regular firm and sturdy rope, must used for holding stuff in place.";
             cordaCounter++;
-            craftImage("Corda");
+            craftImage("Pedra");
+            slotCounter++;
+        }
+        else if (item2 == "Pedra")
+        {
+            janelaTxt.text = "Grey and boring, maybe the sparks create a fire.";
+            stoneCounter++;
+            craftImage("Pedra");
             slotCounter++;
         }
         else if (item2 == "Erva")
         {
             //Eat
+            janelaTxt.text = "Emergency food, produced by mixing dirty herbs.\n+ 15 health";
             Player.GetComponent<BarsController>().hungerBarGaining();
+        }
+        else if (item2 == "Torcha")
+        {
+            janelaTxt.text = "Used for cooking, lighting and other enumerous uselful situation.\nBe careful to not burn yourself";
+        }
+        else if (item2 == "Oleo")
+        {
+            janelaTxt.text = "Where did you even find this? Expensive oil used to create fires.\nIt's slippery and stinky with a deep black colour.";
+            oilCounter++;
+            craftImage("Oleo");
+            slotCounter++;
+        }
+        else if (item2 == "Balde")
+        {
+            janelaTxt.text = "It's a water bucket, it is holding water.";
+        }
+        else if (item2 == "BaldeVazio")
+        {
+            janelaTxt.text = "It's a empty bucket, it can hold water.";
         }
 
     }
@@ -439,29 +495,57 @@ public class InventoryDisplay : MonoBehaviour
         }
         if (item3 == "Wood")
         {
-            janelaTxt.text = "exemplo xxx madeira faz um balde dheifsd sfjeisfjisd.";
+            janelaTxt.text = "Regular piece of wood, might we useful for building a torch or a bucket.\nBe careful with the splinters";
             woodCounter++;
             craftImage("Wood");
             slotCounter++;
         }
         else if (item3 == "ErvaBad")
         {
-            janelaTxt.text = "exemplo xxx mcomida";
+            janelaTxt.text = "Disgusting looking herb. My wife normally mix a bunch of these when we are low on food.";
             badHerbCounter++;
             craftImage("ErvaBad");
             slotCounter++;
         }
         else if (item3 == "Corda")
         {
-            janelaTxt.text = "exemplo xxx mcomida";
+            janelaTxt.text = "Regular firm and sturdy rope, must used for holding stuff in place.";
             cordaCounter++;
             craftImage("Corda");
+            slotCounter++;
+        }
+        else if (item3 == "Pedra")
+        {
+            janelaTxt.text = "Grey and boring, maybe the sparks create a fire.";
+            stoneCounter++;
+            craftImage("Pedra");
+            slotCounter++;
+        }
+        else if (item3 == "Oleo")
+        {
+            janelaTxt.text = "Where did you even find this? Expensive oil used to create fires.\nIt's slippery and stinky with a deep black colour.";
+            oilCounter++;
+            craftImage("Oleo");
             slotCounter++;
         }
         else if (item3 == "Erva")
         {
             //Eat
+            janelaTxt.text = "Emergency food, produced by mixing dirty herbs.\n+ 15 health";
             Player.GetComponent<BarsController>().hungerBarGaining();
+        }
+        else if (item3 == "Torcha")
+        {
+            janelaTxt.text = "Used for cooking, lighting and other enumerous uselful situation.\nBe careful to not burn yourself";
+        }
+
+        else if (item3 == "Balde")
+        {
+            janelaTxt.text = "It's a water bucket, it is holding water.";
+        }
+        else if (item3 == "BaldeVazio")
+        {
+            janelaTxt.text = "It's a empty bucket, it can hold water.";
         }
     }
 }
