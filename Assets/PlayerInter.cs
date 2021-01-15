@@ -27,7 +27,6 @@ public class PlayerInter : MonoBehaviour
     void Start()
     {
         DialogBox.SetActive(false);
-        inventory.SetActive(false);
         playerInteractionsEnabled = false;
         Debug.Log(SceneManager.GetActiveScene().name);
         if(SceneManager.GetActiveScene().name== "LVL1 - Home")
@@ -36,6 +35,10 @@ public class PlayerInter : MonoBehaviour
             StartCoroutine(secondCutscene());
             bauAberto.SetActive(false);
         }
+        else
+        {
+            inventory.SetActive(false);
+        }
     }
 
     private bool firstVisitA = true, firstVisitG = true, firstVisitS = true;
@@ -43,9 +46,12 @@ public class PlayerInter : MonoBehaviour
     {
         if (playerInteractionsEnabled)
         {
-            if (Input.GetButtonDown("Inventory"))
+            if (SceneManager.GetActiveScene().name != "LVL1 - Home")
             {
-                displayInventory();
+                if (Input.GetButtonDown("Inventory"))
+                {
+                    displayInventory();
+                }
             }
 
             if (triggered != "")
@@ -394,16 +400,28 @@ public class PlayerInter : MonoBehaviour
         {
             rock.GetComponent<Renderer>().enabled = false;
             rockEText.SetActive(true);
+            if (!inventory.GetComponent<InventoryDisplay>().displayItems.Contains("Pedra"))
+            {
+                inventory.GetComponent<InventoryDisplay>().displayItems.Add("Pedra");
+            }
         }
         if (item == "Wood")
         {
             wood.GetComponent<Renderer>().enabled = false;
             woodEText.SetActive(true);
+            if (!inventory.GetComponent<InventoryDisplay>().displayItems.Contains("Wood"))
+            {
+                inventory.GetComponent<InventoryDisplay>().displayItems.Add("Wood");
+            }
         }
         if (item == "Barrel")
         {
             barrel.GetComponent<Renderer>().enabled = false;
             herbsEText.SetActive(true);
+            if (!inventory.GetComponent<InventoryDisplay>().displayItems.Contains("ErvaBad"))
+            {
+                inventory.GetComponent<InventoryDisplay>().displayItems.Add("ErvaBad");
+            }
         }
 
         yield return new WaitForSeconds(1.0f);

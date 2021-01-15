@@ -65,8 +65,8 @@ public class PlayerScript : MonoBehaviour
             cutScene = false;
         }
 
-        FlipPlayer();
-        FlipPlayer();
+        /*FlipPlayer();
+        FlipPlayer();*/
 
     }
 

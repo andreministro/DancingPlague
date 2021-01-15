@@ -29,16 +29,10 @@ public class InventoryDisplay : MonoBehaviour
     void Start()
     {
         displayItems = new List<string>();
-        //displayItems.Add("Balde");
-        //displayItems.Add("BaldeVazio");
-        //displayItems.Add("Wood");
-        //displayItems.Add("Wood");
-        //displayItems.Add("Erva");
-        displayItems.Add("Wood");
-        displayItems.Add("ErvaBad");
-        displayItems.Add("Corda");
+
         displayItems.Add("Oleo");
-        displayItems.Add("Pedra");
+        displayItems.Add("Corda");
+
 
         Button btn = setaDOWN.GetComponent<Button>();
         btn.onClick.AddListener(ScrollDown);
@@ -76,7 +70,7 @@ public class InventoryDisplay : MonoBehaviour
             }
         }
     }
-    private bool scrollup = false, scrolldown = false;
+    private bool scrollup = false, scrolldown = false, newObject=false;
     public bool exit;
     private void cleanDisplay()
     {
@@ -138,11 +132,12 @@ public class InventoryDisplay : MonoBehaviour
 
         while (true)
         {
-            scrollup = false; scrolldown = false;
+            scrollup = false; scrolldown = false; newObject = false;
             if (displayItems.Count > posFirst && displayItems[posFirst] != null)
             {
                 activeImage(ItemNaoSelecionado1, displayItems[posFirst]);
                 item1 = displayItems[posFirst];
+                Debug.Log(item1);
             }
             else item1 = "";
             if (displayItems.Count > posFirst + 1 && displayItems[posFirst + 1] != null)
@@ -158,21 +153,18 @@ public class InventoryDisplay : MonoBehaviour
             }
             else item3 = "";
 
-            yield return new WaitUntil(() => (scrollup == true || scrolldown == true || exit==true));
+            yield return new WaitUntil(() => (scrollup == true || scrolldown == true || newObject==true|| exit==true));
 
             if (displayItems.Count > posFirst && displayItems[posFirst] != null)
             {
-                Debug.Log(displayItems[posFirst]);
                 unactiveImage(ItemNaoSelecionado1, displayItems[posFirst]);
             }
             if (displayItems.Count > posFirst + 1 && displayItems[posFirst + 1] != null)
             {
-                Debug.Log(displayItems[posFirst + 1]);
                 unactiveImage(ItemNaoSelecionado2, displayItems[posFirst + 1]);
             }
             if (displayItems.Count > posFirst + 2 && displayItems[posFirst + 2] != null)
             {
-                Debug.Log(displayItems[posFirst + 2]);
                 unactiveImage(ItemNaoSelecionado3, displayItems[posFirst + 2]);
             }
             if (exit)
@@ -264,7 +256,8 @@ public class InventoryDisplay : MonoBehaviour
             slotNumber = outputCraft;
             slots[3].SetActive(true);
             build = true;
-            displayItems.Add("Erva");
+            if(!displayItems.Contains("Erva"))
+                displayItems.Add("Erva");
         }
         else if (badHerbCounter == 0 && woodCounter == 2 && stoneCounter == 0 && oilCounter == 0 && cordaCounter == 1)
         {
@@ -272,7 +265,8 @@ public class InventoryDisplay : MonoBehaviour
             slotNumber = outputCraft;
             slots[3].SetActive(true);
             build = true;
-            displayItems.Add("BaldeVazio");
+            if (!displayItems.Contains("BaldeVazio"))
+                displayItems.Add("BaldeVazio");
         }
         else if (badHerbCounter == 0 && woodCounter == 1 && stoneCounter == 1 && oilCounter == 1 && cordaCounter == 0)
         {
@@ -280,7 +274,8 @@ public class InventoryDisplay : MonoBehaviour
             slotNumber = outputCraft;
             slots[3].SetActive(true);
             build = true;
-            displayItems.Add("Torcha");
+            if (!displayItems.Contains("Torcha"))
+                displayItems.Add("Torcha");
         }
         if (build)
         {
@@ -311,6 +306,7 @@ public class InventoryDisplay : MonoBehaviour
                     img.enabled = true;
                 }
             }
+            newObject = true;
 
         }
         else {
@@ -442,7 +438,7 @@ public class InventoryDisplay : MonoBehaviour
         {
             janelaTxt.text = "Regular firm and sturdy rope, must used for holding stuff in place.";
             cordaCounter++;
-            craftImage("Pedra");
+            craftImage("Corda");
             slotCounter++;
         }
         else if (item2 == "Pedra")

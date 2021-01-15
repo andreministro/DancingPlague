@@ -1,15 +1,18 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.UI;
 
 public class BarsController : MonoBehaviour
 {
     public TextMeshProUGUI pressETxt;
 
-    public GameObject madnessImage;
     public GameObject GameOver;
+    public Button yes;
+    public Button no;
+    public GameObject madnessImage;
+    public GameObject madnessImageFill;
     public GameObject armacao;
     public GameObject[] hungerBar;
     public GameObject[] hungerFaces;
@@ -19,15 +22,17 @@ public class BarsController : MonoBehaviour
     public bool playerEating = false;
     public bool first;
 
-    private float maxScale = 14.0f;
+    private float maxScale = 12.0f;
     private float maxScaleAux = 7.0f;
-    private float minScale = 2.0f;
+    private float minScale = 1.8f;
     private float alphaLevel;
 
     private float maxHealth=28;
+
+    private bool lostHunger = false;
     void Start()
     {
-        //GameOver.SetActive(false);
+
         if (SceneManager.GetActiveScene().name == "LVL1 - Home")
         {
             first = true;
@@ -50,11 +55,7 @@ public class BarsController : MonoBehaviour
             first = PlayerPrefs.GetInt("firstSanity") == 1 ? true : false;
 
             health = PlayerPrefs.GetInt("Hungerbar", gameObject.GetComponent<BarsController>().health);
-            /*hungerBar[health] = GameObject.Find("/Canvas/HungerBar/vida");
-            for (int i=health; i >= 0; i--)
-            {
-                hungerBar[i] = GameObject.Find("/Canvas/HungerBar/vida-" + i);
-            }*/
+
             for (int i = 0; i <= maxHealth; i++)
             {
                 hungerBar[i].SetActive(false);
@@ -72,6 +73,13 @@ public class BarsController : MonoBehaviour
             else
                 hungerFaces[0].SetActive(true);
             StartCoroutine(hungerBarLoosing());
+
+            Button btn = yes.GetComponent<Button>();
+            btn.onClick.AddListener(ContinueGame);
+            btn = no.GetComponent<Button>();
+            btn.onClick.AddListener(StopGame);
+            GameOver.SetActive(false);
+            madnessImageFill.SetActive(false);
         }
     }
 
@@ -86,6 +94,7 @@ public class BarsController : MonoBehaviour
     }
     private IEnumerator hungerBarLoosing()
     {
+        //30.0f
         yield return new WaitForSeconds(30.0f);
         hungerBar[health].SetActive(false);
         if (health > 0) { 
@@ -108,22 +117,10 @@ public class BarsController : MonoBehaviour
             //Dead
             //Animação cair no chão
 
-
-            //GameOver.SetActive(true);
-
-            //Restart
-            health = 28;
-            for (int i = 0; i <= maxHealth; i++)
-            {
-                hungerBar[i].SetActive(false);
-            }
-            for (int i = 0; i <= 2; i++)
-            {
-                hungerFaces[i].SetActive(false);
-            }
-            hungerBar[health].SetActive(true);
-            hungerFaces[0].SetActive(true);
-            StartCoroutine(hungerBarLoosing());
+            lostHunger = true;
+            GameOver.SetActive(true);
+            gameObject.GetComponent<PlayerInter>().playerInteractionsEnabled = false;
+            gameObject.GetComponent<PlayerScript>().movePlayer = false;
         }
         
     }
@@ -148,10 +145,12 @@ public class BarsController : MonoBehaviour
         }
     }
 
+    private float alphaLevelFill = 0.0f;
     private void sanityBarController()
     {
         float step = 0.04f;
         float alphaStep = 0.004f;
+        float alphaFillStep = 0.01f;
         float delayPlayerStep = 0.001f;
 
         if (isCoveringEars)
@@ -194,7 +193,7 @@ public class BarsController : MonoBehaviour
                 Vector2 localScale = new Vector2(madnessImage.transform.localScale.x - step, madnessImage.transform.localScale.y - step);
                 madnessImage.transform.localScale = localScale;
             }
-            else if ((madnessImage.transform.localScale.x - step <= minScale) && alphaLevel<0.8f)
+            else if ((madnessImage.transform.localScale.x - step <= minScale) && alphaLevel<0.9f)
             {
                 alphaLevel += alphaStep;
                 madnessImage.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, alphaLevel);
@@ -204,7 +203,18 @@ public class BarsController : MonoBehaviour
                 //Dead
                 //Animação dancar
                 //Comer ecrã
-                //GameOver.SetActive(true);
+                pressETxt.text = "";
+                madnessImageFill.SetActive(true);
+                gameObject.GetComponent<PlayerInter>().playerInteractionsEnabled = false;
+                gameObject.GetComponent<PlayerScript>().movePlayer = false;
+                if (alphaLevelFill < 1.0f){
+                    alphaLevelFill += alphaFillStep;
+                    madnessImageFill.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, alphaLevelFill);
+                }
+                else
+                {
+                    GameOver.SetActive(true);
+                }
             }
         }
         else if (!triggerArea)
@@ -229,5 +239,42 @@ public class BarsController : MonoBehaviour
                 madnessImage.SetActive(false);
             }
         }
+    }
+    private void ContinueGame()
+    { 
+        if (lostHunger) {
+            //IDLE ANIMATION AGAIN
+            health = 28;
+            for (int i = 0; i <= maxHealth; i++)
+            {
+                hungerBar[i].SetActive(false);
+            }
+            for (int i = 0; i <= 2; i++)
+            {
+                hungerFaces[i].SetActive(false);
+            }
+            hungerBar[health].SetActive(true);
+            hungerFaces[0].SetActive(true);
+            StartCoroutine(hungerBarLoosing());
+        }
+        else
+        {
+            alphaLevelFill = 0.0f;
+            madnessImageFill.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, alphaLevelFill);
+            madnessImageFill.SetActive(false);
+
+            gameObject.transform.position = new Vector2(2.84f, -3.65f);
+            alphaLevel = 0.5f;
+            madnessImage.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, alphaLevel);
+            Vector2 localScale = new Vector2(maxScale, maxScale);
+            madnessImage.transform.localScale = localScale;
+            madnessImage.SetActive(false);
+        }
+        gameObject.GetComponent<PlayerInter>().playerInteractionsEnabled = true;
+        gameObject.GetComponent<PlayerScript>().movePlayer = true;
+        GameOver.SetActive(false);
+    }
+    private void StopGame()
+    {
     }
 }
