@@ -4355,7 +4355,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 754597071}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -46.251526, y: -2.4075928, z: -10}
+  m_LocalPosition: {x: -46.27011, y: -2.4075928, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -5046,7 +5046,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pressETxt: {fileID: 752943316}
+  GameOver: {fileID: 0}
+  yes: {fileID: 0}
+  no: {fileID: 0}
   madnessImage: {fileID: 661601101}
+  madnessImageFill: {fileID: 0}
   armacao: {fileID: 1575151048}
   hungerBar:
   - {fileID: 319700920}
@@ -10882,7 +10886,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.6923077, y: 1}
+    m_SensorSize: {x: 2.5246549, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -10899,7 +10903,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1916872350}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -46.251526, y: -2.4075928, z: -10}
+  m_LocalPosition: {x: -46.27011, y: -2.4075928, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1613341871}
@@ -11040,7 +11044,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1959115377
 SpriteRenderer:
   m_ObjectHideFlags: 0

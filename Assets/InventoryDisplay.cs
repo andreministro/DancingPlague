@@ -46,6 +46,7 @@ public class InventoryDisplay : MonoBehaviour
         btn = ItemNaoSelecionado3.GetComponent<Button>();
         btn.onClick.AddListener(ItemSelecionado3);
 
+        Debug.Log("Click lick");
 
     }
     private void activeImage(Button itemSelecionado, string itemName)
@@ -137,7 +138,6 @@ public class InventoryDisplay : MonoBehaviour
             {
                 activeImage(ItemNaoSelecionado1, displayItems[posFirst]);
                 item1 = displayItems[posFirst];
-                Debug.Log(item1);
             }
             else item1 = "";
             if (displayItems.Count > posFirst + 1 && displayItems[posFirst + 1] != null)
@@ -477,6 +477,7 @@ public class InventoryDisplay : MonoBehaviour
     }
     void ItemSelecionado3()
     {
+        Debug.Log("wat");
         if (build || slotCounter > 3)
         {
 

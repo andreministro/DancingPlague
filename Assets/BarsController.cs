@@ -95,7 +95,7 @@ public class BarsController : MonoBehaviour
     private IEnumerator hungerBarLoosing()
     {
         //30.0f
-        yield return new WaitForSeconds(30.0f);
+        yield return new WaitForSeconds(5.0f);
         hungerBar[health].SetActive(false);
         if (health > 0) { 
             health--;
