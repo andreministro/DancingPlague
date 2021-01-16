@@ -56,8 +56,10 @@ public class PlayerInter : MonoBehaviour
 
             if (triggered != "")
             {
+                Debug.Log("Loop");
                 if (Input.GetButtonDown("Interact"))
                 {
+                    Debug.Log("Loop2");
                     if (triggered == "Armario")
                     {
                         pressETxt.text = "";
@@ -206,7 +208,6 @@ public class PlayerInter : MonoBehaviour
     {
         if (playerInteractionsEnabled)
         {
-            Debug.Log(other.tag);
             if (other.tag == "Armario")
             {
                 pressETxt.text = "Search (Press E)";
@@ -572,6 +573,7 @@ public class PlayerInter : MonoBehaviour
     }
     private IEnumerator buyBread()
     {
+        Debug.Log(Input.GetButtonDown("Interact"));
         yield return new WaitUntil(() => (Input.GetButtonDown("Interact") == true) || offTrigger == true);
         pressETxt.text = "";
         if (offTrigger != true)
