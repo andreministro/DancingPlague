@@ -58,21 +58,18 @@ public class PlayerScript : MonoBehaviour
             FlipPlayer();
             StartCoroutine(gameObject.GetComponent<PlayerInter>().displayDialogueText("I'm going to buy some bread.", false, false));
         }
-        else// if (currentSceneName == "LVL1 - Village")
+        else
         {
             gameObject.GetComponent<PlayerInter>().playerInteractionsEnabled = true;
             movePlayer = true;
             cutScene = false;
         }
-
-
     }
 
     void Update()
     {
         isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, whatIsGround);
 
-        //Player_Movement();
         if (cutScene)
         {
             cutscene_Controller(currentSceneName);
@@ -269,6 +266,24 @@ public class PlayerScript : MonoBehaviour
                 cutScene = false;
                 gameObject.GetComponent<PlayerInter>().playerInteractionsEnabled = true;
             }
+        }
+        else if (currentSceneName == "LVL3 - Market")
+        {
+            //cavalo aparece detras da subida e diz para noS
+            string newText = "What is this filthy plesant doing in here? Think you can just come and steal our food?";
+            StartCoroutine(gameObject.GetComponent<PlayerInter>().displayDialogueText(newText, false, false));
+            newText = "I am not filthy and I just bought this";
+            StartCoroutine(gameObject.GetComponent<PlayerInter>().displayDialogueText(newText, false, false));
+            newText = "GOSH! HOW DARE A MERE PLEBE ANSWER ME BACK! PREPARE FOR YOUR PUNISHMENT!";
+            StartCoroutine(gameObject.GetComponent<PlayerInter>().displayDialogueText(newText, false, false));
+            // pessoas do mercado comeca a aproximar enquanto dançam
+            newText = "...What? ..What is going on? Why are you all dancing? GET AWAY FROM MY HORSE!";
+            StartCoroutine(gameObject.GetComponent<PlayerInter>().displayDialogueText(newText, false, false));
+            //horse runs back behind the staircase
+            newText = "I just spoke with these people... What on devils name is going on..";
+            StartCoroutine(gameObject.GetComponent<PlayerInter>().displayDialogueText(newText, false, false));
+            //jogador agora pode se mexer
+            //dançarinos continuam se a aproximar ate o jogador ir para o lado esquerdo , se ele for contra eles perde vida e morre. 
         }
     }
 

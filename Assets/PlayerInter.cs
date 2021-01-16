@@ -28,12 +28,12 @@ public class PlayerInter : MonoBehaviour
     {
         DialogBox.SetActive(false);
         playerInteractionsEnabled = false;
-        Debug.Log(SceneManager.GetActiveScene().name);
         if(SceneManager.GetActiveScene().name== "LVL1 - Home")
         {
             completedMissions = 0;
             StartCoroutine(secondCutscene());
             bauAberto.SetActive(false);
+            inventory.SetActive(false);
         }
         else
         {
@@ -141,6 +141,61 @@ public class PlayerInter : MonoBehaviour
                     {
                         StartCoroutine(pickUpItem("Wood"));
                     }
+                    if (triggered == "BancaVerde")
+                    {
+                        string newText = "-Hello there. Wanna buy some green glowy powder?";
+                        StartCoroutine(displayDialogueText(newText, false, false));
+                    }
+                    if (triggered == "BancaLaranja")
+                    {
+                        string newText = "-Good morning Sir , care for some berries?";
+                        StartCoroutine(displayDialogueText(newText, false, false));
+                    }
+                    if (triggered == "BancaCiano")
+                    {
+                        string newText = "-Chop..chop..chop.";
+                        StartCoroutine(displayDialogueText(newText, false, false));
+                    }
+                    if (triggered == "BancaVermelha")
+                    {
+                        string newText = "-Would you like some bread?";
+                        StartCoroutine(displayDialogueText(newText, false, false));
+                        pressETxt.text = "Buy bread";
+                        StartCoroutine(buyBread());
+                    }
+                    if (triggered == "BancaAmarela")
+                    {
+                        string newText = "-Hey kid! Don't touch the food!";
+                        //MIUDO A FUGIR
+                        StartCoroutine(displayDialogueText(newText, false, false));
+                    }
+                    if (triggered == "BancaPreta")
+                    {
+                        string newText = "-Hey lad, you look strong! How about a sword?";
+                        StartCoroutine(displayDialogueText(newText, false, false));
+                        gameObject.GetComponent<PlayerScript>().cutScene = true;
+                    }
+                    if (triggered == "SenhorSentado")
+                    {
+                        string newText = "-Hey man, have you heard what happen to those people... forget it let's think positive";
+                        StartCoroutine(displayDialogueText(newText, false, false));
+                    }
+                    if (triggered == "FilhoMae")
+                    {
+                        string newText = "-Mom i am scared... what if i start going crazy too?";
+                        StartCoroutine(displayDialogueText(newText, false, false));
+                    }
+                    if (triggered == "MulherVenderChao")
+                    {
+                        string newText = "-Please buy my vegetables.";
+                        StartCoroutine(displayDialogueText(newText, false, false));
+                    }
+                    if (triggered == "Guarda")
+                    {
+                        string newText = "-Don't look at me peasant.";
+                        StartCoroutine(displayDialogueText(newText, false, false));
+                    }
+
                 }
             }
         }
@@ -232,6 +287,67 @@ public class PlayerInter : MonoBehaviour
                 triggered = other.tag;
                 offTrigger = false;
             }
+            if (triggered == "BancaVerde")
+            {
+                pressETxt.text = "Talk";
+                triggered = other.tag;
+                offTrigger = false;
+            }
+            if (triggered == "BancaLaranja")
+            {
+                pressETxt.text = "Talk";
+                triggered = other.tag;
+                offTrigger = false;
+            }
+            if (triggered == "BancaCiano")
+            {
+                pressETxt.text = "Talk";
+                triggered = other.tag;
+                offTrigger = false;
+            }
+            if (triggered == "BancaVermelha")
+            {
+                pressETxt.text = "Talk";
+                triggered = other.tag;
+                offTrigger = false;
+            }
+            if (triggered == "BancaAmarela")
+            {
+                pressETxt.text = "Talk";
+                triggered = other.tag;
+                offTrigger = false;
+            }
+            if (triggered == "BancaPreta")
+            {
+                pressETxt.text = "Talk";
+                triggered = other.tag;
+                offTrigger = false;
+            }
+            if (triggered == "SenhorSentado")
+            {
+                pressETxt.text = "Talk";
+                triggered = other.tag;
+                offTrigger = false;
+            }
+            if (triggered == "FilhoMae")
+            {
+                pressETxt.text = "Talk";
+                triggered = other.tag;
+                offTrigger = false;
+            }
+            if (triggered == "MulherVenderChao")
+            {
+                pressETxt.text = "Talk";
+                triggered = other.tag;
+                offTrigger = false;
+            }
+            if (triggered == "Guarda")
+            {
+                pressETxt.text = "Talk";
+                triggered = other.tag;
+                offTrigger = false;
+            }
+
         }
 
     }
@@ -312,6 +428,66 @@ public class PlayerInter : MonoBehaviour
                 triggered = "";
                 offTrigger = true;
             }
+            if (triggered == "BancaVerde")
+            {
+                pressETxt.text = "";
+                triggered = "";
+                offTrigger = true;
+            }
+            if (triggered == "BancaLaranja")
+            {
+                pressETxt.text = "";
+                triggered = "";
+                offTrigger = true;
+            }
+            if (triggered == "BancaCiano")
+            {
+                pressETxt.text = "";
+                triggered = "";
+                offTrigger = true;
+            }
+            if (triggered == "BancaVermelha")
+            {
+                pressETxt.text = "";
+                triggered = "";
+                offTrigger = true;
+            }
+            if (triggered == "BancaAmarela")
+            {
+                pressETxt.text = "";
+                triggered = "";
+                offTrigger = true;
+            }
+            if (triggered == "BancaPreta")
+            {
+                pressETxt.text = "";
+                triggered = "";
+                offTrigger = true;
+            }
+            if (triggered == "SenhorSentado")
+            {
+                pressETxt.text = "";
+                triggered = "";
+                offTrigger = true;
+            }
+            if (triggered == "FilhoMae")
+            {
+                pressETxt.text = "";
+                triggered = "";
+                offTrigger = true;
+            }
+            if (triggered == "MulherVenderChao")
+            {
+                pressETxt.text = "";
+                triggered = "";
+                offTrigger = true;
+            }
+            if (triggered == "Guarda")
+            {
+                pressETxt.text = "";
+                triggered = "";
+                offTrigger = true;
+            }
         }
     }
     public IEnumerator displayDialogueText(string newText, bool multipleDialogues, bool first)
@@ -360,6 +536,10 @@ public class PlayerInter : MonoBehaviour
 
             while (counter != wordCounter)
             {
+                if (newText[0].Equals('-'))
+                {
+                    dialogueText.color = Color.gray;
+                }
                 dialogueText.text = newText.Substring(0, counter++);
                 yield return new WaitForSeconds(0.02f);
             }
@@ -385,7 +565,16 @@ public class PlayerInter : MonoBehaviour
         PlayerPrefs.SetInt("Hungerbar", gameObject.GetComponent<BarsController>().health);
         PlayerPrefs.SetInt("firstSanity", gameObject.GetComponent<BarsController>().first ? 1 : 0);
     }
-
+    private IEnumerator buyBread()
+    {
+        yield return new WaitUntil(() => (Input.GetButtonDown("Interact") == true) || offTrigger == true);
+        pressETxt.text = "";
+        if (offTrigger != true)
+        {
+            string newText = "-Thank you. Please come again Sir.";
+            StartCoroutine(displayDialogueText(newText, false, false));
+        }
+    }
     private IEnumerator pickUpItem(string item)
     {
         /*if (firstPick)

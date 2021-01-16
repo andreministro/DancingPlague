@@ -46,7 +46,6 @@ public class InventoryDisplay : MonoBehaviour
         btn = ItemNaoSelecionado3.GetComponent<Button>();
         btn.onClick.AddListener(ItemSelecionado3);
 
-        Debug.Log("Click lick");
 
     }
     private void activeImage(Button itemSelecionado, string itemName)
