@@ -19,6 +19,12 @@ TagManager:
   - Wood
   - PortaEntrarCasa
   - PortaEntrarMercado
+  - BancaVerde
+  - BancaLaranja
+  - BancaCiano
+  - BancaAmarela
+  - BancaVermelha
+  - BancaPreta
   layers:
   - Default
   - TransparentFX

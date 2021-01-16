@@ -8,7 +8,7 @@ public class BarsController : MonoBehaviour
 {
     public TextMeshProUGUI pressETxt;
 
-    public GameObject GameOver;
+    //public GameObject GameOver;
     public Button yes;
     public Button no;
     public GameObject madnessImage;
@@ -74,12 +74,12 @@ public class BarsController : MonoBehaviour
                 hungerFaces[0].SetActive(true);
             StartCoroutine(hungerBarLoosing());
 
-            Button btn = yes.GetComponent<Button>();
+            /*Button btn = yes.GetComponent<Button>();
             btn.onClick.AddListener(ContinueGame);
             btn = no.GetComponent<Button>();
             btn.onClick.AddListener(StopGame);
             GameOver.SetActive(false);
-            madnessImageFill.SetActive(false);
+            madnessImageFill.SetActive(false);*/
         }
     }
 
@@ -118,7 +118,7 @@ public class BarsController : MonoBehaviour
             //Animação cair no chão
 
             lostHunger = true;
-            GameOver.SetActive(true);
+            //GameOver.SetActive(true);
             gameObject.GetComponent<PlayerInter>().playerInteractionsEnabled = false;
             gameObject.GetComponent<PlayerScript>().movePlayer = false;
         }
@@ -213,7 +213,7 @@ public class BarsController : MonoBehaviour
                 }
                 else
                 {
-                    GameOver.SetActive(true);
+                    //GameOver.SetActive(true);
                 }
             }
         }
@@ -272,7 +272,7 @@ public class BarsController : MonoBehaviour
         }
         gameObject.GetComponent<PlayerInter>().playerInteractionsEnabled = true;
         gameObject.GetComponent<PlayerScript>().movePlayer = true;
-        GameOver.SetActive(false);
+        //GameOver.SetActive(false);
     }
     private void StopGame()
     {

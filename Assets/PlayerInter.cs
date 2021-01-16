@@ -173,7 +173,7 @@ public class PlayerInter : MonoBehaviour
                     {
                         string newText = "-Hey lad, you look strong! How about a sword?";
                         StartCoroutine(displayDialogueText(newText, false, false));
-                        gameObject.GetComponent<PlayerScript>().cutScene = true;
+                        //gameObject.GetComponent<PlayerScript>().cutScene = true;
                     }
                     if (triggered == "SenhorSentado")
                     {
@@ -206,6 +206,7 @@ public class PlayerInter : MonoBehaviour
     {
         if (playerInteractionsEnabled)
         {
+            Debug.Log(other.tag);
             if (other.tag == "Armario")
             {
                 pressETxt.text = "Search (Press E)";
@@ -287,61 +288,62 @@ public class PlayerInter : MonoBehaviour
                 triggered = other.tag;
                 offTrigger = false;
             }
-            if (triggered == "BancaVerde")
+            if (other.tag == "BancaVerde")
             {
                 pressETxt.text = "Talk";
                 triggered = other.tag;
                 offTrigger = false;
             }
-            if (triggered == "BancaLaranja")
+            if (other.tag == "BancaLaranja")
             {
                 pressETxt.text = "Talk";
                 triggered = other.tag;
                 offTrigger = false;
             }
-            if (triggered == "BancaCiano")
+            if (other.tag == "BancaCiano")
             {
                 pressETxt.text = "Talk";
                 triggered = other.tag;
                 offTrigger = false;
             }
-            if (triggered == "BancaVermelha")
+            if (other.tag == "BancaVermelha")
             {
                 pressETxt.text = "Talk";
                 triggered = other.tag;
                 offTrigger = false;
             }
-            if (triggered == "BancaAmarela")
+            if (other.tag == "BancaAmarela")
             {
                 pressETxt.text = "Talk";
                 triggered = other.tag;
                 offTrigger = false;
             }
-            if (triggered == "BancaPreta")
+            if (other.tag == "BancaPreta")
+            {
+                Debug.Log("Entrou");
+                pressETxt.text = "Talk";
+                triggered = other.tag;
+                offTrigger = false;
+            }
+            if (other.tag == "SenhorSentado")
             {
                 pressETxt.text = "Talk";
                 triggered = other.tag;
                 offTrigger = false;
             }
-            if (triggered == "SenhorSentado")
+            if (other.tag == "FilhoMae")
             {
                 pressETxt.text = "Talk";
                 triggered = other.tag;
                 offTrigger = false;
             }
-            if (triggered == "FilhoMae")
+            if (other.tag == "MulherVenderChao")
             {
                 pressETxt.text = "Talk";
                 triggered = other.tag;
                 offTrigger = false;
             }
-            if (triggered == "MulherVenderChao")
-            {
-                pressETxt.text = "Talk";
-                triggered = other.tag;
-                offTrigger = false;
-            }
-            if (triggered == "Guarda")
+            if (other.tag == "Guarda")
             {
                 pressETxt.text = "Talk";
                 triggered = other.tag;
@@ -428,61 +430,61 @@ public class PlayerInter : MonoBehaviour
                 triggered = "";
                 offTrigger = true;
             }
-            if (triggered == "BancaVerde")
+            if (other.tag == "BancaVerde")
             {
                 pressETxt.text = "";
                 triggered = "";
                 offTrigger = true;
             }
-            if (triggered == "BancaLaranja")
+            if (other.tag == "BancaLaranja")
             {
                 pressETxt.text = "";
                 triggered = "";
                 offTrigger = true;
             }
-            if (triggered == "BancaCiano")
+            if (other.tag == "BancaCiano")
             {
                 pressETxt.text = "";
                 triggered = "";
                 offTrigger = true;
             }
-            if (triggered == "BancaVermelha")
+            if (other.tag == "BancaVermelha")
             {
                 pressETxt.text = "";
                 triggered = "";
                 offTrigger = true;
             }
-            if (triggered == "BancaAmarela")
+            if (other.tag == "BancaAmarela")
             {
                 pressETxt.text = "";
                 triggered = "";
                 offTrigger = true;
             }
-            if (triggered == "BancaPreta")
+            if (other.tag == "BancaPreta")
             {
                 pressETxt.text = "";
                 triggered = "";
                 offTrigger = true;
             }
-            if (triggered == "SenhorSentado")
+            if (other.tag == "SenhorSentado")
             {
                 pressETxt.text = "";
                 triggered = "";
                 offTrigger = true;
             }
-            if (triggered == "FilhoMae")
+            if (other.tag == "FilhoMae")
             {
                 pressETxt.text = "";
                 triggered = "";
                 offTrigger = true;
             }
-            if (triggered == "MulherVenderChao")
+            if (other.tag == "MulherVenderChao")
             {
                 pressETxt.text = "";
                 triggered = "";
                 offTrigger = true;
             }
-            if (triggered == "Guarda")
+            if (other.tag == "Guarda")
             {
                 pressETxt.text = "";
                 triggered = "";
@@ -533,14 +535,17 @@ public class PlayerInter : MonoBehaviour
         {
             int wordCounter = newText.Length + 1;
             int counter = 1;
-
+            int initPos = 0;
+            if (newText[0].Equals('-'))
+            {
+                dialogueText.color = Color.gray;
+                initPos = 1;
+                counter++;
+                wordCounter--;
+            }
             while (counter != wordCounter)
             {
-                if (newText[0].Equals('-'))
-                {
-                    dialogueText.color = Color.gray;
-                }
-                dialogueText.text = newText.Substring(0, counter++);
+                dialogueText.text = newText.Substring(initPos, counter++);
                 yield return new WaitForSeconds(0.02f);
             }
         }
