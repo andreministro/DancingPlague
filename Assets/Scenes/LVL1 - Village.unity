@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -569,7 +569,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.5631578, y: 1}
+    m_SensorSize: {x: 2.556497, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -586,7 +586,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 95707527}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.924156, y: 0.042407036, z: -10}
+  m_LocalPosition: {x: 2.9234176, y: 0.042407036, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 826334308}
@@ -10093,6 +10093,7 @@ MonoBehaviour:
   cutSceneNumber: 1
   EText: {fileID: 189487804}
   dialogueText: {fileID: 1350395428}
+  cutSceneMarket: 1
 --- !u!212 &1691527381
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -10862,7 +10863,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1771978387}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.924156, y: 0.042407036, z: -10}
+  m_LocalPosition: {x: 2.9234176, y: 0.042407036, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

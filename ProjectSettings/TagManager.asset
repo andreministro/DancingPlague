@@ -25,6 +25,10 @@ TagManager:
   - BancaAmarela
   - BancaVermelha
   - BancaPreta
+  - MulherVenderChao
+  - Guarda
+  - FilhoMae
+  - SenhorSentado
   layers:
   - Default
   - TransparentFX

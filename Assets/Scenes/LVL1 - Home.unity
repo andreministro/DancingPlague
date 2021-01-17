@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -3378,7 +3378,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.535844, y: -1.9884548, z: -10}
+  m_LocalPosition: {x: -12.5756, y: -1.9884548, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4510,7 +4510,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.5631578, y: 1}
+    m_SensorSize: {x: 2.2045455, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -4527,7 +4527,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 776996889}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.535844, y: -1.9884548, z: -10}
+  m_LocalPosition: {x: -12.5756, y: -1.9884548, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1511732760}
@@ -5674,7 +5674,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pressETxt: {fileID: 0}
-  GameOver: {fileID: 0}
   yes: {fileID: 0}
   no: {fileID: 0}
   madnessImage: {fileID: 536764463}
@@ -7311,7 +7310,7 @@ RectTransform:
   m_GameObject: {fileID: 1240397190}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3.55196, y: 3.55196, z: 0.3552}
+  m_LocalScale: {x: 10.000015, y: 10.000015, z: 1.000014}
   m_Children:
   - {fileID: 1358120241}
   - {fileID: 282595800}
@@ -11695,7 +11694,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Yes, maybe one or two more. I will go to the market. Be right back
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 90e4fcbe67f86634f977b2021802925d, type: 2}
   m_sharedMaterial: {fileID: 5686578242459240294, guid: 90e4fcbe67f86634f977b2021802925d,

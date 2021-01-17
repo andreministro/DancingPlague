@@ -6,7 +6,7 @@ using TMPro;
 
 public class InventoryDisplay : MonoBehaviour
 {
-    public List<string> displayItems;
+    private static List<string> displayItems= new List<string>();
 
     public TextMeshProUGUI janelaTxt;
 
@@ -28,7 +28,6 @@ public class InventoryDisplay : MonoBehaviour
 
     void Start()
     {
-        displayItems = new List<string>();
 
         displayItems.Add("Oleo");
         displayItems.Add("Corda");
@@ -543,5 +542,19 @@ public class InventoryDisplay : MonoBehaviour
         {
             janelaTxt.text = "It's a empty bucket, it can hold water.";
         }
+    }
+    public bool checkItemList(string itemName)
+    {
+        if(displayItems.Contains(itemName))
+            return true;
+        return false;
+    }
+    public void addItemList(string itemName)
+    {
+        displayItems.Add(itemName);
+    }
+    public void deleteItemList(string itemName)
+    {
+        displayItems.Remove(itemName);
     }
 }

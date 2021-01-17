@@ -56,10 +56,8 @@ public class PlayerInter : MonoBehaviour
 
             if (triggered != "")
             {
-                Debug.Log("Loop");
                 if (Input.GetButtonDown("Interact"))
                 {
-                    Debug.Log("Loop2");
                     if (triggered == "Armario")
                     {
                         pressETxt.text = "";
@@ -122,7 +120,7 @@ public class PlayerInter : MonoBehaviour
                     if (triggered == "PortaEntrarMercado")
                     {
                         saveDataThroughScenes();
-                        //SceneManager.LoadScene("LVL1 - BackHome");
+                        SceneManager.LoadScene("LVL3 - Market");
                     }
 
                     if (triggered== "Barrel") {
@@ -142,6 +140,10 @@ public class PlayerInter : MonoBehaviour
                     if (triggered == "Wood")
                     {
                         StartCoroutine(pickUpItem("Wood"));
+                    }
+                    if (triggered == "Corda")
+                    {
+                        StartCoroutine(pickUpItem("Corda"));
                     }
                     if (triggered == "BancaVerde")
                     {
@@ -174,8 +176,9 @@ public class PlayerInter : MonoBehaviour
                     if (triggered == "BancaPreta")
                     {
                         string newText = "-Hey lad, you look strong! How about a sword?";
-                        StartCoroutine(displayDialogueText(newText, false, false));
-                        //gameObject.GetComponent<PlayerScript>().cutScene = true;
+                        StartCoroutine(displayDialogueText(newText, false, true));
+                        if(gameObject.GetComponent<PlayerScript>().cutSceneMarket)
+                            gameObject.GetComponent<PlayerScript>().cutScene = true;
                     }
                     if (triggered == "SenhorSentado")
                     {
@@ -195,6 +198,24 @@ public class PlayerInter : MonoBehaviour
                     if (triggered == "Guarda")
                     {
                         string newText = "-Don't look at me peasant.";
+                        StartCoroutine(displayDialogueText(newText, false, false));
+                    }
+                    if (triggered == "Poco")
+                    {
+                        if (inventory.GetComponent<InventoryDisplay>().checkItemList("BaldeVazio"))
+                        {
+                            inventory.GetComponent<InventoryDisplay>().deleteItemList("BaldeVazio");
+                            inventory.GetComponent<InventoryDisplay>().addItemList("Balde");
+                        }
+                        else
+                        {
+                            string newText = "Bucket required.";
+                            StartCoroutine(displayDialogueText(newText, false, true));
+                        }
+                    }
+                    if (triggered == "SemAbrigo")
+                    {
+                        string newText = "-Behold, the day of the Lord comes, cruel, with wrath and fierce anger, to make the land a desolation and to destroy its sinners from it.";
                         StartCoroutine(displayDialogueText(newText, false, false));
                     }
 
@@ -253,7 +274,7 @@ public class PlayerInter : MonoBehaviour
 
             if (other.tag == "Pedra")
             {
-                pressETxt.text = "Pickup stone";
+                pressETxt.text = "Pick up stone";
                 triggered = other.tag;
                 offTrigger = false;
             }
@@ -273,7 +294,13 @@ public class PlayerInter : MonoBehaviour
 
             if (other.tag == "Wood")
             {
-                pressETxt.text = "Pickup wood";
+                pressETxt.text = "Pick up wood";
+                triggered = other.tag;
+                offTrigger = false;
+            }
+            if (other.tag == "Corda")
+            {
+                pressETxt.text = "Pick up rope";
                 triggered = other.tag;
                 offTrigger = false;
             }
@@ -321,7 +348,6 @@ public class PlayerInter : MonoBehaviour
             }
             if (other.tag == "BancaPreta")
             {
-                Debug.Log("Entrou");
                 pressETxt.text = "Talk";
                 triggered = other.tag;
                 offTrigger = false;
@@ -347,6 +373,14 @@ public class PlayerInter : MonoBehaviour
             if (other.tag == "Guarda")
             {
                 pressETxt.text = "Talk";
+                triggered = other.tag;
+                offTrigger = false;
+            }
+            if (other.tag == "Poco")
+            {
+                string newText = "I am kinda thirsty. Some water would be nice";
+                StartCoroutine(displayDialogueText(newText, false, true));
+                pressETxt.text = "Get water";
                 triggered = other.tag;
                 offTrigger = false;
             }
@@ -412,7 +446,12 @@ public class PlayerInter : MonoBehaviour
                 triggered = "";
                 offTrigger = true;
             }
-
+            if (other.tag == "Corda")
+            {
+                pressETxt.text = "";
+                triggered = "";
+                offTrigger = true;
+            }
             if (other.tag == "Wood")
             {
                 pressETxt.text = "";
@@ -491,6 +530,12 @@ public class PlayerInter : MonoBehaviour
                 triggered = "";
                 offTrigger = true;
             }
+            if (other.tag == "Poco")
+            {
+                pressETxt.text = "";
+                triggered = "";
+                offTrigger = true;
+            }
         }
     }
     public IEnumerator displayDialogueText(string newText, bool multipleDialogues, bool first)
@@ -510,7 +555,7 @@ public class PlayerInter : MonoBehaviour
                 {
                     if (dText[0].Equals('m'))
                     {
-                        dialogueText.color = Color.magenta;
+                        dialogueText.color = new Color32(165,62,204, 255);
                     }
                     else if (dText[0].Equals('p'))
                     {
@@ -518,12 +563,12 @@ public class PlayerInter : MonoBehaviour
                     }
                     else if (dText[0].Equals('s'))
                     {
-                        dialogueText.color = Color.blue;
+                        dialogueText.color = new Color32(12, 182, 180, 255);
                     }
                     else
                     {
                         //Externos
-                        dialogueText.color = Color.gray;
+                        dialogueText.color = new Color32(150, 113, 74, 255);
                     }
                     dialogueText.text = dText.Substring(1, counter++);
                     yield return new WaitForSeconds(0.02f);
@@ -537,9 +582,10 @@ public class PlayerInter : MonoBehaviour
             int wordCounter = newText.Length + 1;
             int counter = 1;
             int initPos = 0;
+            dialogueText.color = Color.black;
             if (newText[0].Equals('-'))
             {
-                dialogueText.color = Color.gray;
+                dialogueText.color = new Color32(150, 113, 74, 255);
                 initPos = 1;
                 counter++;
                 wordCounter--;
@@ -573,11 +619,12 @@ public class PlayerInter : MonoBehaviour
     }
     private IEnumerator buyBread()
     {
-        Debug.Log(Input.GetButtonDown("Interact"));
+        yield return new WaitForSeconds(0);
         yield return new WaitUntil(() => (Input.GetButtonDown("Interact") == true) || offTrigger == true);
         pressETxt.text = "";
         if (offTrigger != true)
         {
+            yield return new WaitForSeconds(0);
             string newText = "-Thank you. Please come again Sir.";
             StartCoroutine(displayDialogueText(newText, false, false));
         }
@@ -596,27 +643,27 @@ public class PlayerInter : MonoBehaviour
         {
             rock.GetComponent<Renderer>().enabled = false;
             rockEText.SetActive(true);
-            if (!inventory.GetComponent<InventoryDisplay>().displayItems.Contains("Pedra"))
+            if (!inventory.GetComponent<InventoryDisplay>().checkItemList("Pedra"))
             {
-                inventory.GetComponent<InventoryDisplay>().displayItems.Add("Pedra");
+                inventory.GetComponent<InventoryDisplay>().addItemList("Pedra");
             }
         }
         if (item == "Wood")
         {
             wood.GetComponent<Renderer>().enabled = false;
             woodEText.SetActive(true);
-            if (!inventory.GetComponent<InventoryDisplay>().displayItems.Contains("Wood"))
+            if (!inventory.GetComponent<InventoryDisplay>().checkItemList("Wood"))
             {
-                inventory.GetComponent<InventoryDisplay>().displayItems.Add("Wood");
+                inventory.GetComponent<InventoryDisplay>().addItemList("Wood");
             }
         }
         if (item == "Barrel")
         {
             barrel.GetComponent<Renderer>().enabled = false;
             herbsEText.SetActive(true);
-            if (!inventory.GetComponent<InventoryDisplay>().displayItems.Contains("ErvaBad"))
+            if (!inventory.GetComponent<InventoryDisplay>().checkItemList("ErvaBad"))
             {
-                inventory.GetComponent<InventoryDisplay>().displayItems.Add("ErvaBad");
+                inventory.GetComponent<InventoryDisplay>().addItemList("ErvaBad");
             }
         }
 
