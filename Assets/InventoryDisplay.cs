@@ -28,11 +28,6 @@ public class InventoryDisplay : MonoBehaviour
 
     void Start()
     {
-
-        displayItems.Add("Oleo");
-        displayItems.Add("Corda");
-
-
         Button btn = setaDOWN.GetComponent<Button>();
         btn.onClick.AddListener(ScrollDown);
         btn = setaUP.GetComponent<Button>();

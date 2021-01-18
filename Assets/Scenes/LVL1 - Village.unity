@@ -2081,7 +2081,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5923fedfb65859842ae2f9388e31d660, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayItems: []
   janelaTxt: {fileID: 1754951592}
   setaDOWN: {fileID: 1594339494}
   setaUP: {fileID: 1926726932}
