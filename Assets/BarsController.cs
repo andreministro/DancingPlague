@@ -95,7 +95,7 @@ public class BarsController : MonoBehaviour
     private IEnumerator hungerBarLoosing()
     {
         //30.0f
-        yield return new WaitForSeconds(30.0f);
+        yield return new WaitForSeconds(0.1f);
         hungerBar[health].SetActive(false);
         if (health > 0) { 
             health--;
@@ -117,10 +117,13 @@ public class BarsController : MonoBehaviour
             //Dead
             //Animação cair no chão
 
-            lostHunger = true;
+            pressETxt.text = "";
+            madnessImageFill.SetActive(true);
+            madnessImageFill.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0.4f);
             GameOver.SetActive(true);
             gameObject.GetComponent<PlayerInter>().playerInteractionsEnabled = false;
             gameObject.GetComponent<PlayerScript>().movePlayer = false;
+            lostHunger = true;
         }
         
     }
@@ -259,9 +262,6 @@ public class BarsController : MonoBehaviour
         }
         else
         {
-            alphaLevelFill = 0.0f;
-            madnessImageFill.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, alphaLevelFill);
-            madnessImageFill.SetActive(false);
 
             gameObject.transform.position = new Vector2(2.84f, -3.65f);
             alphaLevel = 0.5f;
@@ -270,6 +270,9 @@ public class BarsController : MonoBehaviour
             madnessImage.transform.localScale = localScale;
             madnessImage.SetActive(false);
         }
+        alphaLevelFill = 0.0f;
+        madnessImageFill.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, alphaLevelFill);
+        madnessImageFill.SetActive(false);
         gameObject.GetComponent<PlayerInter>().playerInteractionsEnabled = true;
         gameObject.GetComponent<PlayerScript>().movePlayer = true;
         GameOver.SetActive(false);
