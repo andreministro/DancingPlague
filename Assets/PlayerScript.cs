@@ -15,6 +15,7 @@ public class PlayerScript : MonoBehaviour
     public int JumpPower;
     private float moveX;
     public float sanityPenalty;
+    public GameObject cavalo;
 
     private bool isGrounded;
     public Transform feetPos;
@@ -283,6 +284,7 @@ public class PlayerScript : MonoBehaviour
 
     private IEnumerator CutSceneMarket()
     {
+        cavalo.GetComponent<Animator>().SetTrigger("HorseWalking");
         yield return new WaitUntil(() => (dialogueText.text == ""));
         string newText = "-What is this filthy plesant doing in here?\n-Think you can just come and steal our food?\npI am not filthy and I just bought this.\n-GOSH! HOW DARE A MERE PLEBE ANSWER ME BACK!\n-PREPARE FOR YOUR PUNISHMENT!";
         StartCoroutine(gameObject.GetComponent<PlayerInter>().displayDialogueText(newText, true, false));

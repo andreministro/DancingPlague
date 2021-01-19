@@ -72,6 +72,9 @@ TagManager:
   - name: SceneObjects
     uniqueID: 217136999
     locked: 0
+  - name: Ceu
+    uniqueID: 3306236577
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

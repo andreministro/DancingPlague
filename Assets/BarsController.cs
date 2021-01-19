@@ -7,12 +7,12 @@ using UnityEngine.UI;
 public class BarsController : MonoBehaviour
 {
     public TextMeshProUGUI pressETxt;
-
     public GameObject GameOver;
     public Button yes;
     public Button no;
     public GameObject madnessImage;
     public GameObject madnessImageFill;
+    public GameObject madnessPlayer;
     public GameObject armacao;
     public GameObject[] hungerBar;
     public GameObject[] hungerFaces;
@@ -116,7 +116,8 @@ public class BarsController : MonoBehaviour
         {
             //Dead
             //Animação cair no chão
-
+            gameObject.GetComponent<PlayerScript>().animator.SetTrigger("IsDyingT");
+            madnessPlayer.SetActive(false);
             pressETxt.text = "";
             madnessImageFill.SetActive(true);
             madnessImageFill.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0.4f);
@@ -207,6 +208,7 @@ public class BarsController : MonoBehaviour
                 //Animação dancar
                 //Comer ecrã
                 pressETxt.text = "";
+                madnessPlayer.SetActive(true);
                 madnessImageFill.SetActive(true);
                 gameObject.GetComponent<PlayerInter>().playerInteractionsEnabled = false;
                 gameObject.GetComponent<PlayerScript>().movePlayer = false;
@@ -247,6 +249,7 @@ public class BarsController : MonoBehaviour
     { 
         if (lostHunger) {
             //IDLE ANIMATION AGAIN
+            gameObject.GetComponent<PlayerScript>().animator.SetBool("IsAlive", true);
             health = 28;
             for (int i = 0; i <= maxHealth; i++)
             {
@@ -262,7 +265,6 @@ public class BarsController : MonoBehaviour
         }
         else
         {
-
             gameObject.transform.position = new Vector2(2.84f, -3.65f);
             alphaLevel = 0.5f;
             madnessImage.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, alphaLevel);
