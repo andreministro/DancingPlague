@@ -66,6 +66,7 @@ public class PlayerScript : MonoBehaviour
             movePlayer = true;
             cutScene = false;
         }
+        if ((SceneManager.GetActiveScene().name == "LVL2 - Big Forest")) FlipPlayer();
     }
 
     void Update()

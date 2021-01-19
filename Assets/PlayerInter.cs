@@ -16,6 +16,8 @@ public class PlayerInter : MonoBehaviour
 
     public GameObject bauAberto;
     public GameObject inventory;
+    public GameObject fogueira;
+    public GameObject fogueiraTrigger;
 
     public bool firstPick=true;
     private bool firstInterPoco = true;
@@ -118,11 +120,6 @@ public class PlayerInter : MonoBehaviour
                         saveDataThroughScenes();
                         SceneManager.LoadScene("LVL1 - BackHome");
                     }
-                    if (triggered == "PortaEntrarMercado")
-                    {
-                        saveDataThroughScenes();
-                        SceneManager.LoadScene("LVL3 - Market");
-                    }
 
                     if (triggered== "Barrel") {
                         string newText = "Herbs found.";
@@ -205,10 +202,18 @@ public class PlayerInter : MonoBehaviour
                     }
                     if (triggered == "Poco")
                     {
+                        pressETxt.text = "";
                         if (inventory.GetComponent<InventoryDisplay>().checkItemList("BaldeVazio"))
                         {
                             inventory.GetComponent<InventoryDisplay>().deleteItemList("BaldeVazio");
                             inventory.GetComponent<InventoryDisplay>().addItemList("Balde");
+                            string newText = "Filled bucket.";
+                            StartCoroutine(displayDialogueText(newText, false, true));
+                        }
+                        else if (inventory.GetComponent<InventoryDisplay>().checkItemList("Balde"))
+                        {
+                            string newText = "My bucket is already filled wtih water.";
+                            StartCoroutine(displayDialogueText(newText, false, true));
                         }
                         else
                         {
@@ -218,8 +223,23 @@ public class PlayerInter : MonoBehaviour
                     }
                     if (triggered == "SemAbrigo")
                     {
-                        string newText = "-Behold, the day of the Lord comes, cruel, with wrath and fierce anger, to make the land a desolation and to destroy its sinners from it.";
+                        string newText = "-Behold, the day of the Lord comes, cruel, with wrath and fierce anger!";
                         StartCoroutine(displayDialogueText(newText, false, false));
+                    }
+                    if (triggered == "Fogueira")
+                    {
+                        pressETxt.text = "";
+                        if (!inventory.GetComponent<InventoryDisplay>().checkItemList("Balde"))
+                        {
+                            string newText = "My bucket does not have water.";
+                            StartCoroutine(displayDialogueText(newText, false, true));
+                        }
+                        else
+                        {
+                            //Animação de apagar o fogo
+                            fogueira.GetComponent<Collider2D>().isTrigger = true;
+                            fogueiraTrigger.SetActive(false);
+                        }
                     }
                 }
             }
@@ -314,15 +334,14 @@ public class PlayerInter : MonoBehaviour
             }
             if (other.tag == "PortaEntrarCasa")
             {
-                pressETxt.text = "Enter home";
+                pressETxt.text = "Enter";
                 triggered = other.tag;
                 offTrigger = false;
             }
             if (other.tag == "PortaEntrarMercado")
             {
-                pressETxt.text = "Enter market";
-                triggered = other.tag;
-                offTrigger = false;
+                saveDataThroughScenes();
+                SceneManager.LoadScene("LVL3 - Market");
             }
             if (other.tag == "BancaVerde")
             {
@@ -393,6 +412,10 @@ public class PlayerInter : MonoBehaviour
             {
                 SceneManager.LoadScene("LVL2 - Forest");
             }
+            if (other.tag == "EnterBigForest")
+            {
+                SceneManager.LoadScene("LVL2 - Big Forest");
+            }
             if (other.tag == "Poco")
             {
                 if (firstInterPoco)
@@ -405,7 +428,24 @@ public class PlayerInter : MonoBehaviour
                 triggered = other.tag;
                 offTrigger = false;
             }
-
+            if (other.tag == "SemAbrigo")
+            {
+                pressETxt.text = "Talk";
+                triggered = other.tag;
+                offTrigger = false;
+            }
+            if (other.tag == "Fogueira")
+            {
+                pressETxt.text = "Put out fire";
+                triggered = other.tag;
+                offTrigger = false;
+            }
+            if (other.tag == "Crouch")
+            {
+                pressETxt.text = "Crouch (Press S)";
+                triggered = other.tag;
+                offTrigger = false;
+            }
         }
 
     }
@@ -558,6 +598,24 @@ public class PlayerInter : MonoBehaviour
                 offTrigger = true;
             }
             if (other.tag == "Poco")
+            {
+                pressETxt.text = "";
+                triggered = "";
+                offTrigger = true;
+            }
+            if (other.tag == "SemAbrigo")
+            {
+                pressETxt.text = "";
+                triggered = "";
+                offTrigger = true;
+            }
+            if (other.tag == "Fogueira")
+            {
+                pressETxt.text = "";
+                triggered = "";
+                offTrigger = true;
+            }
+            if (other.tag == "Crouch")
             {
                 pressETxt.text = "";
                 triggered = "";

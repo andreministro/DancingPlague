@@ -252,7 +252,7 @@ public class InventoryDisplay : MonoBehaviour
             if(!displayItems.Contains("Erva"))
                 displayItems.Add("Erva");
         }
-        else if (badHerbCounter == 0 && woodCounter == 2 && stoneCounter == 0 && oilCounter == 0 && cordaCounter == 1)
+        else if (badHerbCounter == 0 && woodCounter == 3 && stoneCounter == 0 && oilCounter == 0 && cordaCounter == 0)
         {
             auxItemName = "BaldeVazio";
             slotNumber = outputCraft;

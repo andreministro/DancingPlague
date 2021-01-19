@@ -33,6 +33,10 @@ TagManager:
   - Oleo
   - EnterForestMarket
   - Poco
+  - SemAbrigo
+  - Fogueira
+  - Crouch
+  - EnterBigForest
   layers:
   - Default
   - TransparentFX
