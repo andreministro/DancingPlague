@@ -11,13 +11,14 @@ public class PlayerInter : MonoBehaviour
     public TextMeshProUGUI pressETxt;
     public GameObject DialogBox;
 
-    public GameObject rock, barrel, roda, wood;
-    public GameObject rockEText, herbsEText, rodaEText, woodEText;
+    public GameObject rock, barrel, roda, wood, oleo, corda;
+    public GameObject rockEText, herbsEText, rodaEText, woodEText, oleoEText, cordaEText;
 
     public GameObject bauAberto;
     public GameObject inventory;
 
     public bool firstPick=true;
+    private bool firstInterPoco = true;
 
     private string triggered = "";
     private int completedMissions;
@@ -145,6 +146,10 @@ public class PlayerInter : MonoBehaviour
                     {
                         StartCoroutine(pickUpItem("Corda"));
                     }
+                    if (triggered == "Oleo")
+                    {
+                        StartCoroutine(pickUpItem("Oleo"));
+                    }
                     if (triggered == "BancaVerde")
                     {
                         string newText = "-Hello there. Wanna buy some green glowy powder?";
@@ -177,8 +182,6 @@ public class PlayerInter : MonoBehaviour
                     {
                         string newText = "-Hey lad, you look strong! How about a sword?";
                         StartCoroutine(displayDialogueText(newText, false, true));
-                        if(gameObject.GetComponent<PlayerScript>().cutSceneMarket)
-                            gameObject.GetComponent<PlayerScript>().cutScene = true;
                     }
                     if (triggered == "SenhorSentado")
                     {
@@ -218,7 +221,6 @@ public class PlayerInter : MonoBehaviour
                         string newText = "-Behold, the day of the Lord comes, cruel, with wrath and fierce anger, to make the land a desolation and to destroy its sinners from it.";
                         StartCoroutine(displayDialogueText(newText, false, false));
                     }
-
                 }
             }
         }
@@ -304,6 +306,12 @@ public class PlayerInter : MonoBehaviour
                 triggered = other.tag;
                 offTrigger = false;
             }
+            if (other.tag == "Oleo")
+            {
+                pressETxt.text = "Pick up oil";
+                triggered = other.tag;
+                offTrigger = false;
+            }
             if (other.tag == "PortaEntrarCasa")
             {
                 pressETxt.text = "Enter home";
@@ -376,10 +384,23 @@ public class PlayerInter : MonoBehaviour
                 triggered = other.tag;
                 offTrigger = false;
             }
+            if(other.tag== "TriggerCutSceneMarket")
+            {
+                if (gameObject.GetComponent<PlayerScript>().cutSceneMarket)
+                    gameObject.GetComponent<PlayerScript>().cutScene = true;
+            }
+            if (other.tag == "EnterForestMarket")
+            {
+                SceneManager.LoadScene("LVL2 - Forest");
+            }
             if (other.tag == "Poco")
             {
-                string newText = "I am kinda thirsty. Some water would be nice";
-                StartCoroutine(displayDialogueText(newText, false, true));
+                if (firstInterPoco)
+                {
+                    string newText = "I am kinda thirsty. Some water would be nice.";
+                    StartCoroutine(displayDialogueText(newText, false, true));
+                    firstInterPoco = false;
+                }
                 pressETxt.text = "Get water";
                 triggered = other.tag;
                 offTrigger = false;
@@ -453,6 +474,12 @@ public class PlayerInter : MonoBehaviour
                 offTrigger = true;
             }
             if (other.tag == "Wood")
+            {
+                pressETxt.text = "";
+                triggered = "";
+                offTrigger = true;
+            }
+            if (other.tag == "Oleo")
             {
                 pressETxt.text = "";
                 triggered = "";
@@ -666,7 +693,24 @@ public class PlayerInter : MonoBehaviour
                 inventory.GetComponent<InventoryDisplay>().addItemList("ErvaBad");
             }
         }
-
+        if (item == "Oleo")
+        {
+            oleo.GetComponent<Renderer>().enabled = false;
+            oleoEText.SetActive(true);
+            if (!inventory.GetComponent<InventoryDisplay>().checkItemList("Oleo"))
+            {
+                inventory.GetComponent<InventoryDisplay>().addItemList("Oleo");
+            }
+        }
+        if (item == "Corda")
+        {
+            corda.GetComponent<Renderer>().enabled = false;
+            cordaEText.SetActive(true);
+            if (!inventory.GetComponent<InventoryDisplay>().checkItemList("Corda"))
+            {
+                inventory.GetComponent<InventoryDisplay>().addItemList("Corda");
+            }
+        }
         yield return new WaitForSeconds(1.0f);
         if (item == "Pedra")
         {
@@ -682,6 +726,16 @@ public class PlayerInter : MonoBehaviour
         {
             barrel.SetActive(false);
             herbsEText.SetActive(false);
+        }
+        else if (item == "Corda")
+        {
+            corda.SetActive(false);
+            cordaEText.SetActive(false);
+        }
+        else if (item == "Oleo")
+        {
+            oleo.SetActive(false);
+            oleoEText.SetActive(false);
         }
 
     }

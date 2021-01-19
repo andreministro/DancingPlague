@@ -29,6 +29,10 @@ TagManager:
   - Guarda
   - FilhoMae
   - SenhorSentado
+  - TriggerCutSceneMarket
+  - Oleo
+  - EnterForestMarket
+  - Poco
   layers:
   - Default
   - TransparentFX

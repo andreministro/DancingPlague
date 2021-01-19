@@ -20,4 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LVL3 - Market.unity
     guid: b602087e1a26b5046bee713c1542a14d
+  - enabled: 1
+    path: Assets/Scenes/LVL2 - Big Forest.unity
+    guid: e8be1f24e4eed7445a3e89bf03bc50aa
+  - enabled: 1
+    path: Assets/Scenes/LVL2 - Forest.unity
+    guid: 52a61a14531b88b47b177df9f9bb1b2f
   m_configObjects: {}

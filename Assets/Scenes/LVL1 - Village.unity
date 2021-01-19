@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -165,7 +165,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.5645884, y: -1.7554827}
+  m_Offset: {x: 0.4909705, y: -1.7554827}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -176,7 +176,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.1291769, y: 4.5109653}
+  m_Size: {x: 1.981941, y: 4.5109653}
   m_EdgeRadius: 0
 --- !u!1 &53112207
 GameObject:
@@ -569,7 +569,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.0992367, y: 1}
+    m_SensorSize: {x: 2.3860044, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -586,7 +586,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 95707527}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 43.522724, y: 0.042407036, z: -10}
+  m_LocalPosition: {x: 43.554516, y: 0.042407036, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 826334308}
@@ -10405,10 +10405,14 @@ MonoBehaviour:
   barrel: {fileID: 1242052255}
   roda: {fileID: 1375138536}
   wood: {fileID: 490538378}
+  oleo: {fileID: 0}
+  corda: {fileID: 0}
   rockEText: {fileID: 227743719}
   herbsEText: {fileID: 822027333}
   rodaEText: {fileID: 0}
   woodEText: {fileID: 1855225148}
+  oleoEText: {fileID: 0}
+  cordaEText: {fileID: 0}
   bauAberto: {fileID: 0}
   inventory: {fileID: 420822766}
   firstPick: 1
@@ -11213,7 +11217,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1771978387}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 43.522724, y: 0.042407036, z: -10}
+  m_LocalPosition: {x: 43.554516, y: 0.042407036, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
