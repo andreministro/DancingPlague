@@ -37,6 +37,13 @@ TagManager:
   - Fogueira
   - Crouch
   - EnterBigForest
+  - MarketToVillage
+  - SForestToMarket
+  - FloorDirt
+  - Corda
+  - Demon
+  - BigForestToNightVillage
+  - NightVillageToBackHome
   layers:
   - Default
   - TransparentFX

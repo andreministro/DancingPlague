@@ -15,8 +15,8 @@ public class PlayerScript : MonoBehaviour
     public int JumpPower;
     private float moveX;
     public float sanityPenalty;
-    public GameObject cavalo;
-
+    public GameObject cavalo, demon, inventario, demonCollider;
+    
     private bool isGrounded;
     public Transform feetPos;
     public float checkRadius;
@@ -29,6 +29,7 @@ public class PlayerScript : MonoBehaviour
     private bool isCrawling;
     private bool isCoveringEars;
     private bool isCoveringEW;
+    private bool isWalking;
 
     public bool movePlayer;
     public bool cutScene;
@@ -38,6 +39,8 @@ public class PlayerScript : MonoBehaviour
 
     private string currentSceneName;
     private bool label;
+
+    public bool enterMonster = false;
 
     public bool cutSceneMarket = true;
     void Start()
@@ -86,31 +89,50 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    private static bool firstMonster = true;
+
     void Player_Movement()
     {
         //Controls 
+        if(gameObject.transform.position.x > 8.3 && (SceneManager.GetActiveScene().name == "LVL2 - Forest") && firstMonster==true && inventario.GetComponent<InventoryDisplay>().checkItemList("Balde"))
+        {
+            demonCollider.SetActive(true);
+            StartCoroutine(monsterAppear());
+            firstMonster = false;
+        }
         moveX = Input.GetAxis("Horizontal");
+       /* if(Input.GetButtonDown("Horizontal"))
+        {
+            SoundManager.PlaySound("dirt_step");
+        } */
         if (moveX < 0)
         {
-            if(moveX+sanityPenalty<0)
+            if (moveX + sanityPenalty < 0)
+            {
                 moveX += sanityPenalty;
+            }
+            isWalking = true;
         }
         else if (moveX > 0)
         {
             if (moveX - sanityPenalty > 0)
+            {
                 moveX -= sanityPenalty;
+            }
         }
         rb.velocity = new Vector2(moveX * playerspeed, rb.velocity.y);
 
         if (moveX == 0 || Input.GetButton("Crouch") || Input.GetButton("Ears"))
         {
             animator.SetBool("IsRunning", false);
+            isWalking = false;
         }
         else
         {
             animator.SetBool("IsCoveringEW", false);
             animator.SetBool("IsCrawling", false);
             animator.SetBool("IsRunning", true);
+            isWalking = true;
         }
 
         //JUMP
@@ -206,12 +228,20 @@ public class PlayerScript : MonoBehaviour
             gameObject.GetComponent<BarsController>().isCoveringEars = true;
         }
 
+        //Torch
+
+       /* if(Input.GetButtonDown("Torch"))
+        {
+            animator.SetBool("");
+        }*/
+
         //Player Direction
         if (moveX < 0.0f && facingRight == true)
             FlipPlayer();
         else if (moveX > 0.0f && facingRight == false)
             FlipPlayer();
     }
+
     void FlipPlayer()
     {
         facingRight = !facingRight;
@@ -309,5 +339,13 @@ public class PlayerScript : MonoBehaviour
         cutScene = false;
         //dançarinos continuam se a aproximar ate o jogador ir para o lado esquerdo , se ele for contra eles perde vida e morre. 
 
+    }
+
+    private IEnumerator monsterAppear()
+    {
+        demon.GetComponent<Animator>().SetTrigger("IsAppearing");
+        yield return new WaitUntil(() => enterMonster);
+        Debug.Log("entrou yield");
+        gameObject.GetComponent<BarsController>().morteMonstro();
     }
 }

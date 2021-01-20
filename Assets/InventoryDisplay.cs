@@ -252,7 +252,7 @@ public class InventoryDisplay : MonoBehaviour
             if(!displayItems.Contains("Erva"))
                 displayItems.Add("Erva");
         }
-        else if (badHerbCounter == 0 && woodCounter == 3 && stoneCounter == 0 && oilCounter == 0 && cordaCounter == 0)
+        else if (badHerbCounter == 0 && woodCounter == 2 && stoneCounter == 0 && oilCounter == 0 && cordaCounter == 1)
         {
             auxItemName = "BaldeVazio";
             slotNumber = outputCraft;
@@ -388,7 +388,7 @@ public class InventoryDisplay : MonoBehaviour
         }
         else if (item1 == "Torcha")
         {
-            janelaTxt.text = "Used for cooking, lighting and other enumerous uselful situation.\nBe careful to not burn yourself";
+            janelaTxt.text = "Used for cooking, lighting and other enumerous uselful situation.\nBe careful to not burn yourself (Press 1 to use it)";
         }
         else if (item1 == "Balde")
         {
@@ -449,7 +449,7 @@ public class InventoryDisplay : MonoBehaviour
         }
         else if (item2 == "Torcha")
         {
-            janelaTxt.text = "Used for cooking, lighting and other enumerous uselful situation.\nBe careful to not burn yourself";
+            janelaTxt.text = "Used for cooking, lighting and other enumerous uselful situation.\nBe careful to not burn yourself (Press 1 to use it)";
         }
         else if (item2 == "Oleo")
         {
@@ -526,7 +526,7 @@ public class InventoryDisplay : MonoBehaviour
         }
         else if (item3 == "Torcha")
         {
-            janelaTxt.text = "Used for cooking, lighting and other enumerous uselful situation.\nBe careful to not burn yourself";
+            janelaTxt.text = "Used for cooking, lighting and other enumerous uselful situation.\nBe careful to not burn yourself (Press 1 to use it)";
         }
 
         else if (item3 == "Balde")

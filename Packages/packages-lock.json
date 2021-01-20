@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.brightlib.animator": {
+      "version": "https://github.com/carreraSilvio/BrightAnimator.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "021f473826e2ad9a4899a8553e22ddae12fe55ad"
+    },
     "com.unity.2d.animation": {
       "version": "3.2.5",
       "depth": 0,

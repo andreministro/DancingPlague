@@ -16,6 +16,7 @@ public class BarsController : MonoBehaviour
     public GameObject armacao;
     public GameObject[] hungerBar;
     public GameObject[] hungerFaces;
+    public GameObject demon;
     public int health;
     public bool isCoveringEars;
     public bool triggerArea = false;
@@ -186,7 +187,7 @@ public class BarsController : MonoBehaviour
         {
             if (first)
             {
-                pressETxt.text = "Cover ears (Press R)";
+                pressETxt.text = "Cover ears (Press LShift)";
                 first = false;
             }
             madnessImage.SetActive(true);
@@ -265,7 +266,15 @@ public class BarsController : MonoBehaviour
         }
         else
         {
-            gameObject.transform.position = new Vector2(2.84f, -3.65f);
+            if (SceneManager.GetActiveScene().name == "LVL1 - Village")
+            {
+                gameObject.transform.position = new Vector2(2.84f, -3.65f);
+            }
+            else if(SceneManager.GetActiveScene().name == "LVL2 - Forest")
+            {
+                gameObject.transform.position = new Vector2(-20.15f, -3.88f);
+            }
+
             alphaLevel = 0.5f;
             madnessImage.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, alphaLevel);
             Vector2 localScale = new Vector2(maxScale, maxScale);
@@ -281,5 +290,15 @@ public class BarsController : MonoBehaviour
     }
     private void StopGame()
     {
+    }
+
+    public void morteMonstro()
+    {
+        demon.GetComponent<Animator>().SetTrigger("IsKilling");
+        madnessImageFill.SetActive(true);
+        madnessImageFill.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1f);
+        GameOver.SetActive(true);
+        gameObject.GetComponent<PlayerInter>().playerInteractionsEnabled = false;
+        gameObject.GetComponent<PlayerScript>().movePlayer = false;
     }
 }

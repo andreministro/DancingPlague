@@ -11,7 +11,7 @@ public class PlayerInter : MonoBehaviour
     public TextMeshProUGUI pressETxt;
     public GameObject DialogBox;
 
-    public GameObject rock, barrel, roda, wood, oleo, corda;
+    public GameObject rock, barrel, roda, wood, oleo, corda, barrilAberto;
     public GameObject rockEText, herbsEText, rodaEText, woodEText, oleoEText, cordaEText;
 
     public GameObject bauAberto;
@@ -103,6 +103,7 @@ public class PlayerInter : MonoBehaviour
                         pressETxt.text = "";
                         if (SceneManager.GetActiveScene().name == "LVL1 - BackHome")
                         {
+                            SoundManager.PlaySound("door");
                             saveDataThroughScenes();
                             SceneManager.LoadScene("LVL1 - Village");
                         }
@@ -110,6 +111,7 @@ public class PlayerInter : MonoBehaviour
                         {
                             if (completedMissions == 3)
                             {
+                                SoundManager.PlaySound("door");
                                 saveDataThroughScenes();
                                 SceneManager.LoadScene("LVL1 - Village");
                             }
@@ -122,9 +124,12 @@ public class PlayerInter : MonoBehaviour
                     }
 
                     if (triggered== "Barrel") {
+                        //barrel.GetComponent<Animator>().SetTrigger("IsSearching");    ///// WHHHHHYYYYYYYYYYYY???????????????????????????????????????????????????????????
                         string newText = "Herbs found.";
                         StartCoroutine(displayDialogueText(newText, false, false));
                         StartCoroutine(pickUpItem("Barrel"));
+                        barrilAberto.SetActive(true);
+                        SoundManager.PlaySound("barril");
                     }
                     if (triggered == "Pedra")
                     {
@@ -229,17 +234,27 @@ public class PlayerInter : MonoBehaviour
                     if (triggered == "Fogueira")
                     {
                         pressETxt.text = "";
-                        if (!inventory.GetComponent<InventoryDisplay>().checkItemList("Balde"))
+                        if(inventory.GetComponent<InventoryDisplay>().checkItemList("Balde"))
+                        {
+                            gameObject.GetComponent<PlayerScript>().animator.SetTrigger("IsWatering");
+                            fogueira.GetComponent<Animator>().SetTrigger("UseWater");
+                            gameObject.GetComponent<PlayerScript>().animator.SetBool("IsAsh", true);
+                            inventory.GetComponent<InventoryDisplay>().deleteItemList("Balde");
+                            inventory.GetComponent<InventoryDisplay>().addItemList("BaldeVazio");
+                            fogueira.GetComponent<Collider2D>().isTrigger = true;
+                            fogueiraTrigger.SetActive(false);
+                        }
+                        else if (!inventory.GetComponent<InventoryDisplay>().checkItemList("Balde"))
                         {
                             string newText = "My bucket does not have water.";
                             StartCoroutine(displayDialogueText(newText, false, true));
                         }
-                        else
-                        {
-                            //Animação de apagar o fogo
-                            fogueira.GetComponent<Collider2D>().isTrigger = true;
-                            fogueiraTrigger.SetActive(false);
+                        else if (!inventory.GetComponent<InventoryDisplay>().checkItemList("BaldeVazio")) {
+                            string newText = "I don't have a bucket.";
+                            StartCoroutine(displayDialogueText(newText, false, true));
+
                         }
+
                     }
                 }
             }
@@ -408,13 +423,25 @@ public class PlayerInter : MonoBehaviour
                 if (gameObject.GetComponent<PlayerScript>().cutSceneMarket)
                     gameObject.GetComponent<PlayerScript>().cutScene = true;
             }
+            if(other.tag == "MarketToVillage")
+            {
+                SceneManager.LoadScene("LVL1 - Village");
+            }
             if (other.tag == "EnterForestMarket")
             {
                 SceneManager.LoadScene("LVL2 - Forest");
             }
+            if (other.tag == "SForestToMarket")
+            {
+                SceneManager.LoadScene("LVL3 - Market");
+            }
             if (other.tag == "EnterBigForest")
             {
                 SceneManager.LoadScene("LVL2 - Big Forest");
+            }
+            if (other.tag == "BigForestToNightVillage")
+            {
+                SceneManager.LoadScene("LVL3 - NightVillage");
             }
             if (other.tag == "Poco")
             {
@@ -442,9 +469,15 @@ public class PlayerInter : MonoBehaviour
             }
             if (other.tag == "Crouch")
             {
-                pressETxt.text = "Crouch (Press S)";
+                pressETxt.text = "Crouch (Press LCtrl)";
                 triggered = other.tag;
                 offTrigger = false;
+            }
+
+            if(other.tag == "Demon")
+            {
+                Debug.Log("entrou tag");
+                gameObject.GetComponent<PlayerScript>().enterMonster = true;
             }
         }
 
