@@ -5,11 +5,14 @@ using UnityEngine;
 public class SanityTrigger : MonoBehaviour
 {
     public GameObject player;
+    public Collider2D collider;
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Debug.Log("saiu");
-        player.GetComponent<BarsController>().triggerArea = false;
+        if(collider != collision)
+        {
+            player.GetComponent<BarsController>().triggerArea = false;
+        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

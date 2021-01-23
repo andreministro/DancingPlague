@@ -45,6 +45,7 @@ TagManager:
   - BigForestToNightVillage
   - NightVillageToBackHome
   - CrouchHelper
+  - BigForestBackForest
   layers:
   - Default
   - TransparentFX

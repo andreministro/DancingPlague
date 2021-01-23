@@ -57,12 +57,12 @@ public class PlayerScript : MonoBehaviour
         }
         else if(SceneManager.GetActiveScene().name == "LVL1 - BackHome")
         {
-            Debug.Log("Back home");
             gameObject.GetComponent<PlayerInter>().playerInteractionsEnabled = true;
             movePlayer = true;
             cutScene = false;
             FlipPlayer();
-            StartCoroutine(gameObject.GetComponent<PlayerInter>().displayDialogueText("I need to get some bread.", false, false));
+            gameObject.GetComponent<PlayerInter>().DialogBox.SetActive(true);
+            StartCoroutine(gameObject.GetComponent<PlayerInter>().displayDialogueText("I need to get some bread.", false, true));
         }
         else
         {
@@ -247,7 +247,7 @@ public class PlayerScript : MonoBehaviour
             FlipPlayer();
     }
 
-    void FlipPlayer()
+    public void FlipPlayer()
     {
         facingRight = !facingRight;
         Vector2 localScaleParent = gameObject.transform.localScale;

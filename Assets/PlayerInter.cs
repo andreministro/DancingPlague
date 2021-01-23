@@ -27,9 +27,17 @@ public class PlayerInter : MonoBehaviour
     private bool offTrigger = false;
 
     public bool playerInteractionsEnabled;
+
+    private static int sceneMarket=0;
+    private static int sceneForest=0;
+    private static int sceneBigForest = 0;
+    private static int sceneVillage=0;
+    //private static int sceneMarket;
     void Start()
     {
-        DialogBox.SetActive(false);
+        LoadScene();
+        if(SceneManager.GetActiveScene().name == "LVL1 - BackHome") DialogBox.SetActive(true);
+        else DialogBox.SetActive(false);
         playerInteractionsEnabled = false;
         if(SceneManager.GetActiveScene().name== "LVL1 - Home")
         {
@@ -297,6 +305,7 @@ public class PlayerInter : MonoBehaviour
             if (other.tag == "Porta")
             {
                 if (SceneManager.GetActiveScene().name == "LVL1 - BackHome") {
+                    pressETxt.text = "Open";
                     triggered = other.tag;
                     offTrigger = false;
                 }
@@ -451,6 +460,11 @@ public class PlayerInter : MonoBehaviour
             {
                 saveDataThroughScenes();
                 SceneManager.LoadScene("LVL3 - NightVillage");
+            }
+            if (other.tag == "BigForestBackForest")
+            {
+                saveDataThroughScenes();
+                SceneManager.LoadScene("LVL2 - Forest");
             }
             if (other.tag == "Poco")
             {
@@ -662,6 +676,7 @@ public class PlayerInter : MonoBehaviour
     {
         triggered = ""; //um bocado cheat
         DialogBox.SetActive(true);
+        Debug.Log("oi?");
         if (multipleDialogues)
         {
             gameObject.GetComponent<PlayerScript>().movePlayer = false;
@@ -866,5 +881,64 @@ public class PlayerInter : MonoBehaviour
             StartCoroutine(inventory.GetComponent<InventoryDisplay>().display());
             inventory.SetActive(true);
         }
+    }
+
+    private void LoadScene()
+    {
+        if(SceneManager.GetActiveScene().name == "LVL1 - Village")
+        {
+            if (sceneVillage > 0)
+            {
+                if (inventory.GetComponent<InventoryDisplay>().checkItemList("ErvaBad"))
+                {
+                    barrel.SetActive(false);
+                }
+                if (inventory.GetComponent<InventoryDisplay>().checkItemList("Pedra"))
+                {
+                    rock.SetActive(false);
+                }
+                if (inventory.GetComponent<InventoryDisplay>().checkItemList("Wood"))
+                {
+                    wood.SetActive(false);
+                }
+                //posição do jogador
+                gameObject.transform.position = new Vector2(53.76f, -3.65f);
+                gameObject.GetComponent<PlayerScript>().FlipPlayer();
+            }
+            sceneVillage++;
+        }
+        if (SceneManager.GetActiveScene().name == "LVL3 - Market")
+        {
+            if (sceneMarket > 0)
+            {
+                if (inventory.GetComponent<InventoryDisplay>().checkItemList("Corda"))
+                {
+                    corda.SetActive(false);
+                }
+            }
+            sceneMarket++;
+        }
+        if (SceneManager.GetActiveScene().name == "LVL2 - Forest")
+        {
+            if (sceneForest > 0)
+            {
+                gameObject.transform.position = new Vector2(24.38f, -3.88f);
+                gameObject.GetComponent<PlayerScript>().FlipPlayer();
+            }
+            sceneForest++;
+        }
+        if (SceneManager.GetActiveScene().name == "LVL2 - BigForest")
+        {
+            if (sceneBigForest > 0)
+            {
+
+            }
+            sceneBigForest++;
+        }
+        if (!inventory.GetComponent<InventoryDisplay>().checkItemList("ErvaBad"))
+        {
+
+        }
+       
     }
 } 
