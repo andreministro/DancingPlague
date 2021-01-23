@@ -425,10 +425,12 @@ public class PlayerInter : MonoBehaviour
             }
             if(other.tag == "MarketToVillage")
             {
+                saveDataThroughScenes();
                 SceneManager.LoadScene("LVL1 - Village");
             }
             if (other.tag == "EnterForestMarket")
             {
+                saveDataThroughScenes();
                 SceneManager.LoadScene("LVL2 - Forest");
             }
             if(other.tag == "CrouchHelper")
@@ -437,14 +439,17 @@ public class PlayerInter : MonoBehaviour
             }
             if (other.tag == "SForestToMarket")
             {
+                saveDataThroughScenes();
                 SceneManager.LoadScene("LVL3 - Market");
             }
             if (other.tag == "EnterBigForest")
             {
+                saveDataThroughScenes();
                 SceneManager.LoadScene("LVL2 - Big Forest");
             }
             if (other.tag == "BigForestToNightVillage")
             {
+                saveDataThroughScenes();
                 SceneManager.LoadScene("LVL3 - NightVillage");
             }
             if (other.tag == "Poco")
@@ -474,7 +479,6 @@ public class PlayerInter : MonoBehaviour
 
             if(other.tag == "Demon")
             {
-                Debug.Log("entrou tag");
                 gameObject.GetComponent<PlayerScript>().enterMonster = true;
             }
         }

@@ -8,6 +8,7 @@ public class SanityTrigger : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        Debug.Log("saiu");
         player.GetComponent<BarsController>().triggerArea = false;
     }
     private void OnTriggerEnter2D(Collider2D collision)

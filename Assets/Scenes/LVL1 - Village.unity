@@ -569,7 +569,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.538835, y: 1}
+    m_SensorSize: {x: 2.5023923, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -586,7 +586,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 95707527}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.8414598, y: 0.042407036, z: -10}
+  m_LocalPosition: {x: 2.8374195, y: 0.042407036, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 826334308}
@@ -7735,7 +7735,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 1.8112888, y: 0}
+  m_Offset: {x: 1.8112888, y: -0.012683868}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -7746,7 +7746,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 16.084156, y: 3.5277777}
+  m_Size: {x: 16.084156, y: 6.597316}
   m_EdgeRadius: 0
 --- !u!212 &1184776261
 SpriteRenderer:
@@ -10932,6 +10932,7 @@ MonoBehaviour:
   woodEText: {fileID: 1855225148}
   oleoEText: {fileID: 0}
   cordaEText: {fileID: 0}
+  paoEText: {fileID: 0}
   bauAberto: {fileID: 0}
   inventory: {fileID: 420822766}
   fogueira: {fileID: 0}
@@ -11840,7 +11841,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1771978387}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.8414598, y: 0.042407036, z: -10}
+  m_LocalPosition: {x: 2.8374195, y: 0.042407036, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

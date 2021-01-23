@@ -44,6 +44,7 @@ TagManager:
   - Demon
   - BigForestToNightVillage
   - NightVillageToBackHome
+  - CrouchHelper
   layers:
   - Default
   - TransparentFX

@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LVL2 - Forest.unity
     guid: 52a61a14531b88b47b177df9f9bb1b2f
+  - enabled: 1
+    path: Assets/Scenes/LVL1 - BackHome.unity
+    guid: 41175ffe91be3464b96de8c9c6a6e806
   m_configObjects: {}

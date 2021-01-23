@@ -57,11 +57,12 @@ public class PlayerScript : MonoBehaviour
         }
         else if(SceneManager.GetActiveScene().name == "LVL1 - BackHome")
         {
+            Debug.Log("Back home");
             gameObject.GetComponent<PlayerInter>().playerInteractionsEnabled = true;
             movePlayer = true;
             cutScene = false;
             FlipPlayer();
-            StartCoroutine(gameObject.GetComponent<PlayerInter>().displayDialogueText("I'm going to buy some bread.", false, false));
+            StartCoroutine(gameObject.GetComponent<PlayerInter>().displayDialogueText("I need to get some bread.", false, false));
         }
         else
         {
@@ -226,6 +227,10 @@ public class PlayerScript : MonoBehaviour
         if (isCoveringEars == true)
         {
             gameObject.GetComponent<BarsController>().isCoveringEars = true;
+        }
+        else
+        {
+            gameObject.GetComponent<BarsController>().isCoveringEars = false;
         }
 
         //Torch
