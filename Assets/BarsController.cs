@@ -96,7 +96,7 @@ public class BarsController : MonoBehaviour
     private IEnumerator hungerBarLoosing()
     {
         //30.0f
-        yield return new WaitForSeconds(30.0f);
+        yield return new WaitForSeconds(15.0f);
         hungerBar[health].SetActive(false);
         if (health > 0) { 
             health--;
@@ -126,6 +126,7 @@ public class BarsController : MonoBehaviour
             gameObject.GetComponent<PlayerInter>().playerInteractionsEnabled = false;
             gameObject.GetComponent<PlayerScript>().movePlayer = false;
             lostHunger = true;
+            gameObject.GetComponent<PlayerInter>().inventory.SetActive(false);
         }
         
     }
@@ -213,6 +214,7 @@ public class BarsController : MonoBehaviour
                 madnessImageFill.SetActive(true);
                 gameObject.GetComponent<PlayerInter>().playerInteractionsEnabled = false;
                 gameObject.GetComponent<PlayerScript>().movePlayer = false;
+                gameObject.GetComponent<PlayerInter>().inventory.SetActive(false);
                 if (alphaLevelFill < 1.0f){
                     alphaLevelFill += alphaFillStep;
                     madnessImageFill.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, alphaLevelFill);
@@ -287,6 +289,7 @@ public class BarsController : MonoBehaviour
         gameObject.GetComponent<PlayerInter>().playerInteractionsEnabled = true;
         gameObject.GetComponent<PlayerScript>().movePlayer = true;
         GameOver.SetActive(false);
+        gameObject.GetComponent<PlayerInter>().inventory.SetActive(false);
     }
     private void StopGame()
     {
@@ -294,6 +297,7 @@ public class BarsController : MonoBehaviour
 
     public void morteMonstro()
     {
+        gameObject.GetComponent<PlayerInter>().inventory.SetActive(false);
         demon.GetComponent<Animator>().SetTrigger("IsKilling");
         madnessImageFill.SetActive(true);
         madnessImageFill.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1f);

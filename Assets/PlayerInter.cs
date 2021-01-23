@@ -12,7 +12,7 @@ public class PlayerInter : MonoBehaviour
     public GameObject DialogBox;
 
     public GameObject rock, barrel, roda, wood, oleo, corda, barrilAberto;
-    public GameObject rockEText, herbsEText, rodaEText, woodEText, oleoEText, cordaEText;
+    public GameObject rockEText, herbsEText, rodaEText, woodEText, oleoEText, cordaEText, paoEText;
 
     public GameObject bauAberto;
     public GameObject inventory;
@@ -431,6 +431,10 @@ public class PlayerInter : MonoBehaviour
             {
                 SceneManager.LoadScene("LVL2 - Forest");
             }
+            if(other.tag == "CrouchHelper")
+            {
+                pressETxt.text= "Crouch (Press LCtrl)";
+            }
             if (other.tag == "SForestToMarket")
             {
                 SceneManager.LoadScene("LVL3 - Market");
@@ -464,12 +468,6 @@ public class PlayerInter : MonoBehaviour
             if (other.tag == "Fogueira")
             {
                 pressETxt.text = "Put out fire";
-                triggered = other.tag;
-                offTrigger = false;
-            }
-            if (other.tag == "Crouch")
-            {
-                pressETxt.text = "Crouch (Press LCtrl)";
                 triggered = other.tag;
                 offTrigger = false;
             }
@@ -648,7 +646,7 @@ public class PlayerInter : MonoBehaviour
                 triggered = "";
                 offTrigger = true;
             }
-            if (other.tag == "Crouch")
+            if (other.tag == "CrouchHelper")
             {
                 pressETxt.text = "";
                 triggered = "";
@@ -743,8 +741,17 @@ public class PlayerInter : MonoBehaviour
         if (offTrigger != true)
         {
             yield return new WaitForSeconds(0);
-            string newText = "-Thank you. Please come again Sir.";
-            StartCoroutine(displayDialogueText(newText, false, false));
+            if (inventory.GetComponent<InventoryDisplay>().checkItemList("Pao"))
+            {
+                string newText = "-I don't have any more money.";
+                StartCoroutine(displayDialogueText(newText, false, false));
+            }
+            else
+            {
+                StartCoroutine(pickUpItem("Pao"));
+                string newText = "-Thank you. Please come again Sir.";
+                StartCoroutine(displayDialogueText(newText, false, false));
+            }
         }
     }
     private IEnumerator pickUpItem(string item)
@@ -802,6 +809,14 @@ public class PlayerInter : MonoBehaviour
                 inventory.GetComponent<InventoryDisplay>().addItemList("Corda");
             }
         }
+        if (item == "Pao")
+        {
+            paoEText.SetActive(true);
+            if (!inventory.GetComponent<InventoryDisplay>().checkItemList("Pao"))
+            {
+                inventory.GetComponent<InventoryDisplay>().addItemList("Pao");
+            }
+        }
         yield return new WaitForSeconds(1.0f);
         if (item == "Pedra")
         {
@@ -828,7 +843,11 @@ public class PlayerInter : MonoBehaviour
             oleo.SetActive(false);
             oleoEText.SetActive(false);
         }
-
+        else if (item == "Pao")
+        {
+            paoEText.SetActive(false);
+        }
+        pressETxt.text = "";
     }
     private void displayInventory()
     {
