@@ -57,7 +57,7 @@ public class PlayerScript : MonoBehaviour
         }
         else if(SceneManager.GetActiveScene().name == "LVL1 - BackHome")
         {
-            gameObject.GetComponent<PlayerInter>().playerInteractionsEnabled = true;
+            //gameObject.GetComponent<PlayerInter>().playerInteractionsEnabled = true;
             movePlayer = true;
             cutScene = false;
             FlipPlayer();
@@ -66,7 +66,7 @@ public class PlayerScript : MonoBehaviour
         }
         else
         {
-            gameObject.GetComponent<PlayerInter>().playerInteractionsEnabled = true;
+            //gameObject.GetComponent<PlayerInter>().playerInteractionsEnabled = true;
             movePlayer = true;
             cutScene = false;
         }
@@ -294,7 +294,10 @@ public class PlayerScript : MonoBehaviour
 
                 string newText;
                 if (cutSceneNumber == 1)
-                    newText = "mHello dear, did you sleep well?\npYes. Nights are getting colder.\nmYes, I know...\npCan you pass me the bread?";
+                {
+                    gameObject.GetComponent<PlayerInter>().pressETxt.text = "Continue (Press E)";
+                    newText = "mHello dear, did you sleep well?\npYes. Nights are getting colder.\nmYes, I know...\nmCan you pass me the bread?";
+                }
                 else
                     newText = "pI can't seem to find it.\nsDad, I was so hungry and ate it, I'm sorry.\nm It's okay. I guess we can afford to buy another one, dear?\npYes, maybe one or two more. I will go to the market. Be right back";
 

@@ -21,7 +21,6 @@ public class BarsController : MonoBehaviour
     public bool isCoveringEars;
     public bool triggerArea = false;
     public bool playerEating = false;
-    public bool first;
 
     private float maxScale = 12.0f;
     private float maxScaleAux = 7.0f;
@@ -36,7 +35,6 @@ public class BarsController : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name == "LVL1 - Home")
         {
-            first = true;
             health = 25;
             for (int i = 0; i <= maxHealth; i++)
             {
@@ -53,7 +51,6 @@ public class BarsController : MonoBehaviour
         {
             alphaLevel = 0.5f;
             madnessImage.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, alphaLevel);
-            first = PlayerPrefs.GetInt("firstSanity") == 1 ? true : false;
 
             health = PlayerPrefs.GetInt("Hungerbar", gameObject.GetComponent<BarsController>().health);
 
@@ -186,11 +183,6 @@ public class BarsController : MonoBehaviour
         }
         else if(triggerArea)
         {
-            if (first)
-            {
-                pressETxt.text = "Cover ears (Press LShift)";
-                first = false;
-            }
             madnessImage.SetActive(true);
             if(gameObject.GetComponent<PlayerScript>().sanityPenalty<0.5f)
                 gameObject.GetComponent<PlayerScript>().sanityPenalty += delayPlayerStep;

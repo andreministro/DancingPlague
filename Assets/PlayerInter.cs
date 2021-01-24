@@ -32,24 +32,27 @@ public class PlayerInter : MonoBehaviour
     private static int sceneForest=0;
     private static int sceneBigForest = 0;
     private static int sceneVillage=0;
+
+    private static bool firstSanity = true;
     //private static int sceneMarket;
     void Start()
     {
-        LoadScene();
         if(SceneManager.GetActiveScene().name == "LVL1 - BackHome") DialogBox.SetActive(true);
         else DialogBox.SetActive(false);
-        playerInteractionsEnabled = false;
         if(SceneManager.GetActiveScene().name== "LVL1 - Home")
         {
             completedMissions = 0;
             StartCoroutine(secondCutscene());
             bauAberto.SetActive(false);
             inventory.SetActive(false);
+            playerInteractionsEnabled = false;
         }
         else
         {
+            playerInteractionsEnabled = true;
             inventory.SetActive(false);
         }
+        LoadScene();
     }
 
     private bool firstVisitA = true, firstVisitG = true, firstVisitS = true;
@@ -304,6 +307,7 @@ public class PlayerInter : MonoBehaviour
 
             if (other.tag == "Porta")
             {
+
                 if (SceneManager.GetActiveScene().name == "LVL1 - BackHome") {
                     pressETxt.text = "Open";
                     triggered = other.tag;
@@ -495,6 +499,11 @@ public class PlayerInter : MonoBehaviour
             {
                 gameObject.GetComponent<PlayerScript>().enterMonster = true;
             }
+            if (other.tag == "LShiftWarning" && firstSanity)
+            {
+                pressETxt.text = "Cover ears (Press LShift)";
+                firstSanity = false;
+            }
         }
 
     }
@@ -670,13 +679,18 @@ public class PlayerInter : MonoBehaviour
                 triggered = "";
                 offTrigger = true;
             }
+            if (other.tag == "LShiftWarning")
+            {
+                pressETxt.text = "";
+                triggered = "";
+                offTrigger = true;
+            }
         }
     }
     public IEnumerator displayDialogueText(string newText, bool multipleDialogues, bool first)
     {
         triggered = ""; //um bocado cheat
         DialogBox.SetActive(true);
-        Debug.Log("oi?");
         if (multipleDialogues)
         {
             gameObject.GetComponent<PlayerScript>().movePlayer = false;
@@ -711,6 +725,7 @@ public class PlayerInter : MonoBehaviour
                 yield return new WaitUntil(() => (Input.GetButtonDown("Interact") == true));
             }
             gameObject.GetComponent<PlayerScript>().movePlayer = true;
+            pressETxt.text = "";
         }
         else
         {
@@ -750,7 +765,6 @@ public class PlayerInter : MonoBehaviour
     private void saveDataThroughScenes()
     {
         PlayerPrefs.SetInt("Hungerbar", gameObject.GetComponent<BarsController>().health);
-        PlayerPrefs.SetInt("firstSanity", gameObject.GetComponent<BarsController>().first ? 1 : 0);
     }
     private IEnumerator buyBread()
     {
@@ -904,6 +918,10 @@ public class PlayerInter : MonoBehaviour
                 //posição do jogador
                 gameObject.transform.position = new Vector2(53.76f, -3.65f);
                 gameObject.GetComponent<PlayerScript>().FlipPlayer();
+            }
+            else
+            {
+                StartCoroutine(displayDialogueText("To show inventory press I", false, true));
             }
             sceneVillage++;
         }

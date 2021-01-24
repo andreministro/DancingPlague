@@ -46,6 +46,8 @@ TagManager:
   - NightVillageToBackHome
   - CrouchHelper
   - BigForestBackForest
+  - LCtrlWarning
+  - LShiftWarning
   layers:
   - Default
   - TransparentFX
