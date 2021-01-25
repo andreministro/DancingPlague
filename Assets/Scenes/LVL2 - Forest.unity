@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1056,7 +1056,6 @@ MonoBehaviour:
   isCoveringEars: 0
   triggerArea: 0
   playerEating: 0
-  first: 0
 --- !u!114 &103956976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1114,6 +1113,7 @@ MonoBehaviour:
   demon: {fileID: 537914190}
   inventario: {fileID: 584257400}
   demonCollider: {fileID: 1880702321}
+  MarketToVillageDoor: {fileID: 0}
   feetPos: {fileID: 1311659494}
   checkRadius: 0.1
   whatIsGround:
@@ -4269,7 +4269,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -20.058475, y: -0.5201783, z: -10}
+  m_LocalPosition: {x: -20.066515, y: -0.5201783, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
@@ -6194,7 +6194,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.6296296, y: 1}
+    m_SensorSize: {x: 2.5571096, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -6211,7 +6211,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 776996889}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -20.058475, y: -0.5201783, z: -10}
+  m_LocalPosition: {x: -20.066515, y: -0.5201783, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1511732760}
@@ -8700,8 +8700,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 1
-  m_fontSizeBase: 1
+  m_fontSize: 0.8
+  m_fontSizeBase: 0.8
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

@@ -776,7 +776,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.3935926, y: 1}
+    m_SensorSize: {x: 2.5571096, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -793,7 +793,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 136941296}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -50.69464, y: 0.042407036, z: -10}
+  m_LocalPosition: {x: -50.676514, y: 0.042407036, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1581513553}
@@ -4034,7 +4034,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 615059580}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -50.69464, y: 0.042407036, z: -10}
+  m_LocalPosition: {x: -50.676514, y: 0.042407036, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -9419,7 +9419,6 @@ MonoBehaviour:
   isCoveringEars: 0
   triggerArea: 0
   playerEating: 0
-  first: 1
 --- !u!114 &1363483579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9477,6 +9476,7 @@ MonoBehaviour:
   demon: {fileID: 0}
   inventario: {fileID: 0}
   demonCollider: {fileID: 0}
+  MarketToVillageDoor: {fileID: 0}
   feetPos: {fileID: 1378001821}
   checkRadius: 0.1
   whatIsGround:
@@ -12552,8 +12552,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 1
-  m_fontSizeBase: 1
+  m_fontSize: 0.8
+  m_fontSizeBase: 0.8
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

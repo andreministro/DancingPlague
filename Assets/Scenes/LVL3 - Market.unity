@@ -6916,7 +6916,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 754597071}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -51.834644, y: -1.667593, z: -10}
+  m_LocalPosition: {x: -51.816517, y: -1.667593, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -8070,7 +8070,6 @@ MonoBehaviour:
   isCoveringEars: 0
   triggerArea: 0
   playerEating: 0
-  first: 1
 --- !u!114 &847554666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8128,6 +8127,7 @@ MonoBehaviour:
   demon: {fileID: 0}
   inventario: {fileID: 0}
   demonCollider: {fileID: 0}
+  MarketToVillageDoor: {fileID: 478509071}
   feetPos: {fileID: 1579355646}
   checkRadius: 0.1
   whatIsGround:
@@ -14211,7 +14211,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.007909775, y: -0.009934425}
+  m_Offset: {x: -0.007909775, y: 0.47964346}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -14222,7 +14222,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 26.585674, y: 1.2906966}
+  m_Size: {x: 26.585674, y: 2.2698524}
   m_EdgeRadius: 0
 --- !u!212 &1726118945
 SpriteRenderer:
@@ -14519,8 +14519,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 1
-  m_fontSizeBase: 1
+  m_fontSize: 0.8
+  m_fontSizeBase: 0.8
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -15529,7 +15529,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.3935926, y: 1}
+    m_SensorSize: {x: 2.5571096, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -15546,7 +15546,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1916872350}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -51.834644, y: -1.667593, z: -10}
+  m_LocalPosition: {x: -51.816517, y: -1.667593, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1613341871}

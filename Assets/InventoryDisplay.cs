@@ -346,49 +346,50 @@ public class InventoryDisplay : MonoBehaviour
             oilCounter = 0;
             cordaCounter = 0;
         }
-        if (item1=="Wood") {
-            janelaTxt.text = "Regular piece of wood, might we useful for building a torch or a bucket.\nBe careful with the splinters";
+        if (item1 == "Wood")
+        {
+            janelaTxt.text = "Regular piece of wood, might we useful for building a torch or a bucket. Be careful with the splinters.\n\n2 woods + 1 rope = bucket\n1 wood + 1 oil + 1 stone = torch";
             woodCounter++;
             craftImage("Wood");
             slotCounter++;
         }
         else if (item1 == "ErvaBad")
         {
-            janelaTxt.text = "Disgusting looking herb. My wife normally mix a bunch of these when we are low on food.";
+            janelaTxt.text = "Disgusting looking herb. My wife normally mix a bunch of these when we are low on food.\n\n2 herbs = 1 edible herb";
             badHerbCounter++;
             craftImage("ErvaBad");
             slotCounter++;
         }
         else if (item1 == "Corda")
         {
-            janelaTxt.text = "Regular firm and sturdy rope, must used for holding stuff in place.";
+            janelaTxt.text = "Regular firm and sturdy rope, must used for holding stuff in place.\n\n2 woods + 1 rope = bucket";
             cordaCounter++;
             craftImage("Corda");
             slotCounter++;
         }
         else if (item1 == "Pedra")
         {
-            janelaTxt.text = "Grey and boring, maybe the sparks create a fire.";
+            janelaTxt.text = "Grey and boring, maybe the sparks create a fire.\n\n1 wood + 1 oil + 1 stone = torch";
             stoneCounter++;
             craftImage("Pedra");
             slotCounter++;
         }
-        else if (item1 == "Oleo")
-        {
-            janelaTxt.text = "Where did you even find this? Expensive oil used to create fires.\nIt's slippery and stinky with a deep black colour.";
-            oilCounter++;
-            craftImage("Oleo");
-            slotCounter++;
-        }
-        else if(item1 == "Erva")
+        else if (item1 == "Erva")
         {
             //Eat
-            janelaTxt.text = "Emergency food, produced by mixing dirty herbs.\n+ 15 health";
+            janelaTxt.text = "Emergency food, produced by mixing dirty herbs.\n\n+ 15 health";
             Player.GetComponent<BarsController>().hungerBarGaining();
         }
         else if (item1 == "Torcha")
         {
-            janelaTxt.text = "Used for cooking, lighting and other enumerous uselful situation.\nBe careful to not burn yourself (Press 1 to use it)";
+            janelaTxt.text = "Used for cooking, lighting and other enumerous uselful situation.\n\nBe careful to not burn yourself (Press 1 to use it)";
+        }
+        else if (item1 == "Oleo")
+        {
+            janelaTxt.text = "Where did you even find this? Expensive oil used to create fires.\nIt's slippery and stinky with a deep black colour.\n\n1 wood + 1 oil + 1 stone = torch";
+            oilCounter++;
+            craftImage("Oleo");
+            slotCounter++;
         }
         else if (item1 == "Balde")
         {
@@ -419,28 +420,28 @@ public class InventoryDisplay : MonoBehaviour
         }
         if (item2 == "Wood")
         {
-            janelaTxt.text = "Regular piece of wood, might we useful for building a torch or a bucket.\nBe careful with the splinters";
+            janelaTxt.text = "Regular piece of wood, might we useful for building a torch or a bucket. Be careful with the splinters.\n\n2 woods + 1 rope = bucket\n1 wood + 1 oil + 1 stone = torch";
             woodCounter++;
             craftImage("Wood");
             slotCounter++;
         }
         else if (item2 == "ErvaBad")
         {
-            janelaTxt.text = "Disgusting looking herb. My wife normally mix a bunch of these when we are low on food.";
+            janelaTxt.text = "Disgusting looking herb. My wife normally mix a bunch of these when we are low on food.\n\n2 herbs = 1 edible herb";
             badHerbCounter++;
             craftImage("ErvaBad");
             slotCounter++;
         }
         else if (item2 == "Corda")
         {
-            janelaTxt.text = "Regular firm and sturdy rope, must used for holding stuff in place.";
+            janelaTxt.text = "Regular firm and sturdy rope, must used for holding stuff in place.\n\n2 woods + 1 rope = bucket";
             cordaCounter++;
             craftImage("Corda");
             slotCounter++;
         }
         else if (item2 == "Pedra")
         {
-            janelaTxt.text = "Grey and boring, maybe the sparks create a fire.";
+            janelaTxt.text = "Grey and boring, maybe the sparks create a fire.\n\n1 wood + 1 oil + 1 stone = torch";
             stoneCounter++;
             craftImage("Pedra");
             slotCounter++;
@@ -448,16 +449,16 @@ public class InventoryDisplay : MonoBehaviour
         else if (item2 == "Erva")
         {
             //Eat
-            janelaTxt.text = "Emergency food, produced by mixing dirty herbs.\n+ 15 health";
+            janelaTxt.text = "Emergency food, produced by mixing dirty herbs.\n\n+ 15 health";
             Player.GetComponent<BarsController>().hungerBarGaining();
         }
         else if (item2 == "Torcha")
         {
-            janelaTxt.text = "Used for cooking, lighting and other enumerous uselful situation.\nBe careful to not burn yourself (Press 1 to use it)";
+            janelaTxt.text = "Used for cooking, lighting and other enumerous uselful situation.\n\nBe careful to not burn yourself (Press 1 to use it)";
         }
         else if (item2 == "Oleo")
         {
-            janelaTxt.text = "Where did you even find this? Expensive oil used to create fires.\nIt's slippery and stinky with a deep black colour.";
+            janelaTxt.text = "Where did you even find this? Expensive oil used to create fires.\nIt's slippery and stinky with a deep black colour.\n\n1 wood + 1 oil + 1 stone = torch";
             oilCounter++;
             craftImage("Oleo");
             slotCounter++;
@@ -493,48 +494,48 @@ public class InventoryDisplay : MonoBehaviour
         }
         if (item3 == "Wood")
         {
-            janelaTxt.text = "Regular piece of wood, might we useful for building a torch or a bucket.\nBe careful with the splinters";
+            janelaTxt.text = "Regular piece of wood, might we useful for building a torch or a bucket. Be careful with the splinters.\n\n2 woods + 1 rope = bucket\n1 wood + 1 oil + 1 stone = torch";
             woodCounter++;
             craftImage("Wood");
             slotCounter++;
         }
         else if (item3 == "ErvaBad")
         {
-            janelaTxt.text = "Disgusting looking herb. My wife normally mix a bunch of these when we are low on food.";
+            janelaTxt.text = "Disgusting looking herb. My wife normally mix a bunch of these when we are low on food.\n\n2 herbs = 1 edible herb";
             badHerbCounter++;
             craftImage("ErvaBad");
             slotCounter++;
         }
         else if (item3 == "Corda")
         {
-            janelaTxt.text = "Regular firm and sturdy rope, must used for holding stuff in place.";
+            janelaTxt.text = "Regular firm and sturdy rope, must used for holding stuff in place.\n\n2 woods + 1 rope = bucket";
             cordaCounter++;
             craftImage("Corda");
             slotCounter++;
         }
         else if (item3 == "Pedra")
         {
-            janelaTxt.text = "Grey and boring, maybe the sparks create a fire.";
+            janelaTxt.text = "Grey and boring, maybe the sparks create a fire.\n\n1 wood + 1 oil + 1 stone = torch";
             stoneCounter++;
             craftImage("Pedra");
-            slotCounter++;
-        }
-        else if (item3 == "Oleo")
-        {
-            janelaTxt.text = "Where did you even find this? Expensive oil used to create fires.\nIt's slippery and stinky with a deep black colour.";
-            oilCounter++;
-            craftImage("Oleo");
             slotCounter++;
         }
         else if (item3 == "Erva")
         {
             //Eat
-            janelaTxt.text = "Emergency food, produced by mixing dirty herbs.\n+ 15 health";
+            janelaTxt.text = "Emergency food, produced by mixing dirty herbs.\n\n+ 15 health";
             Player.GetComponent<BarsController>().hungerBarGaining();
         }
         else if (item3 == "Torcha")
         {
-            janelaTxt.text = "Used for cooking, lighting and other enumerous uselful situation.\nBe careful to not burn yourself (Press 1 to use it)";
+            janelaTxt.text = "Used for cooking, lighting and other enumerous uselful situation.\n\nBe careful to not burn yourself (Press 1 to use it)";
+        }
+        else if (item3 == "Oleo")
+        {
+            janelaTxt.text = "Where did you even find this? Expensive oil used to create fires.\nIt's slippery and stinky with a deep black colour.\n\n1 wood + 1 oil + 1 stone = torch";
+            oilCounter++;
+            craftImage("Oleo");
+            slotCounter++;
         }
 
         else if (item3 == "Balde")

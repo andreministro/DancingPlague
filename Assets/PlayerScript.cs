@@ -15,7 +15,7 @@ public class PlayerScript : MonoBehaviour
     public int JumpPower;
     private float moveX;
     public float sanityPenalty;
-    public GameObject cavalo, demon, inventario, demonCollider;
+    public GameObject cavalo, demon, inventario, demonCollider, MarketToVillageDoor;
     
     private bool isGrounded;
     public Transform feetPos;
@@ -316,6 +316,7 @@ public class PlayerScript : MonoBehaviour
                 cutSceneMarket = false;
                 gameObject.GetComponent<PlayerInter>().playerInteractionsEnabled = false;
                 animator.SetBool("IsRunning", false);
+                MarketToVillageDoor.SetActive(false);
                 StartCoroutine(CutSceneMarket());
             }
         }
@@ -353,7 +354,6 @@ public class PlayerScript : MonoBehaviour
     {
         demon.GetComponent<Animator>().SetTrigger("IsAppearing");
         yield return new WaitUntil(() => enterMonster);
-        Debug.Log("entrou yield");
         gameObject.GetComponent<BarsController>().morteMonstro();
     }
 }

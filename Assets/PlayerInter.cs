@@ -114,9 +114,9 @@ public class PlayerInter : MonoBehaviour
                         pressETxt.text = "";
                         if (SceneManager.GetActiveScene().name == "LVL1 - BackHome")
                         {
-                            SoundManager.PlaySound("door");
+                            /*SoundManager.PlaySound("door");
                             saveDataThroughScenes();
-                            SceneManager.LoadScene("LVL1 - Village");
+                            SceneManager.LoadScene("LVL1 - Village");*/
                         }
                         else
                         {
@@ -130,8 +130,7 @@ public class PlayerInter : MonoBehaviour
                     }
                     if (triggered == "PortaEntrarCasa")
                     {
-                        saveDataThroughScenes();
-                        SceneManager.LoadScene("LVL1 - BackHome");
+                        StartCoroutine(displayDialogueText("I should get some bread first.", false, true));
                     }
 
                     if (triggered== "Barrel") {
