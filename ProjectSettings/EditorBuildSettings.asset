@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LVL1 - BackHome.unity
     guid: 41175ffe91be3464b96de8c9c6a6e806
+  - enabled: 1
+    path: Assets/Scenes/LVL4 - NightVillage.unity
+    guid: e832b51ca22cbc449902ee0ff5741943
   m_configObjects: {}

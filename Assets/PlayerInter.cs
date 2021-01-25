@@ -503,6 +503,12 @@ public class PlayerInter : MonoBehaviour
                 pressETxt.text = "Cover ears (Press LShift)";
                 firstSanity = false;
             }
+
+            if(other.tag == "NightVillageToHome")
+            {
+                saveDataThroughScenes();
+                SceneManager.LoadScene("LVL4 - BackHome");
+            }
         }
 
     }

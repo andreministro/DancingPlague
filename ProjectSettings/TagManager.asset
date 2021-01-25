@@ -48,6 +48,7 @@ TagManager:
   - BigForestBackForest
   - LCtrlWarning
   - LShiftWarning
+  - NightVillageToHome
   layers:
   - Default
   - TransparentFX
