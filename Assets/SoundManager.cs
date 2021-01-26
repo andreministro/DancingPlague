@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    public static AudioClip door_open, barril, dirt_step;
+    public static AudioClip door_open, barril, dirt_step, poco;
     static AudioSource audioSrc;
 
     // Start is called before the first frame update
@@ -13,6 +13,7 @@ public class SoundManager : MonoBehaviour
         //dirt_step = Resources.Load<AudioClip>("dirt_step");
         door_open = Resources.Load<AudioClip>("door_open");
         barril = Resources.Load<AudioClip>("barril");
+        poco = Resources.Load<AudioClip>("baldepoco");
         audioSrc = GetComponent<AudioSource>();
     }
 
@@ -32,6 +33,10 @@ public class SoundManager : MonoBehaviour
 
             case "barril":
                 audioSrc.PlayOneShot(barril);
+                break;
+
+            case "poco":
+                audioSrc.PlayOneShot(poco);
                 break;
 
             /*case "dirt_step":

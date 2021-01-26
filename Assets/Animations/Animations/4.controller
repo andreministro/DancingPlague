@@ -13,17 +13,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useMultiple: 0
-  clip: {fileID: 8300000, guid: 19e0513422727414fb693fabb5540d78, type: 3}
+  clip: {fileID: 8300000, guid: 820cebbbef364854aa8184b7a5bfada4, type: 3}
   clips: []
   condition: 0
   delayer:
-    delayType: 0
+    delayType: 1
     timer:
       loops: 0
       time: 0
     frameTimer:
       loops: 0
-      frame: 0
+      frame: 1
   frequencyTimer:
     loops: 0
     time: 0

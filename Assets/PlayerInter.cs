@@ -18,6 +18,7 @@ public class PlayerInter : MonoBehaviour
     public GameObject inventory;
     public GameObject fogueira;
     public GameObject fogueiraTrigger;
+    public GameObject pedregulho;
 
     public bool firstPick=true;
     private bool firstInterPoco = true;
@@ -224,6 +225,7 @@ public class PlayerInter : MonoBehaviour
                             inventory.GetComponent<InventoryDisplay>().addItemList("Balde");
                             string newText = "Filled bucket.";
                             StartCoroutine(displayDialogueText(newText, false, true));
+                            SoundManager.PlaySound("poco");
                         }
                         else if (inventory.GetComponent<InventoryDisplay>().checkItemList("Balde"))
                         {
@@ -508,6 +510,11 @@ public class PlayerInter : MonoBehaviour
             {
                 saveDataThroughScenes();
                 SceneManager.LoadScene("LVL4 - BackHome");
+            }
+
+            if(other.tag == "RockFalling")
+            {
+                pedregulho.GetComponent<Animator>().SetTrigger("IsRockFalling");
             }
         }
 
