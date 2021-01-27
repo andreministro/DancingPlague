@@ -590,7 +590,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 1
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -12.727929, y: 47.985798, z: -14.315177, w: -2.7534688}
+  m_margin: {x: -43.500248, y: 47.985798, z: -44.47203, w: -2.7534688}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -3518,7 +3518,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.546923, y: -3.4296584, z: -10}
+  m_LocalPosition: {x: -12.535995, y: -3.4296584, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4650,7 +4650,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.4632206, y: 1}
+    m_SensorSize: {x: 2.5617979, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -4667,7 +4667,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 776996889}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.546923, y: -3.4296584, z: -10}
+  m_LocalPosition: {x: -12.535995, y: -3.4296584, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1511732760}
@@ -5592,6 +5592,7 @@ GameObject:
   - component: {fileID: 916269562}
   - component: {fileID: 916269565}
   - component: {fileID: 916269566}
+  - component: {fileID: 916269567}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -5643,6 +5644,7 @@ MonoBehaviour:
   inventario: {fileID: 0}
   demonCollider: {fileID: 0}
   MarketToVillageDoor: {fileID: 0}
+  luzTocha: {fileID: 0}
   feetPos: {fileID: 2080573843}
   checkRadius: 0.1
   whatIsGround:
@@ -5782,6 +5784,7 @@ MonoBehaviour:
   fogueira: {fileID: 0}
   fogueiraTrigger: {fileID: 0}
   pedregulho: {fileID: 0}
+  pedregulhoTrigger: {fileID: 0}
   firstPick: 1
   playerInteractionsEnabled: 1
 --- !u!95 &916269562
@@ -5878,6 +5881,7 @@ MonoBehaviour:
   isCoveringEars: 0
   triggerArea: 0
   playerEating: 0
+  notPause: 1
 --- !u!82 &916269565
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5993,6 +5997,18 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
+--- !u!114 &916269567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 916269555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f9dc74e6d0d4df4cbeccd069c1a9200, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &930100791
 GameObject:
   m_ObjectHideFlags: 0
@@ -7641,7 +7657,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1240397191
 RectTransform:
   m_ObjectHideFlags: 0

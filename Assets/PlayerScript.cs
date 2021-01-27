@@ -10,12 +10,13 @@ public class PlayerScript : MonoBehaviour
     public Animator animator;
     public Collider2D standCollider;
     public Collider2D crouchCollider;
-    public float playerspeed;
+    public float playerspeed= 4.2f;
     private bool facingRight = true;
     public int JumpPower;
     private float moveX;
     public float sanityPenalty;
     public GameObject cavalo, demon, inventario, demonCollider, MarketToVillageDoor;
+    public GameObject luzTocha;
     
     private bool isGrounded;
     public Transform feetPos;
@@ -30,6 +31,8 @@ public class PlayerScript : MonoBehaviour
     private bool isCoveringEars;
     private bool isCoveringEW;
     private bool isWalking;
+    private bool isLit;
+    private bool isLitWalking;
 
     public bool movePlayer;
     public bool cutScene;
@@ -49,7 +52,7 @@ public class PlayerScript : MonoBehaviour
         animator = GetComponent<Animator>();
         currentSceneName = SceneManager.GetActiveScene().name;
         sanityPenalty = 0;
-        if (SceneManager.GetActiveScene().name == "LVL1 - Home")
+        if (SceneManager.GetActiveScene().name == "LVL1 - Home" && !gameObject.GetComponent<BarsController>().isDead())
         {
             movePlayer = false;
             cutScene = true;
@@ -231,10 +234,32 @@ public class PlayerScript : MonoBehaviour
 
         //Torch
 
-       /* if(Input.GetButtonDown("Torch"))
+        //if (gameObject.GetComponent<PlayerInter>().inventory.GetComponent<InventoryDisplay>().checkItemList("Torcha"))
+        if (Input.GetButtonDown("Torch") && isGrounded == true)
         {
-            animator.SetBool("");
-        }*/
+            Debug.Log(isGrounded);
+            animator.SetBool("IsLit", true);
+            isLit = true;
+            //luzTocha.SetActive(true);
+
+            if (moveX != 0)
+            {
+                Debug.Log(moveX);
+                isLitWalking = true;
+                animator.SetBool("IsLitWalking", true);
+            }
+            else
+            {
+                isLitWalking = false;
+                animator.SetBool("IsLitWalking", false);
+            }
+        }
+        else
+        {
+            animator.SetBool("IsLit", false);
+            isLit = false;
+            //luzTocha.SetActive(false);
+        }
 
         //Player Direction
         if (moveX < 0.0f && facingRight == true)
@@ -318,19 +343,19 @@ public class PlayerScript : MonoBehaviour
         }
         else if (SceneManager.GetActiveScene().name == "LVL2 - Big Forest")
         {
-            string newText = "pWh...han?..?..!?\npWait... Did I really just see that?\npNo way that was real.. I must be hallucinating!\npIs this the reason everyone is acting like that?\npHope my family is okay.. I must get back home.";
+            FlipPlayer();
+            string newText = "pWh...han?..?..!?\npWait... Did I really just see that?\npNo way that was real.. I must be hallucinating!\npThis isn't something I should be dealing...\npIs this the reason everyone is acting like that?\npHope my family is doing fine.. I must get back home.";
             StartCoroutine(gameObject.GetComponent<PlayerInter>().displayDialogueText(newText, true, false));
             cutScene = false;
         }
     }
-
     private IEnumerator CutSceneMarket()
     {
         FlipPlayer();
         cavalo.GetComponent<Animator>().SetTrigger("HorseWalking");
         //yield return new WaitUntil(() => (dialogueText.text == ""));
         yield return new WaitForSeconds(2.0f);
-        string newText = "-What is this filthy plesant doing in here?\n-Think you can just come and steal our food?\npI am not filthy and I just bought this.\n-GOSH! HOW DARE A MERE PLEBE ANSWER ME BACK!\n-PREPARE FOR YOUR PUNISHMENT!";
+        string newText = "-What is this filthy plesant doing in here?\n-Think you can just come and steal our food?\npI  am not filthy I just want to buy something for my family to eat.\n-GOSH! HOW DARE A MERE PLEBE ANSWER ME BACK!\n-PREPARE FOR YOUR PUNISHMENT!";
         StartCoroutine(gameObject.GetComponent<PlayerInter>().displayDialogueText(newText, true, false));
 
         // pessoas do mercado comeca a aproximar enquanto dançam

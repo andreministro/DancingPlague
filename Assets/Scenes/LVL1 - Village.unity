@@ -569,7 +569,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.6593137, y: 1}
+    m_SensorSize: {x: 2.4867022, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -586,7 +586,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 95707527}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.854816, y: 0.042407036, z: -10}
+  m_LocalPosition: {x: 2.83568, y: 0.042407036, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 826334308}
@@ -10985,6 +10985,7 @@ MonoBehaviour:
   isCoveringEars: 0
   triggerArea: 0
   playerEating: 0
+  notPause: 1
 --- !u!114 &1691527379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11019,6 +11020,7 @@ MonoBehaviour:
   fogueira: {fileID: 0}
   fogueiraTrigger: {fileID: 0}
   pedregulho: {fileID: 0}
+  pedregulhoTrigger: {fileID: 0}
   firstPick: 1
   playerInteractionsEnabled: 1
 --- !u!114 &1691527380
@@ -11036,7 +11038,7 @@ MonoBehaviour:
   animator: {fileID: 1691527374}
   standCollider: {fileID: 1691527376}
   crouchCollider: {fileID: 1691527375}
-  playerspeed: 4
+  playerspeed: 5
   JumpPower: 17
   sanityPenalty: 0
   cavalo: {fileID: 0}
@@ -11959,7 +11961,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1771978387}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.854816, y: 0.042407036, z: -10}
+  m_LocalPosition: {x: 2.83568, y: 0.042407036, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

@@ -40,6 +40,7 @@ public class InventoryDisplay : MonoBehaviour
         btn = ItemNaoSelecionado3.GetComponent<Button>();
         btn.onClick.AddListener(ItemSelecionado3);
 
+        //displayItems.Add("BaldeVazio");
 
     }
     private void activeImage(Button itemSelecionado, string itemName)
@@ -564,5 +565,13 @@ public class InventoryDisplay : MonoBehaviour
     public void deleteItemList(string itemName)
     {
         displayItems.Remove(itemName);
+    }
+    public List<string> copyItemList()
+    {
+        return displayItems;
+    }
+    public void setItemList(List<string> newList)
+    {
+        displayItems = newList;
     }
 }

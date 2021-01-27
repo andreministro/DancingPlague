@@ -18,7 +18,7 @@ public class PlayerInter : MonoBehaviour
     public GameObject inventory;
     public GameObject fogueira;
     public GameObject fogueiraTrigger;
-    public GameObject pedregulho;
+    public GameObject pedregulho, pedregulhoTrigger;
 
     public bool firstPick=true;
     private bool firstInterPoco = true;
@@ -29,18 +29,13 @@ public class PlayerInter : MonoBehaviour
 
     public bool playerInteractionsEnabled;
 
-    private static int sceneMarket=0;
-    private static int sceneForest=0;
-    private static int sceneBigForest = 0;
-    private static int sceneVillage=0;
 
     private static bool firstSanity = true;
     //private static int sceneMarket;
     void Start()
     {
-        if(SceneManager.GetActiveScene().name == "LVL1 - BackHome") DialogBox.SetActive(true);
-        else DialogBox.SetActive(false);
-        if(SceneManager.GetActiveScene().name== "LVL1 - Home")
+        DialogBox.SetActive(false);
+        if(SceneManager.GetActiveScene().name== "LVL1 - Home" && !gameObject.GetComponent<BarsController>().isDead())
         {
             completedMissions = 0;
             StartCoroutine(secondCutscene());
@@ -50,6 +45,7 @@ public class PlayerInter : MonoBehaviour
         }
         else
         {
+            completedMissions = 3;
             playerInteractionsEnabled = true;
             inventory.SetActive(false);
         }
@@ -77,7 +73,7 @@ public class PlayerInter : MonoBehaviour
                     {
                         pressETxt.text = "";
                         string newText = "Empty.";
-                        StartCoroutine(displayDialogueText(newText, false,false));
+                        StartCoroutine(displayDialogueText(newText, false, false));
                         if (firstVisitA)
                         {
                             completedMissions++;
@@ -90,7 +86,7 @@ public class PlayerInter : MonoBehaviour
                         bauAberto.SetActive(true);
                         pressETxt.text = "";
                         string newText = "Empty.";
-                        StartCoroutine(displayDialogueText(newText, false,false));
+                        StartCoroutine(displayDialogueText(newText, false, false));
                         if (firstVisitG)
                         {
                             completedMissions++;
@@ -102,7 +98,7 @@ public class PlayerInter : MonoBehaviour
                     {
                         pressETxt.text = "";
                         string newText = "Empty.";
-                        StartCoroutine(displayDialogueText(newText, false,false));
+                        StartCoroutine(displayDialogueText(newText, false, false));
                         if (firstVisitS)
                         {
                             completedMissions++;
@@ -134,7 +130,8 @@ public class PlayerInter : MonoBehaviour
                         StartCoroutine(displayDialogueText("I should get some bread first.", false, true));
                     }
 
-                    if (triggered== "Barrel") {
+                    if (triggered == "Barrel")
+                    {
                         //barrel.GetComponent<Animator>().SetTrigger("IsSearching");    ///// WHHHHHYYYYYYYYYYYY???????????????????????????????????????????????????????????
                         string newText = "Herbs found.";
                         StartCoroutine(displayDialogueText(newText, false, false));
@@ -246,7 +243,7 @@ public class PlayerInter : MonoBehaviour
                     if (triggered == "Fogueira")
                     {
                         pressETxt.text = "";
-                        if(inventory.GetComponent<InventoryDisplay>().checkItemList("Balde"))
+                        if (inventory.GetComponent<InventoryDisplay>().checkItemList("Balde"))
                         {
                             gameObject.GetComponent<PlayerScript>().animator.SetTrigger("IsWatering");
                             fogueira.GetComponent<Animator>().SetTrigger("UseWater");
@@ -261,12 +258,27 @@ public class PlayerInter : MonoBehaviour
                             string newText = "My bucket does not have water.";
                             StartCoroutine(displayDialogueText(newText, false, true));
                         }
-                        else if (!inventory.GetComponent<InventoryDisplay>().checkItemList("BaldeVazio")) {
+                        else if (!inventory.GetComponent<InventoryDisplay>().checkItemList("BaldeVazio"))
+                        {
                             string newText = "I don't have a bucket.";
                             StartCoroutine(displayDialogueText(newText, false, true));
 
                         }
 
+                    }
+                    if (triggered == "NightVillageToHome")
+                    {
+                        saveDataThroughScenes();
+                        SceneManager.LoadScene("LVL4 - BackHome");
+                    }
+                }
+                else if (Input.GetButtonDown("Save"))
+                {
+                    if (triggered == "Vela")
+                    {
+                        gameObject.GetComponent<PlayerData>().PlayerDataSave();
+                        string newText = "Game saved.";
+                        StartCoroutine(displayDialogueText(newText, false, true));
                     }
                 }
             }
@@ -464,7 +476,7 @@ public class PlayerInter : MonoBehaviour
             if (other.tag == "BigForestToNightVillage")
             {
                 saveDataThroughScenes();
-                SceneManager.LoadScene("LVL3 - NightVillage");
+                SceneManager.LoadScene("LVL4 - NightVillage");
             }
             if (other.tag == "BigForestBackForest")
             {
@@ -509,18 +521,26 @@ public class PlayerInter : MonoBehaviour
 
             if(other.tag == "NightVillageToHome")
             {
-                saveDataThroughScenes();
-                SceneManager.LoadScene("LVL4 - BackHome");
+                pressETxt.text = "Enter";
+                triggered = other.tag;
+                offTrigger = false;
             }
 
             if(other.tag == "RockFalling")
             {
                 pedregulho.GetComponent<Animator>().SetTrigger("IsRockFalling");
+                pedregulhoTrigger.SetActive(false);
+                StartCoroutine(rockDialog());
             }
         }
 
     }
 
+    public IEnumerator rockDialog()
+    {
+        yield return new WaitForSeconds(1.5f);
+        StartCoroutine(displayDialogueText("That was way too close. Damn nobles!", false, true));
+    }
     private void OnTriggerExit2D(Collider2D other)
     {
         if (playerInteractionsEnabled)
@@ -735,7 +755,7 @@ public class PlayerInter : MonoBehaviour
                     dialogueText.text = dText.Substring(1, counter++);
                     yield return new WaitForSeconds(0.02f);
                 }
-                yield return new WaitUntil(() => (Input.GetButtonDown("Interact") == true));
+                yield return new WaitUntil(() => (Input.GetButtonDown("Interact")));
             }
             gameObject.GetComponent<PlayerScript>().movePlayer = true;
             pressETxt.text = "";
@@ -910,9 +930,25 @@ public class PlayerInter : MonoBehaviour
         }
     }
 
+    private static int sceneMarket = 0;
+    private static int sceneHome = 0;
+    private static int sceneForest = 0;
+    private static int sceneBigForest = 0;
+    private static int sceneVillage = 0;
     private void LoadScene()
     {
-        if(SceneManager.GetActiveScene().name == "LVL1 - Village")
+        if (SceneManager.GetActiveScene().name == "LVL1 - Home")
+        {
+            if (sceneHome > 0)
+            {
+                if (gameObject.GetComponent<BarsController>().isDead())
+                {
+                    gameObject.transform.position = gameObject.GetComponent<PlayerData>().getPosition();
+                }
+            }
+            sceneHome++;
+        }
+        if (SceneManager.GetActiveScene().name == "LVL1 - Village")
         {
             if (sceneVillage > 0)
             {
@@ -946,6 +982,7 @@ public class PlayerInter : MonoBehaviour
                 {
                     corda.SetActive(false);
                 }
+                //if(dead)
             }
             sceneMarket++;
         }
@@ -953,23 +990,11 @@ public class PlayerInter : MonoBehaviour
         {
             if (sceneForest > 0)
             {
-                gameObject.transform.position = new Vector2(24.38f, -3.88f);
+                gameObject.transform.position = new Vector2(22.63f, -3.88f);
                 gameObject.GetComponent<PlayerScript>().FlipPlayer();
             }
             sceneForest++;
         }
-        if (SceneManager.GetActiveScene().name == "LVL2 - BigForest")
-        {
-            if (sceneBigForest > 0)
-            {
-
-            }
-            sceneBigForest++;
-        }
-        if (!inventory.GetComponent<InventoryDisplay>().checkItemList("ErvaBad"))
-        {
-
-        }
-       
+        gameObject.GetComponent<BarsController>().notDead();
     }
 } 

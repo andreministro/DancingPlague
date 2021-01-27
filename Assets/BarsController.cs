@@ -28,6 +28,7 @@ public class BarsController : MonoBehaviour
     private float alphaLevel;
 
     private float maxHealth=28;
+    public static bool isdead;
 
     private bool lostHunger = false;
     void Start()
@@ -90,10 +91,12 @@ public class BarsController : MonoBehaviour
         sanityBarController();
         
     }
+    public bool notPause = true;
     private IEnumerator hungerBarLoosing()
     {
         //30.0f
         yield return new WaitForSeconds(15.0f);
+        yield return new WaitUntil(() => notPause);
         hungerBar[health].SetActive(false);
         if (health > 0) { 
             health--;
@@ -155,88 +158,91 @@ public class BarsController : MonoBehaviour
         float alphaStep = 0.004f;
         float alphaFillStep = 0.01f;
         float delayPlayerStep = 0.001f;
-
-        if (isCoveringEars)
+        if (notPause)
         {
-            if (pressETxt.text != "")
-                pressETxt.text = "";
+            if (isCoveringEars)
+            {
+                if (pressETxt.text != "")
+                    pressETxt.text = "";
 
-            gameObject.GetComponent<PlayerScript>().sanityPenalty =0.0f;
-            if (madnessImage.transform.localScale.x - step < maxScaleAux)
-            {
-                Vector2 localScale = new Vector2(madnessImage.transform.localScale.x + step, madnessImage.transform.localScale.y + step);
-                madnessImage.transform.localScale = localScale;
-            }
-            else if (madnessImage.transform.localScale.x - step >= maxScaleAux && alphaLevel > 0.0f && madnessImage.activeSelf)
-            {
-                alphaLevel -= step;
-                madnessImage.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, alphaLevel);
-            }
-            else
-            {
-                alphaLevel = 0.5f;
-                madnessImage.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, alphaLevel);
-                Vector2 localScale = new Vector2(maxScale, maxScale);
-                madnessImage.transform.localScale = localScale;
-                madnessImage.SetActive(false);
-            }
-        }
-        else if(triggerArea)
-        {
-            madnessImage.SetActive(true);
-            if(gameObject.GetComponent<PlayerScript>().sanityPenalty<0.5f)
-                gameObject.GetComponent<PlayerScript>().sanityPenalty += delayPlayerStep;
-            if (madnessImage.transform.localScale.x - step > minScale)
-            {
-                Vector2 localScale = new Vector2(madnessImage.transform.localScale.x - step, madnessImage.transform.localScale.y - step);
-                madnessImage.transform.localScale = localScale;
-            }
-            else if ((madnessImage.transform.localScale.x - step <= minScale) && alphaLevel<0.9f)
-            {
-                alphaLevel += alphaStep;
-                madnessImage.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, alphaLevel);
-            }
-            else
-            {
-                //Dead
-                //Animação dancar
-                //Comer ecrã
-                pressETxt.text = "";
-                madnessPlayer.SetActive(true);
-                madnessImageFill.SetActive(true);
-                gameObject.GetComponent<PlayerInter>().playerInteractionsEnabled = false;
-                gameObject.GetComponent<PlayerScript>().movePlayer = false;
-                gameObject.GetComponent<PlayerInter>().inventory.SetActive(false);
-                if (alphaLevelFill < 1.0f){
-                    alphaLevelFill += alphaFillStep;
-                    madnessImageFill.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, alphaLevelFill);
+                gameObject.GetComponent<PlayerScript>().sanityPenalty = 0.0f;
+                if (madnessImage.transform.localScale.x - step < maxScaleAux)
+                {
+                    Vector2 localScale = new Vector2(madnessImage.transform.localScale.x + step, madnessImage.transform.localScale.y + step);
+                    madnessImage.transform.localScale = localScale;
+                }
+                else if (madnessImage.transform.localScale.x - step >= maxScaleAux && alphaLevel > 0.0f && madnessImage.activeSelf)
+                {
+                    alphaLevel -= step;
+                    madnessImage.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, alphaLevel);
                 }
                 else
                 {
-                    GameOver.SetActive(true);
+                    alphaLevel = 0.5f;
+                    madnessImage.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, alphaLevel);
+                    Vector2 localScale = new Vector2(maxScale, maxScale);
+                    madnessImage.transform.localScale = localScale;
+                    madnessImage.SetActive(false);
                 }
             }
-        }
-        else if (!triggerArea)
-        {
-            gameObject.GetComponent<PlayerScript>().sanityPenalty = 0.0f;
-            if (madnessImage.transform.localScale.x - step < maxScaleAux)
+            else if (triggerArea)
             {
-                Vector2 localScale = new Vector2(madnessImage.transform.localScale.x + step, madnessImage.transform.localScale.y + step);
-                madnessImage.transform.localScale = localScale;
+                madnessImage.SetActive(true);
+                if (gameObject.GetComponent<PlayerScript>().sanityPenalty < 0.5f)
+                    gameObject.GetComponent<PlayerScript>().sanityPenalty += delayPlayerStep;
+                if (madnessImage.transform.localScale.x - step > minScale)
+                {
+                    Vector2 localScale = new Vector2(madnessImage.transform.localScale.x - step, madnessImage.transform.localScale.y - step);
+                    madnessImage.transform.localScale = localScale;
+                }
+                else if ((madnessImage.transform.localScale.x - step <= minScale) && alphaLevel < 0.9f)
+                {
+                    alphaLevel += alphaStep;
+                    madnessImage.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, alphaLevel);
+                }
+                else
+                {
+                    //Dead
+                    //Animação dancar
+                    //Comer ecrã
+                    pressETxt.text = "";
+                    madnessPlayer.SetActive(true);
+                    madnessImageFill.SetActive(true);
+                    gameObject.GetComponent<PlayerInter>().playerInteractionsEnabled = false;
+                    gameObject.GetComponent<PlayerScript>().movePlayer = false;
+                    gameObject.GetComponent<PlayerInter>().inventory.SetActive(false);
+                    if (alphaLevelFill < 1.0f)
+                    {
+                        alphaLevelFill += alphaFillStep;
+                        madnessImageFill.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, alphaLevelFill);
+                    }
+                    else
+                    {
+                        GameOver.SetActive(true);
+                    }
+                }
             }
-            else if (madnessImage.transform.localScale.x - step >= maxScaleAux && alphaLevel > 0.0f && madnessImage.activeSelf)
+            else if (!triggerArea)
             {
-                alphaLevel -= step;
-                madnessImage.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, alphaLevel);
-            }
-            else
-            {
-                alphaLevel = 0.5f;
-                madnessImage.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, alphaLevel);
-                Vector2 localScale = new Vector2(maxScale, maxScale);
-                madnessImage.transform.localScale = localScale;
-                madnessImage.SetActive(false);
+                gameObject.GetComponent<PlayerScript>().sanityPenalty = 0.0f;
+                if (madnessImage.transform.localScale.x - step < maxScaleAux)
+                {
+                    Vector2 localScale = new Vector2(madnessImage.transform.localScale.x + step, madnessImage.transform.localScale.y + step);
+                    madnessImage.transform.localScale = localScale;
+                }
+                else if (madnessImage.transform.localScale.x - step >= maxScaleAux && alphaLevel > 0.0f && madnessImage.activeSelf)
+                {
+                    alphaLevel -= step;
+                    madnessImage.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, alphaLevel);
+                }
+                else
+                {
+                    alphaLevel = 0.5f;
+                    madnessImage.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, alphaLevel);
+                    Vector2 localScale = new Vector2(maxScale, maxScale);
+                    madnessImage.transform.localScale = localScale;
+                    madnessImage.SetActive(false);
+                }
             }
         }
     }
@@ -260,15 +266,6 @@ public class BarsController : MonoBehaviour
         }
         else
         {
-            if (SceneManager.GetActiveScene().name == "LVL1 - Village")
-            {
-                gameObject.transform.position = new Vector2(2.84f, -3.65f);
-            }
-            else if(SceneManager.GetActiveScene().name == "LVL2 - Forest")
-            {
-                gameObject.transform.position = new Vector2(-20.15f, -3.88f);
-            }
-
             alphaLevel = 0.5f;
             madnessImage.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, alphaLevel);
             Vector2 localScale = new Vector2(maxScale, maxScale);
@@ -282,11 +279,28 @@ public class BarsController : MonoBehaviour
         gameObject.GetComponent<PlayerScript>().movePlayer = true;
         GameOver.SetActive(false);
         gameObject.GetComponent<PlayerInter>().inventory.SetActive(false);
+
+        LoadSavedScene();
+        lostHunger = false;
     }
     private void StopGame()
     {
     }
 
+    private void LoadSavedScene()
+    {
+        isdead = true;
+        if (lostHunger)
+        {
+            health = 28;
+        }
+        else
+        {
+            health = gameObject.GetComponent<PlayerData>().getHealth();
+            gameObject.GetComponent<PlayerInter>().inventory.GetComponent<InventoryDisplay>().setItemList(gameObject.GetComponent<PlayerData>().getInventoryItems());
+            SceneManager.LoadScene(gameObject.GetComponent<PlayerData>().getScene());
+        }
+    }
     public void morteMonstro()
     {
         gameObject.GetComponent<PlayerInter>().inventory.SetActive(false);
@@ -296,5 +310,14 @@ public class BarsController : MonoBehaviour
         GameOver.SetActive(true);
         gameObject.GetComponent<PlayerInter>().playerInteractionsEnabled = false;
         gameObject.GetComponent<PlayerScript>().movePlayer = false;
+    }
+
+    public void notDead()
+    {
+        isdead = false;
+    }
+    public bool isDead()
+    {
+        return isdead;
     }
 }
