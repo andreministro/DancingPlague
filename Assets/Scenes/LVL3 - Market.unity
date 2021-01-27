@@ -7230,7 +7230,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 754597071}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.011089, y: -1.667593, z: -10}
+  m_LocalPosition: {x: 9.084816, y: -1.667593, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -8417,6 +8417,7 @@ MonoBehaviour:
   inventory: {fileID: 821109579}
   fogueira: {fileID: 0}
   fogueiraTrigger: {fileID: 0}
+  pedregulho: {fileID: 0}
   firstPick: 1
   playerInteractionsEnabled: 1
 --- !u!114 &847554667
@@ -16134,7 +16135,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.9942791, y: 1}
+    m_SensorSize: {x: 2.6593137, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -16151,7 +16152,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1916872350}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.011089, y: -1.667593, z: -10}
+  m_LocalPosition: {x: 9.084816, y: -1.667593, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1613341871}

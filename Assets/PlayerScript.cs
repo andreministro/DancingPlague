@@ -55,14 +55,10 @@ public class PlayerScript : MonoBehaviour
             cutScene = true;
             label = true;
         }
-        else if(SceneManager.GetActiveScene().name == "LVL1 - BackHome")
+        else if (SceneManager.GetActiveScene().name == "LVL2 - Big Forest")
         {
-            //gameObject.GetComponent<PlayerInter>().playerInteractionsEnabled = true;
-            movePlayer = true;
-            cutScene = false;
-            FlipPlayer();
-            gameObject.GetComponent<PlayerInter>().DialogBox.SetActive(true);
-            StartCoroutine(gameObject.GetComponent<PlayerInter>().displayDialogueText("I need to get some bread.", false, true));
+            movePlayer = false;
+            cutScene = true;
         }
         else
         {
@@ -295,11 +291,11 @@ public class PlayerScript : MonoBehaviour
                 string newText;
                 if (cutSceneNumber == 1)
                 {
-                    gameObject.GetComponent<PlayerInter>().pressETxt.text = "Continue (Press E)";
-                    newText = "mHello dear, did you sleep well?\npYes. Nights are getting colder.\nmYes, I know...\nmCan you pass me the bread?";
+                    gameObject.GetComponent<PlayerInter>().pressETxt.text = "Press E to Interact";
+                    newText = "mHello dear, did you sleep well?\npYes...\npNights are getting colder.\npI am kinda hungry.. last night the meals were just some herbs.\npAre there some breadcrumbs leftovers?\nmI think so, have a look around dear.";
                 }
                 else
-                    newText = "pI can't seem to find it.\nsDad, I was so hungry and ate it, I'm sorry.\nm It's okay. I guess we can afford to buy another one, dear?\npYes, maybe one or two more. I will go to the market. Be right back";
+                    newText = "pI can't seem to find it.\nsDad..\nsI was so hungry that I ate them.\nsPlease don't be mad at me. I'm sorry.\nmIt's okay. We know it's hard sweety.\nmCan we afford to get some more, dear?\npI think so...\npI will go check out the market. Be right back.";
 
                 FlipPlayer();
                 StartCoroutine(gameObject.GetComponent<PlayerInter>().displayDialogueText(newText, true,false));
@@ -319,6 +315,12 @@ public class PlayerScript : MonoBehaviour
                 MarketToVillageDoor.SetActive(false);
                 StartCoroutine(CutSceneMarket());
             }
+        }
+        else if (SceneManager.GetActiveScene().name == "LVL2 - Big Forest")
+        {
+            string newText = "pWh...han?..?..!?\npWait... Did I really just see that?\npNo way that was real.. I must be hallucinating!\npIs this the reason everyone is acting like that?\npHope my family is okay.. I must get back home.";
+            StartCoroutine(gameObject.GetComponent<PlayerInter>().displayDialogueText(newText, true, false));
+            cutScene = false;
         }
     }
 
