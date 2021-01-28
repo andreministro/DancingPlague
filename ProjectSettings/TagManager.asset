@@ -50,6 +50,8 @@ TagManager:
   - LShiftWarning
   - NightVillageToHome
   - RockFalling
+  - Ceiling1
+  - CrouchCheck
   layers:
   - Default
   - TransparentFX

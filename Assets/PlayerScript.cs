@@ -10,6 +10,7 @@ public class PlayerScript : MonoBehaviour
     public Animator animator;
     public Collider2D standCollider;
     public Collider2D crouchCollider;
+    public GameObject checkCeilingCollider;
     public float playerspeed= 4.2f;
     private bool facingRight = true;
     public int JumpPower;
@@ -31,8 +32,10 @@ public class PlayerScript : MonoBehaviour
     private bool isCoveringEars;
     private bool isCoveringEW;
     private bool isWalking;
-    private bool isLit;
+    private bool isLit = false;
     private bool isLitWalking;
+    private bool canJump = true;
+    private bool canUncrouch = true;
 
     public bool movePlayer;
     public bool cutScene;
@@ -136,7 +139,7 @@ public class PlayerScript : MonoBehaviour
         }
 
         //JUMP
-        if (Input.GetButtonDown("Jump") && isGrounded == true)
+        if (Input.GetButtonDown("Jump") && isGrounded == true && canJump == true)
         {
             animator.SetTrigger("TakeOf");
             isJumping = true;
@@ -178,6 +181,7 @@ public class PlayerScript : MonoBehaviour
             isCrouching = true;
             animator.SetBool("IsCrouching", true);
             standCollider.enabled = false;
+           // checkCeilingCollider.SetActive(true);
 
             if (moveX!=0)
             {
@@ -191,16 +195,18 @@ public class PlayerScript : MonoBehaviour
             }
         }
 
-        if (Input.GetButtonUp("Crouch"))
+        if (Input.GetButtonUp("Crouch") && canUncrouch == true)
         {
             isCrouching = false;
             animator.SetBool("IsCrouching", false);
             standCollider.enabled = true;
+           // checkCeilingCollider.SetActive(false);
         }
 
         //COVER EARS
         if(Input.GetButton("Ears") && isGrounded == true)
         {
+            canJump = false;
             isCoveringEars = true;
             animator.SetBool("IsCoveringEars", true);
 
@@ -221,6 +227,7 @@ public class PlayerScript : MonoBehaviour
             gameObject.GetComponent<BarsController>().isCoveringEars = false;
             isCoveringEars = false;
             animator.SetBool("IsCoveringEars", false);
+            canJump = true;
         }
 
         if (isCoveringEars == true)
@@ -235,30 +242,30 @@ public class PlayerScript : MonoBehaviour
         //Torch
 
         //if (gameObject.GetComponent<PlayerInter>().inventory.GetComponent<InventoryDisplay>().checkItemList("Torcha"))
-        if (Input.GetButtonDown("Torch") && isGrounded == true)
+        if (Input.GetButtonDown("Torch") && isGrounded == true && isLit == false)
         {
-            Debug.Log(isGrounded);
+            canJump = false;
             animator.SetBool("IsLit", true);
             isLit = true;
-            //luzTocha.SetActive(true);
+            luzTocha.SetActive(true);
+        }
+        else if (Input.GetButtonDown("Torch") && isGrounded == true && isLit == true)
+        {
+            canJump = true;
+            animator.SetBool("IsLit", false);
+            isLit = false;
+            luzTocha.SetActive(false);
+        }
 
-            if (moveX != 0)
-            {
-                Debug.Log(moveX);
-                isLitWalking = true;
-                animator.SetBool("IsLitWalking", true);
-            }
-            else
-            {
-                isLitWalking = false;
-                animator.SetBool("IsLitWalking", false);
-            }
+        if (moveX != 0 && isLit == true && isGrounded == true)
+        {
+            isLitWalking = true;
+            animator.SetBool("IsLitWalking", true);
         }
         else
         {
-            animator.SetBool("IsLit", false);
-            isLit = false;
-            //luzTocha.SetActive(false);
+            isLitWalking = false;
+            animator.SetBool("IsLitWalking", false);
         }
 
         //Player Direction
@@ -383,4 +390,20 @@ public class PlayerScript : MonoBehaviour
         yield return new WaitUntil(() => enterMonster);
         gameObject.GetComponent<BarsController>().morteMonstro();
     }
+
+    /*private void OnTriggerEnter2D(Collider2D other)
+    {
+        if(checkCeilingCollider)
+        {
+            if (other.tag == "Ceiling1")
+            {
+                canUncrouch = false;
+            }
+            else
+            {
+                canUncrouch = true;
+            }
+        }
+        
+    }*/
 }
