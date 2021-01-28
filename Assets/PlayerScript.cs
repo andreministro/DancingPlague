@@ -52,7 +52,7 @@ public class PlayerScript : MonoBehaviour
         animator = GetComponent<Animator>();
         currentSceneName = SceneManager.GetActiveScene().name;
         sanityPenalty = 0;
-        if (SceneManager.GetActiveScene().name == "LVL1 - Home" && !gameObject.GetComponent<BarsController>().isDead())
+        if (SceneManager.GetActiveScene().name == "LVL1 - Home" && gameObject.GetComponent<BarsController>().isDead()==false)
         {
             movePlayer = false;
             cutScene = true;

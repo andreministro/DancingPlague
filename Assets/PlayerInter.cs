@@ -12,7 +12,7 @@ public class PlayerInter : MonoBehaviour
     public GameObject DialogBox;
 
     public GameObject rock, barrel, roda, wood, oleo, corda, barrilAberto;
-    public GameObject rockEText, herbsEText, rodaEText, woodEText, oleoEText, cordaEText, paoEText;
+    public GameObject rockEText, herbsEText, rodaEText, woodEText, oleoEText, cordaEText, paoEText, facaEText;
 
     public GameObject bauAberto;
     public GameObject inventory;
@@ -35,8 +35,9 @@ public class PlayerInter : MonoBehaviour
     void Start()
     {
         DialogBox.SetActive(false);
-        if(SceneManager.GetActiveScene().name== "LVL1 - Home" && !gameObject.GetComponent<BarsController>().isDead())
+        if(SceneManager.GetActiveScene().name== "LVL1 - Home" && gameObject.GetComponent<BarsController>().isDead()==false)
         {
+            Debug.Log("primeira visita");
             completedMissions = 0;
             StartCoroutine(secondCutscene());
             bauAberto.SetActive(false);
@@ -108,21 +109,14 @@ public class PlayerInter : MonoBehaviour
 
                     if (triggered == "Porta")
                     {
+                        Debug.Log("Entrou no trigger");
+                        Debug.Log(completedMissions);
                         pressETxt.text = "";
-                        if (SceneManager.GetActiveScene().name == "LVL1 - BackHome")
+                        if (completedMissions == 3)
                         {
-                            /*SoundManager.PlaySound("door");
+                            SoundManager.PlaySound("door");
                             saveDataThroughScenes();
-                            SceneManager.LoadScene("LVL1 - Village");*/
-                        }
-                        else
-                        {
-                            if (completedMissions == 3)
-                            {
-                                SoundManager.PlaySound("door");
-                                saveDataThroughScenes();
-                                SceneManager.LoadScene("LVL1 - Village");
-                            }
+                            SceneManager.LoadScene("LVL1 - Village");
                         }
                     }
                     if (triggered == "PortaEntrarCasa")
@@ -271,6 +265,10 @@ public class PlayerInter : MonoBehaviour
                         saveDataThroughScenes();
                         SceneManager.LoadScene("LVL4 - BackHome");
                     }
+                    if (triggered == "Faca")
+                    {
+                        StartCoroutine(pickUpItem("Faca"));
+                    }
                 }
                 else if (Input.GetButtonDown("Save"))
                 {
@@ -321,18 +319,10 @@ public class PlayerInter : MonoBehaviour
             if (other.tag == "Porta")
             {
 
-                if (SceneManager.GetActiveScene().name == "LVL1 - BackHome") {
+                if (completedMissions == 3)
                     pressETxt.text = "Open";
-                    triggered = other.tag;
-                    offTrigger = false;
-                }
-                else
-                {
-                    if (completedMissions == 3)
-                        pressETxt.text = "Open";
-                    triggered = other.tag;
-                    offTrigger = false;
-                }
+                triggered = other.tag;
+                offTrigger = false;
             }
 
             if (other.tag == "Pedra")
@@ -883,6 +873,14 @@ public class PlayerInter : MonoBehaviour
                 inventory.GetComponent<InventoryDisplay>().addItemList("Pao");
             }
         }
+        if (item == "Faca")
+        {
+            facaEText.SetActive(true);
+            if (!inventory.GetComponent<InventoryDisplay>().checkItemList("Faca"))
+            {
+                inventory.GetComponent<InventoryDisplay>().addItemList("Faca");
+            }
+        }
         yield return new WaitForSeconds(1.0f);
         if (item == "Pedra")
         {
@@ -913,6 +911,10 @@ public class PlayerInter : MonoBehaviour
         {
             paoEText.SetActive(false);
         }
+        else if (item == "Faca")
+        {
+            facaEText.SetActive(false);
+        }
         pressETxt.text = "";
     }
     private void displayInventory()
@@ -941,7 +943,7 @@ public class PlayerInter : MonoBehaviour
         {
             if (sceneHome > 0)
             {
-                if (gameObject.GetComponent<BarsController>().isDead())
+                if (gameObject.GetComponent<BarsController>().isDead()==true)
                 {
                     gameObject.transform.position = gameObject.GetComponent<PlayerData>().getPosition();
                 }
@@ -965,8 +967,18 @@ public class PlayerInter : MonoBehaviour
                     wood.SetActive(false);
                 }
                 //posição do jogador
-                gameObject.transform.position = new Vector2(53.76f, -3.65f);
-                gameObject.GetComponent<PlayerScript>().FlipPlayer();
+                if (gameObject.GetComponent<BarsController>().isDead() == true)
+                {
+                    //saiu de casa
+                    gameObject.transform.position = new Vector2(2.76f, -3.65f);
+                    gameObject.GetComponent<BarsController>().notDead();
+                }
+                else
+                {
+                    //saiu do mercado
+                    gameObject.transform.position = new Vector2(53.76f, -3.65f);
+                    gameObject.GetComponent<PlayerScript>().FlipPlayer();
+                }
             }
             else
             {
@@ -982,7 +994,16 @@ public class PlayerInter : MonoBehaviour
                 {
                     corda.SetActive(false);
                 }
-                //if(dead)
+                if (inventory.GetComponent<InventoryDisplay>().checkItemList("Oleo"))
+                {
+                    oleo.SetActive(false);
+                }
+                if (gameObject.GetComponent<BarsController>().isDead() == true)
+                {
+                    //reborn
+                    gameObject.transform.position = gameObject.GetComponent<PlayerData>().getPosition();
+                    gameObject.GetComponent<BarsController>().notDead();
+                }
             }
             sceneMarket++;
         }
@@ -990,11 +1011,27 @@ public class PlayerInter : MonoBehaviour
         {
             if (sceneForest > 0)
             {
+                //inventário aqui
+
                 gameObject.transform.position = new Vector2(22.63f, -3.88f);
                 gameObject.GetComponent<PlayerScript>().FlipPlayer();
             }
             sceneForest++;
         }
-        gameObject.GetComponent<BarsController>().notDead();
+        if (SceneManager.GetActiveScene().name == "LVL2 - Big Forest")
+        {
+            if (sceneBigForest > 0)
+            {
+                //inventário aqui
+
+                if (gameObject.GetComponent<BarsController>().isDead() == true)
+                {
+                    //reborn
+                    gameObject.transform.position = gameObject.GetComponent<PlayerData>().getPosition();
+                    gameObject.GetComponent<BarsController>().notDead();
+                }
+            }
+            sceneBigForest++;
+        }
     }
 } 

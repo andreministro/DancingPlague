@@ -400,6 +400,10 @@ public class InventoryDisplay : MonoBehaviour
         {
             janelaTxt.text = "It's a empty bucket, it can hold water.";
         }
+        else if (item1 == "Faca")
+        {
+            janelaTxt.text = "Pointy and Sharp. I don't recall having a knife in my house.";
+        }
         else if(item1 == "Pao")
         {
             janelaTxt.text = ".";
@@ -471,6 +475,10 @@ public class InventoryDisplay : MonoBehaviour
         else if (item2 == "BaldeVazio")
         {
             janelaTxt.text = "It's a empty bucket, it can hold water.";
+        }
+        else if (item2 == "Faca")
+        {
+            janelaTxt.text = "Pointy and Sharp. I don't recall having a knife in my house.";
         }
         else if (item2 == "Pao")
         {
@@ -546,6 +554,10 @@ public class InventoryDisplay : MonoBehaviour
         else if (item3 == "BaldeVazio")
         {
             janelaTxt.text = "It's a empty bucket, it can hold water.";
+        }
+        else if (item3 == "Faca")
+        {
+            janelaTxt.text = "Pointy and Sharp. I don't recall having a knife in my house.";
         }
         else if (item3 == "Pao")
         {

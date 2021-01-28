@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -716,7 +716,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 75843645}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 55.26242, y: -0.61556196, z: -10}
+  m_LocalPosition: {x: 55.262802, y: -0.61556196, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
@@ -7792,7 +7792,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.3670886, y: 1}
+    m_SensorSize: {x: 2.3705463, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -7809,7 +7809,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1067790981}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 55.26242, y: -0.61556196, z: -10}
+  m_LocalPosition: {x: 55.262802, y: -0.61556196, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 481029618}
@@ -14405,6 +14405,7 @@ GameObject:
   - component: {fileID: 2131253374}
   - component: {fileID: 2131253373}
   - component: {fileID: 2131253372}
+  - component: {fileID: 2131253379}
   - component: {fileID: 2131253371}
   - component: {fileID: 2131253370}
   - component: {fileID: 2131253369}
@@ -14620,6 +14621,7 @@ MonoBehaviour:
   inventario: {fileID: 0}
   demonCollider: {fileID: 0}
   MarketToVillageDoor: {fileID: 0}
+  luzTocha: {fileID: 0}
   feetPos: {fileID: 1663136518}
   checkRadius: 0.1
   whatIsGround:
@@ -14814,3 +14816,15 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
+--- !u!114 &2131253379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2131253367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f9dc74e6d0d4df4cbeccd069c1a9200, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

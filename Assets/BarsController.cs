@@ -28,7 +28,7 @@ public class BarsController : MonoBehaviour
     private float alphaLevel;
 
     private float maxHealth=28;
-    public static bool isdead;
+    public static bool isdead=false;
 
     private bool lostHunger = false;
     void Start()

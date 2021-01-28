@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -2742,7 +2742,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &302943252
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7506,7 +7506,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 754597071}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.049322, y: -1.667593, z: -10}
+  m_LocalPosition: {x: -52.4172, y: -1.667593, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -8523,6 +8523,7 @@ GameObject:
   - component: {fileID: 847554667}
   - component: {fileID: 847554666}
   - component: {fileID: 847554665}
+  - component: {fileID: 847554672}
   - component: {fileID: 847554664}
   - component: {fileID: 847554663}
   - component: {fileID: 847554662}
@@ -8707,11 +8708,13 @@ MonoBehaviour:
   oleoEText: {fileID: 429164671}
   cordaEText: {fileID: 2072364698}
   paoEText: {fileID: 824708938}
+  facaEText: {fileID: 0}
   bauAberto: {fileID: 0}
   inventory: {fileID: 821109579}
   fogueira: {fileID: 0}
   fogueiraTrigger: {fileID: 0}
   pedregulho: {fileID: 0}
+  pedregulhoTrigger: {fileID: 0}
   firstPick: 1
   playerInteractionsEnabled: 1
 --- !u!114 &847554667
@@ -8737,6 +8740,7 @@ MonoBehaviour:
   inventario: {fileID: 0}
   demonCollider: {fileID: 0}
   MarketToVillageDoor: {fileID: 478509071}
+  luzTocha: {fileID: 0}
   feetPos: {fileID: 1579355646}
   checkRadius: 0.1
   whatIsGround:
@@ -8808,7 +8812,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 847554660}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.99, y: -5.36, z: 0}
+  m_LocalPosition: {x: -52.48, y: -5.36, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1579355646}
@@ -8931,6 +8935,18 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
+--- !u!114 &847554672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 847554660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f9dc74e6d0d4df4cbeccd069c1a9200, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &866010916
 GameObject:
   m_ObjectHideFlags: 0
@@ -16953,7 +16969,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.339152, y: 1}
+    m_SensorSize: {x: 2.3705463, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -16970,7 +16986,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1916872350}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.049322, y: -1.667593, z: -10}
+  m_LocalPosition: {x: -52.4172, y: -1.667593, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1613341871}
