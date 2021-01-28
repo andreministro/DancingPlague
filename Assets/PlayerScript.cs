@@ -49,6 +49,7 @@ public class PlayerScript : MonoBehaviour
     public bool enterMonster = false;
 
     public bool cutSceneMarket = true;
+    private static bool firstBigForest = true;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -61,7 +62,7 @@ public class PlayerScript : MonoBehaviour
             cutScene = true;
             label = true;
         }
-        else if (SceneManager.GetActiveScene().name == "LVL2 - Big Forest")
+        else if (SceneManager.GetActiveScene().name == "LVL2 - Big Forest" && inventario.GetComponent<InventoryDisplay>().checkItemList("Balde") && firstBigForest)
         {
             movePlayer = false;
             cutScene = true;
@@ -72,7 +73,11 @@ public class PlayerScript : MonoBehaviour
             movePlayer = true;
             cutScene = false;
         }
-        if ((SceneManager.GetActiveScene().name == "LVL2 - Big Forest")) FlipPlayer();
+
+        if ((SceneManager.GetActiveScene().name == "LVL2 - Big Forest"))
+        {
+            FlipPlayer();
+        }
     }
 
     void Update()
@@ -181,7 +186,7 @@ public class PlayerScript : MonoBehaviour
             isCrouching = true;
             animator.SetBool("IsCrouching", true);
             standCollider.enabled = false;
-           // checkCeilingCollider.SetActive(true);
+            checkCeilingCollider.SetActive(true);
 
             if (moveX!=0)
             {
@@ -200,7 +205,7 @@ public class PlayerScript : MonoBehaviour
             isCrouching = false;
             animator.SetBool("IsCrouching", false);
             standCollider.enabled = true;
-           // checkCeilingCollider.SetActive(false);
+            checkCeilingCollider.SetActive(false);
         }
 
         //COVER EARS
@@ -354,6 +359,7 @@ public class PlayerScript : MonoBehaviour
             string newText = "pWh...han?..?..!?\npWait... Did I really just see that?\npNo way that was real.. I must be hallucinating!\npThis isn't something I should be dealing...\npIs this the reason everyone is acting like that?\npHope my family is doing fine.. I must get back home.";
             StartCoroutine(gameObject.GetComponent<PlayerInter>().displayDialogueText(newText, true, false));
             cutScene = false;
+            firstBigForest = false;
         }
     }
     private IEnumerator CutSceneMarket()
@@ -391,10 +397,11 @@ public class PlayerScript : MonoBehaviour
         gameObject.GetComponent<BarsController>().morteMonstro();
     }
 
-    /*private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if(checkCeilingCollider)
+        if(checkCeilingCollider.activeSelf)
         {
+            Debug.Log("Entrou no ceiling");
             if (other.tag == "Ceiling1")
             {
                 canUncrouch = false;
@@ -405,5 +412,5 @@ public class PlayerScript : MonoBehaviour
             }
         }
         
-    }*/
+    }
 }

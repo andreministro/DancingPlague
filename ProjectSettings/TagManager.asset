@@ -51,7 +51,7 @@ TagManager:
   - NightVillageToHome
   - RockFalling
   - Ceiling1
-  - CrouchCheck
+  - Faca
   layers:
   - Default
   - TransparentFX

@@ -509,7 +509,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.90313685, y: -1.6733478}
+  m_Offset: {x: 0.90313685, y: -1.2308362}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -520,7 +520,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.72657895, y: 1.2703369}
+  m_Size: {x: 0.72657895, y: 7.819505}
   m_EdgeRadius: 0
 --- !u!212 &74689968
 SpriteRenderer:
@@ -580,7 +580,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 74689966}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.97, y: -3.58, z: -7.2053638}
+  m_LocalPosition: {x: 48.73, y: -3.58, z: -7.2053638}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -827,7 +827,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 75843645}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 54.046875, y: -0.61556196, z: -10}
+  m_LocalPosition: {x: 54.09096, y: -0.61556196, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3510,7 +3510,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.043258667, y: 0.35605812}
+  m_Offset: {x: -0.08677435, y: 0.45636642}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -3521,7 +3521,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.3522034, y: 1.3868351}
+  m_Size: {x: 0.8100796, y: 3.3643386}
   m_EdgeRadius: 0
 --- !u!212 &426827793
 SpriteRenderer:
@@ -3581,7 +3581,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 426827791}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 50.07, y: -5.57, z: 0}
+  m_LocalPosition: {x: 4.5, y: -5.57, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -6542,7 +6542,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &922362142
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8068,7 +8068,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.046484, y: 1}
+    m_SensorSize: {x: 2.444156, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -8085,7 +8085,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1067790981}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 54.046875, y: -0.61556196, z: -10}
+  m_LocalPosition: {x: 54.09096, y: -0.61556196, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 481029618}
@@ -9150,7 +9150,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -89.43855, y: -33.41439}
+  m_AnchoredPosition: {x: 26.3, y: -27.9}
   m_SizeDelta: {x: 0.19444445, y: 0.20833333}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &1239010703
@@ -10162,7 +10162,7 @@ Canvas:
   m_OverrideSorting: 1
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 1081143485
   m_SortingOrder: 3
   m_TargetDisplay: 0
@@ -13360,7 +13360,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -89.43855, y: -33.41439}
+  m_AnchoredPosition: {x: 24.7, y: -27.2}
   m_SizeDelta: {x: 0.19444445, y: 0.20833333}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &1839876998
@@ -15456,7 +15456,7 @@ MonoBehaviour:
   sanityPenalty: 0
   cavalo: {fileID: 0}
   demon: {fileID: 0}
-  inventario: {fileID: 0}
+  inventario: {fileID: 922362141}
   demonCollider: {fileID: 0}
   MarketToVillageDoor: {fileID: 0}
   luzTocha: {fileID: 1206359496}

@@ -202,9 +202,6 @@ public class BarsController : MonoBehaviour
                 }
                 else
                 {
-                    //Dead
-                    //Animação dancar
-                    //Comer ecrã
                     pressETxt.text = "";
                     madnessPlayer.SetActive(true);
                     madnessImageFill.SetActive(true);

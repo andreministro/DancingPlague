@@ -21,7 +21,7 @@ public class PlayerInter : MonoBehaviour
     public GameObject pedregulho, pedregulhoTrigger;
 
     public bool firstPick=true;
-    private bool firstInterPoco = true;
+    private static bool firstInterPoco = true;
 
     private string triggered = "";
     private int completedMissions;
@@ -521,6 +521,12 @@ public class PlayerInter : MonoBehaviour
                 pedregulhoTrigger.SetActive(false);
                 StartCoroutine(rockDialog());
             }
+            if (other.tag == "Faca")
+            {
+                pressETxt.text = "Pick up knife";
+                triggered = other.tag;
+                offTrigger = false;
+            }
         }
 
     }
@@ -702,6 +708,12 @@ public class PlayerInter : MonoBehaviour
                 offTrigger = true;
             }
             if (other.tag == "LShiftWarning")
+            {
+                pressETxt.text = "";
+                triggered = "";
+                offTrigger = true;
+            }
+            if (other.tag == "Faca")
             {
                 pressETxt.text = "";
                 triggered = "";
@@ -1031,6 +1043,22 @@ public class PlayerInter : MonoBehaviour
                 }
             }
             sceneBigForest++;
+        }
+        if (SceneManager.GetActiveScene().name == "LVL4 - NightVillage")
+        {
+            StartCoroutine(displayDialogueText("It's night already... no wonder it was so dark in the forest.",false, true));
+            if (inventory.GetComponent<InventoryDisplay>().checkItemList("ErvaBad"))
+            {
+                barrel.SetActive(false);
+            }
+            if (inventory.GetComponent<InventoryDisplay>().checkItemList("Pedra"))
+            {
+                rock.SetActive(false);
+            }
+            if (inventory.GetComponent<InventoryDisplay>().checkItemList("Wood"))
+            {
+                wood.SetActive(false);
+            }
         }
     }
 } 
