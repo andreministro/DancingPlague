@@ -18,6 +18,7 @@ public class PlayerScript : MonoBehaviour
     public float sanityPenalty;
     public GameObject cavalo, demon, inventario, demonCollider, MarketToVillageDoor;
     public GameObject luzTocha;
+    public GameObject dancerMove;
     
     private bool isGrounded;
     public Transform feetPos;
@@ -417,18 +418,20 @@ public class PlayerScript : MonoBehaviour
         StartCoroutine(gameObject.GetComponent<PlayerInter>().displayDialogueText(newText, true, false));
 
         // pessoas do mercado comeca a aproximar enquanto dançam
-        
         yield return new WaitUntil(() => (dialogueText.text == ""));
+        yield return new WaitForSeconds(1.8f);
+        dancerMove.GetComponent<Collider2D>().enabled = false;
+        dancerMove.SetActive(true);
+        dancerMove.GetComponent<Animator>().SetTrigger("DancersMove");
         newText = "-...What? ..What is going on? Why are you all dancing?\n-GET AWAY FROM MY HORSE!";
         StartCoroutine(gameObject.GetComponent<PlayerInter>().displayDialogueText(newText, true, false));
-        
+
         //horse runs back behind the staircase
-        
         yield return new WaitUntil(() => (dialogueText.text == ""));
-        newText = "I just spoke with these people... What on devils name is going on?";
-        StartCoroutine(gameObject.GetComponent<PlayerInter>().displayDialogueText(newText, false, false));
+        cavalo.GetComponent<Animator>().SetTrigger("HorseBaza");
 
         //jogador agora pode se mexer
+        dancerMove.GetComponent<Collider2D>().enabled = true;
         gameObject.GetComponent<PlayerInter>().playerInteractionsEnabled = true;
         cutScene = false;
         //dançarinos continuam se a aproximar ate o jogador ir para o lado esquerdo , se ele for contra eles perde vida e morre. 

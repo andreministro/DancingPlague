@@ -53,6 +53,7 @@ TagManager:
   - Ceiling1
   - Faca
   - PortaEndGame
+  - CrouchChecker
   layers:
   - Default
   - TransparentFX

@@ -19,6 +19,8 @@ public class PlayerInter : MonoBehaviour
     public GameObject fogueira;
     public GameObject fogueiraTrigger;
     public GameObject pedregulho, pedregulhoTrigger;
+    public GameObject lightcandle;
+    public GameObject faca;
 
     public bool firstPick=true;
     private static bool firstInterPoco = true;
@@ -277,8 +279,8 @@ public class PlayerInter : MonoBehaviour
                     }
                     if (triggered == "Vela")
                     {
-                        //light.enable=true;
-                        completedMissions = 1;
+                       lightcandle.SetActive(true);
+                       completedMissions = 1;
                     }
                 }
                 else if (Input.GetButtonDown("Save"))
@@ -965,6 +967,7 @@ public class PlayerInter : MonoBehaviour
         else if (item == "Faca")
         {
             facaEText.SetActive(false);
+            faca.SetActive(false);
         }
         pressETxt.text = "";
     }
