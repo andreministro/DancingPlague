@@ -374,16 +374,33 @@ public class PlayerScript : MonoBehaviour
         }
         else if (SceneManager.GetActiveScene().name == "LVL4 - BackHome" && isLit==false)
         {
-            FlipPlayer();
-            string newText = "pHey dear, you have no idea what just happened today.\npHello?\npI can't see a damm thing. I need some light.";
-            StartCoroutine(gameObject.GetComponent<PlayerInter>().displayDialogueText(newText, true, false));
-            cutScene = false;
+            if (cutSceneBackHome)
+            {
+                cutScene = false;
+                cutSceneBackHome = false;
+                StartCoroutine(CutSceneBackHome());
+            }
         }
         else if (SceneManager.GetActiveScene().name == "LVL4 - BackHome" && isLit == true)
         {
             string newText = "pWhere is everyone?!\npI need to find them.";
             StartCoroutine(gameObject.GetComponent<PlayerInter>().displayDialogueText(newText, true, false));
             cutScene = false;
+        }
+    }
+    private IEnumerator CutSceneBackHome()
+    {
+        FlipPlayer();
+        string newText = "pHey dear, you have no idea what just happened today.\npHello?\npI can't see a damm thing. I need some light.";
+        StartCoroutine(gameObject.GetComponent<PlayerInter>().displayDialogueText(newText, true, false));
+        yield return new WaitUntil(() => (dialogueText.text == ""));
+        if (inventario.GetComponent<InventoryDisplay>().checkItemList("Torcha")){
+            gameObject.GetComponent<PlayerInter>().pressETxt.text = "Light the torch (Press 1)";
+        }
+        else
+        {
+            newText = "Maybe I need to craft something to give me light.";
+            StartCoroutine(gameObject.GetComponent<PlayerInter>().displayDialogueText(newText, false, false));
         }
     }
     private IEnumerator CutSceneMarket()
