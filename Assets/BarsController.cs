@@ -301,9 +301,9 @@ public class BarsController : MonoBehaviour
         else
         {
             health = gameObject.GetComponent<PlayerData>().getHealth();
-            gameObject.GetComponent<PlayerInter>().inventory.GetComponent<InventoryDisplay>().setItemList(gameObject.GetComponent<PlayerData>().getInventoryItems());
-            SceneManager.LoadScene(gameObject.GetComponent<PlayerData>().getScene());
         }
+        gameObject.GetComponent<PlayerInter>().inventory.GetComponent<InventoryDisplay>().setItemList(gameObject.GetComponent<PlayerData>().getInventoryItems());
+        SceneManager.LoadScene(gameObject.GetComponent<PlayerData>().getScene());
     }
     public void morteMonstro()
     {

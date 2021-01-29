@@ -275,6 +275,11 @@ public class PlayerInter : MonoBehaviour
                     {
                         StartCoroutine(pickUpItem("Faca"));
                     }
+                    if (triggered == "Vela")
+                    {
+                        //light.enable=true;
+                        completedMissions = 1;
+                    }
                 }
                 else if (Input.GetButtonDown("Save"))
                 {
@@ -286,11 +291,6 @@ public class PlayerInter : MonoBehaviour
                                 gameObject.GetComponent<PlayerData>().PlayerDataSave();
                                 string newText = "Game saved.";
                                 StartCoroutine(displayDialogueText(newText, false, true));
-                            }
-                            else
-                            {
-                                //light.enable=true;
-                                completedMissions = 1;
                             }
                         }
                         else
@@ -326,7 +326,7 @@ public class PlayerInter : MonoBehaviour
                         triggered = other.tag;
                         offTrigger = false;
                     }
-                    else if (completedMissions == 0 && gameObject.GetComponent<PlayerScript>().isLit)
+                    else if (completedMissions == 0 && gameObject.GetComponent<PlayerScript>().getLit()==true)
                     {
                         pressETxt.text = "Light the candle";
                         triggered = other.tag;
@@ -1049,11 +1049,16 @@ public class PlayerInter : MonoBehaviour
                 {
                     oleo.SetActive(false);
                 }
+                if (inventory.GetComponent<InventoryDisplay>().checkItemList("ErvaBad"))
+                {
+                    barrel.SetActive(false);
+                }
                 if (gameObject.GetComponent<BarsController>().isDead() == true)
                 {
                     //reborn
                     gameObject.transform.position = gameObject.GetComponent<PlayerData>().getPosition();
                     gameObject.GetComponent<BarsController>().notDead();
+                    //Cutscene do mercado não, dar load do cavalo e dançarinos ?
                 }
             }
             sceneMarket++;
@@ -1063,9 +1068,15 @@ public class PlayerInter : MonoBehaviour
             if (sceneForest > 0)
             {
                 //inventário aqui
-
-                gameObject.transform.position = new Vector2(22.63f, -3.88f);
-                gameObject.GetComponent<PlayerScript>().FlipPlayer();
+                if (gameObject.GetComponent<BarsController>().isDead() == true)
+                {
+                    gameObject.GetComponent<BarsController>().notDead();
+                }
+                else
+                {
+                    gameObject.transform.position = new Vector2(22.63f, -3.88f);
+                    gameObject.GetComponent<PlayerScript>().FlipPlayer();
+                }
             }
             sceneForest++;
         }

@@ -547,7 +547,7 @@ MonoBehaviour:
   sanityPenalty: 0
   cavalo: {fileID: 0}
   demon: {fileID: 0}
-  inventario: {fileID: 0}
+  inventario: {fileID: 652872663}
   demonCollider: {fileID: 0}
   MarketToVillageDoor: {fileID: 0}
   luzTocha: {fileID: 2093125253}
@@ -557,6 +557,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   jumpTime: 0.1
+  isLit: 0
   canJump: 1
   movePlayer: 0
   cutScene: 1
@@ -13071,7 +13072,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2093125254
 Transform:
   m_ObjectHideFlags: 0

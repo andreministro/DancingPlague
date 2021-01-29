@@ -383,7 +383,7 @@ public class InventoryDisplay : MonoBehaviour
         }
         else if (item1 == "Torcha")
         {
-            janelaTxt.text = "Used for cooking, lighting and other enumerous uselful situation.\n\nBe careful to not burn yourself (Press 1 to use it)";
+            janelaTxt.text = "Used for cooking, lighting and other enumerous uselful situation.\n\nBe careful to not burn yourself.\n\n(Press 1 to use it)";
         }
         else if (item1 == "Oleo")
         {
@@ -459,7 +459,7 @@ public class InventoryDisplay : MonoBehaviour
         }
         else if (item2 == "Torcha")
         {
-            janelaTxt.text = "Used for cooking, lighting and other enumerous uselful situation.\n\nBe careful to not burn yourself (Press 1 to use it)";
+            janelaTxt.text = "Used for cooking, lighting and other enumerous uselful situation.\nBe careful to not burn yourself.\n\n(Press 1 to use it)";
         }
         else if (item2 == "Oleo")
         {
@@ -537,7 +537,7 @@ public class InventoryDisplay : MonoBehaviour
         }
         else if (item3 == "Torcha")
         {
-            janelaTxt.text = "Used for cooking, lighting and other enumerous uselful situation.\n\nBe careful to not burn yourself (Press 1 to use it)";
+            janelaTxt.text = "Used for cooking, lighting and other enumerous uselful situation.\n\nBe careful to not burn yourself.\n\n(Press 1 to use it)";
         }
         else if (item3 == "Oleo")
         {
@@ -580,6 +580,11 @@ public class InventoryDisplay : MonoBehaviour
     }
     public List<string> copyItemList()
     {
+        Debug.Log("Entrou na copia");
+        foreach(string elem in displayItems)
+        {
+            Debug.Log(elem);
+        }
         return displayItems;
     }
     public void setItemList(List<string> newList)

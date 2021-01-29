@@ -32,7 +32,7 @@ public class PlayerScript : MonoBehaviour
     private bool isCoveringEars;
     private bool isCoveringEW;
     private bool isWalking;
-    public bool isLit = false;
+    public static bool isLit = false;
     private bool isLitWalking;
     public bool canJump = true;
     private bool canUncrouch = true;
@@ -108,8 +108,9 @@ public class PlayerScript : MonoBehaviour
 
     void Player_Movement()
     {
+
         //Controls 
-        if(gameObject.transform.position.x > 8.3 && (SceneManager.GetActiveScene().name == "LVL2 - Forest") && firstMonster==true && inventario.GetComponent<InventoryDisplay>().checkItemList("Balde"))
+        if (gameObject.transform.position.x > 8.3 && (SceneManager.GetActiveScene().name == "LVL2 - Forest") && firstMonster==true && inventario.GetComponent<InventoryDisplay>().checkItemList("Balde"))
         {
             demonCollider.SetActive(true);
             StartCoroutine(monsterAppear());
@@ -251,8 +252,7 @@ public class PlayerScript : MonoBehaviour
 
         //Torch
 
-        //if (gameObject.GetComponent<PlayerInter>().inventory.GetComponent<InventoryDisplay>().checkItemList("Torcha"))
-        if (Input.GetButtonDown("Torch") && isGrounded == true && isLit == false)
+        if (Input.GetButtonDown("Torch") && isGrounded == true && isLit == false && gameObject.GetComponent<PlayerInter>().inventory.GetComponent<InventoryDisplay>().checkItemList("Torcha"))
         {
             canJump = false;
             animator.SetBool("IsLit", true);
@@ -311,6 +311,10 @@ public class PlayerScript : MonoBehaviour
     void Jump()
     {
         rb.velocity = Vector2.up * JumpPower;
+    }
+    public bool getLit()
+    {
+        return isLit;
     }
 
     private void cutscene_Controller(string currentSceneName)
