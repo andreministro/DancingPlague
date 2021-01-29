@@ -16,7 +16,7 @@ public class BarsController : MonoBehaviour
     public GameObject armacao;
     public GameObject[] hungerBar;
     public GameObject[] hungerFaces;
-    public GameObject demon;
+    public GameObject demon, demonImage;
     public int health;
     public bool isCoveringEars;
     public bool triggerArea = false;
@@ -127,6 +127,7 @@ public class BarsController : MonoBehaviour
             gameObject.GetComponent<PlayerScript>().movePlayer = false;
             lostHunger = true;
             gameObject.GetComponent<PlayerInter>().inventory.SetActive(false);
+            if (SceneManager.GetActiveScene().name == "LVL2 - Forest") demonImage.SetActive(false);
         }
         
     }
@@ -307,6 +308,7 @@ public class BarsController : MonoBehaviour
     }
     public void morteMonstro()
     {
+        demonImage.SetActive(true);
         gameObject.GetComponent<PlayerInter>().inventory.SetActive(false);
         demon.GetComponent<Animator>().SetTrigger("IsKilling");
         madnessImageFill.SetActive(true);
