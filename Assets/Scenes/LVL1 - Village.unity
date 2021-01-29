@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -569,7 +569,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.9085795, y: 1}
+    m_SensorSize: {x: 3.1931465, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -586,7 +586,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 95707527}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.7715883, y: 0.042407036, z: -10}
+  m_LocalPosition: {x: 2.9139977, y: 0.042407036, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 826334308}
@@ -4945,7 +4945,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 914d3eda2d2a14a408146b2591718224, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5fe4b67afbf37094d9bb6920f58aee06, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -11053,6 +11053,7 @@ MonoBehaviour:
   - {fileID: 883804094}
   - {fileID: 1834228673}
   demon: {fileID: 0}
+  demonImage: {fileID: 0}
   health: 0
   isCoveringEars: 0
   triggerArea: 0
@@ -11094,6 +11095,8 @@ MonoBehaviour:
   fogueiraTrigger: {fileID: 0}
   pedregulho: {fileID: 0}
   pedregulhoTrigger: {fileID: 0}
+  lightcandle: {fileID: 0}
+  faca: {fileID: 0}
   firstPick: 1
   playerInteractionsEnabled: 1
 --- !u!114 &1691527380
@@ -11121,12 +11124,14 @@ MonoBehaviour:
   demonCollider: {fileID: 0}
   MarketToVillageDoor: {fileID: 0}
   luzTocha: {fileID: 871939973}
+  dancerMove: {fileID: 0}
   feetPos: {fileID: 1848664864}
   checkRadius: 0.1
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
   jumpTime: 0.1
+  canJump: 1
   movePlayer: 0
   cutScene: 1
   cutSceneNumber: 1
@@ -11134,6 +11139,7 @@ MonoBehaviour:
   dialogueText: {fileID: 1350395428}
   enterMonster: 0
   cutSceneMarket: 1
+  cutSceneBackHome: 1
 --- !u!212 &1691527381
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -12033,7 +12039,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1771978387}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.7715883, y: 0.042407036, z: -10}
+  m_LocalPosition: {x: 2.9139977, y: 0.042407036, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

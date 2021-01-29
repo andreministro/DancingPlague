@@ -40,7 +40,6 @@ public class InventoryDisplay : MonoBehaviour
         btn = ItemNaoSelecionado3.GetComponent<Button>();
         btn.onClick.AddListener(ItemSelecionado3);
 
-        displayItems.Add("Torcha");
 
     }
     private void activeImage(Button itemSelecionado, string itemName)
@@ -580,12 +579,11 @@ public class InventoryDisplay : MonoBehaviour
     }
     public List<string> copyItemList()
     {
-        Debug.Log("Entrou na copia");
-        foreach(string elem in displayItems)
+        List<string> aux= new List<string>();
+        foreach (string elem in displayItems)
         {
-            Debug.Log(elem);
+            aux.Add(elem);
         }
-        List<string> aux = displayItems.Shallowcopy();
         return aux;
     }
     public void setItemList(List<string> newList)

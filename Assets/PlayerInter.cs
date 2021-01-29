@@ -37,9 +37,11 @@ public class PlayerInter : MonoBehaviour
     void Start()
     {
         DialogBox.SetActive(false);
-        if(SceneManager.GetActiveScene().name== "LVL1 - Home" && gameObject.GetComponent<BarsController>().isDead()==false)
+        if (SceneManager.GetActiveScene().name == "LVL1 - Home" && gameObject.GetComponent<BarsController>().isDead() == true)
+            completedMissions = 3;
+
+        if (SceneManager.GetActiveScene().name== "LVL1 - Home" && gameObject.GetComponent<BarsController>().isDead()==false)
         {
-            Debug.Log("primeira visita");
             completedMissions = 0;
             StartCoroutine(secondCutscene());
             bauAberto.SetActive(false);
@@ -477,8 +479,11 @@ public class PlayerInter : MonoBehaviour
             }
             if(other.tag== "TriggerCutSceneMarket")
             {
-                if (gameObject.GetComponent<PlayerScript>().cutSceneMarket)
-                    gameObject.GetComponent<PlayerScript>().cutScene = true;
+                if (sceneMarket == 0)
+                {
+                    if (gameObject.GetComponent<PlayerScript>().cutSceneMarket)
+                        gameObject.GetComponent<PlayerScript>().cutScene = true;
+                }
             }
             if(other.tag == "MarketToVillage")
             {

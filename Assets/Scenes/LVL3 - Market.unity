@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -7506,7 +7506,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 754597071}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.696362, y: -1.667593, z: -10}
+  m_LocalPosition: {x: -52.42904, y: -1.667593, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -8824,6 +8824,8 @@ MonoBehaviour:
   fogueiraTrigger: {fileID: 0}
   pedregulho: {fileID: 0}
   pedregulhoTrigger: {fileID: 0}
+  lightcandle: {fileID: 0}
+  faca: {fileID: 0}
   firstPick: 1
   playerInteractionsEnabled: 1
 --- !u!114 &847554667
@@ -8925,7 +8927,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 847554660}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.79, y: -5.36, z: 0}
+  m_LocalPosition: {x: -52.5, y: -5.36, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1167962352}
@@ -12996,7 +12998,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 2.5186157, y: 0.47197437}
+  m_Offset: {x: 2.5186157, y: 0.8702316}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -13007,7 +13009,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.39524078, y: 3.3393536}
+  m_Size: {x: 0.39524078, y: 8.118435}
   m_EdgeRadius: 0
 --- !u!4 &1360378993
 Transform:
@@ -17310,7 +17312,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.648688, y: 1}
+    m_SensorSize: {x: 2.444156, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -17327,7 +17329,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1916872350}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.696362, y: -1.667593, z: -10}
+  m_LocalPosition: {x: -52.42904, y: -1.667593, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1613341871}

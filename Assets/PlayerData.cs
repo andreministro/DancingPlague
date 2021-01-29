@@ -12,7 +12,6 @@ public class PlayerData : MonoBehaviour
 
     public void PlayerDataSave()
     {
-        Debug.Log("PlayerDataSave");
         health = gameObject.GetComponent<BarsController>().health;
         position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
         scene = SceneManager.GetActiveScene().name;
@@ -24,8 +23,6 @@ public class PlayerData : MonoBehaviour
     }
     public List<string> getInventoryItems()
     {
-        foreach (string elem in inventoryItems)
-            Debug.Log(elem);
         return inventoryItems;
     }
     public string getScene()

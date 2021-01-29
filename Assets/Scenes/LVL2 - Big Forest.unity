@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -827,7 +827,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 75843645}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 54.038147, y: -0.61556196, z: -10}
+  m_LocalPosition: {x: 54.09096, y: -0.61556196, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
@@ -8125,7 +8125,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.967742, y: 1}
+    m_SensorSize: {x: 2.444156, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -8142,7 +8142,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1067790981}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 54.038147, y: -0.61556196, z: -10}
+  m_LocalPosition: {x: 54.09096, y: -0.61556196, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 481029618}
@@ -15491,6 +15491,8 @@ MonoBehaviour:
   fogueiraTrigger: {fileID: 1482832954}
   pedregulho: {fileID: 0}
   pedregulhoTrigger: {fileID: 0}
+  lightcandle: {fileID: 0}
+  faca: {fileID: 0}
   firstPick: 1
   playerInteractionsEnabled: 1
 --- !u!114 &2131253374
@@ -15518,6 +15520,7 @@ MonoBehaviour:
   demonCollider: {fileID: 0}
   MarketToVillageDoor: {fileID: 0}
   luzTocha: {fileID: 1206359496}
+  dancerMove: {fileID: 0}
   feetPos: {fileID: 1663136518}
   checkRadius: 0.1
   whatIsGround:

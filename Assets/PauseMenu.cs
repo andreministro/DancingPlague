@@ -32,12 +32,14 @@ public class PauseMenu : MonoBehaviour
             {
                 player.GetComponent<BarsController>().notPause = true;
                 pauseMenu.SetActive(false);
+                player.GetComponent<PlayerInter>().playerInteractionsEnabled = true;
                 Time.timeScale = 1;
             }
             else
             {
                 player.GetComponent<BarsController>().notPause = false;
                 pauseMenu.SetActive(true);
+                player.GetComponent<PlayerInter>().playerInteractionsEnabled = false;
                 Time.timeScale = 0;
             }
             paused = !paused;
@@ -45,6 +47,7 @@ public class PauseMenu : MonoBehaviour
     }
     private void Continue()
     {
+        player.GetComponent<PlayerInter>().playerInteractionsEnabled = true;
         player.GetComponent<BarsController>().notPause = true;
         pauseMenu.SetActive(false);
         Time.timeScale = 1;

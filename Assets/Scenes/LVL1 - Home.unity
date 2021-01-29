@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -492,7 +492,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 8.5}
+  m_AnchoredPosition: {x: 0, y: 11.9}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &52336843
@@ -3518,7 +3518,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.535995, y: -3.4296584, z: -10}
+  m_LocalPosition: {x: -12.54815, y: -3.4296584, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4650,7 +4650,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.5617979, y: 1}
+    m_SensorSize: {x: 2.4521532, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -4667,7 +4667,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 776996889}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.535995, y: -3.4296584, z: -10}
+  m_LocalPosition: {x: -12.54815, y: -3.4296584, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1511732760}
@@ -5636,6 +5636,7 @@ MonoBehaviour:
   animator: {fileID: 916269562}
   standCollider: {fileID: 916269560}
   crouchCollider: {fileID: 916269563}
+  checkCeilingCollider: {fileID: 0}
   playerspeed: 4
   JumpPower: 17
   sanityPenalty: 0
@@ -5645,12 +5646,14 @@ MonoBehaviour:
   demonCollider: {fileID: 0}
   MarketToVillageDoor: {fileID: 0}
   luzTocha: {fileID: 0}
+  dancerMove: {fileID: 0}
   feetPos: {fileID: 2080573843}
   checkRadius: 0.1
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
   jumpTime: 0.1
+  canJump: 1
   movePlayer: 1
   cutScene: 0
   cutSceneNumber: 1
@@ -5658,6 +5661,7 @@ MonoBehaviour:
   dialogueText: {fileID: 2079422265}
   enterMonster: 0
   cutSceneMarket: 1
+  cutSceneBackHome: 1
 --- !u!212 &916269558
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5779,12 +5783,15 @@ MonoBehaviour:
   oleoEText: {fileID: 0}
   cordaEText: {fileID: 0}
   paoEText: {fileID: 0}
+  facaEText: {fileID: 0}
   bauAberto: {fileID: 658608014}
   inventory: {fileID: 1240397190}
   fogueira: {fileID: 0}
   fogueiraTrigger: {fileID: 0}
   pedregulho: {fileID: 0}
   pedregulhoTrigger: {fileID: 0}
+  lightcandle: {fileID: 0}
+  faca: {fileID: 0}
   firstPick: 1
   playerInteractionsEnabled: 1
 --- !u!95 &916269562
@@ -5877,6 +5884,7 @@ MonoBehaviour:
   - {fileID: 1185583988}
   - {fileID: 1809816033}
   demon: {fileID: 0}
+  demonImage: {fileID: 0}
   health: 0
   isCoveringEars: 0
   triggerArea: 0
