@@ -46,7 +46,6 @@ public class PlayerInter : MonoBehaviour
         }
         else
         {
-            completedMissions = 3;
             playerInteractionsEnabled = true;
             inventory.SetActive(false);
         }
@@ -109,14 +108,22 @@ public class PlayerInter : MonoBehaviour
 
                     if (triggered == "Porta")
                     {
-                        Debug.Log("Entrou no trigger");
-                        Debug.Log(completedMissions);
                         pressETxt.text = "";
                         if (completedMissions == 3)
                         {
                             SoundManager.PlaySound("door");
                             saveDataThroughScenes();
                             SceneManager.LoadScene("LVL1 - Village");
+                        }
+                    }
+                    if (triggered == "PortaEndGame")
+                    {
+                        pressETxt.text = "";
+                        if (completedMissions == 1)
+                        {
+                            SoundManager.PlaySound("door");
+                            saveDataThroughScenes();
+                            SceneManager.LoadScene("EndGameScene");
                         }
                     }
                     if (triggered == "PortaEntrarCasa")

@@ -158,6 +158,7 @@ public class BarsController : MonoBehaviour
         float alphaStep = 0.004f;
         float alphaFillStep = 0.01f;
         float delayPlayerStep = 0.001f;
+        float jumpMax = 2.7f;
         if (notPause)
         {
             if (isCoveringEars)
@@ -168,6 +169,8 @@ public class BarsController : MonoBehaviour
                 gameObject.GetComponent<PlayerScript>().sanityPenalty = 0.0f;
                 if (madnessImage.transform.localScale.x - step < maxScaleAux)
                 {
+                    if (madnessImage.transform.localScale.x - step < jumpMax) gameObject.GetComponent<PlayerScript>().canJump = false;
+                    else gameObject.GetComponent<PlayerScript>().canJump = true;
                     Vector2 localScale = new Vector2(madnessImage.transform.localScale.x + step, madnessImage.transform.localScale.y + step);
                     madnessImage.transform.localScale = localScale;
                 }
@@ -192,11 +195,15 @@ public class BarsController : MonoBehaviour
                     gameObject.GetComponent<PlayerScript>().sanityPenalty += delayPlayerStep;
                 if (madnessImage.transform.localScale.x - step > minScale)
                 {
+                    if (madnessImage.transform.localScale.x - step < jumpMax) gameObject.GetComponent<PlayerScript>().canJump = false;
+                    else gameObject.GetComponent<PlayerScript>().canJump = true;
                     Vector2 localScale = new Vector2(madnessImage.transform.localScale.x - step, madnessImage.transform.localScale.y - step);
                     madnessImage.transform.localScale = localScale;
                 }
                 else if ((madnessImage.transform.localScale.x - step <= minScale) && alphaLevel < 0.9f)
                 {
+                    if (madnessImage.transform.localScale.x - step < jumpMax) gameObject.GetComponent<PlayerScript>().canJump = false;
+                    else gameObject.GetComponent<PlayerScript>().canJump = true;
                     alphaLevel += alphaStep;
                     madnessImage.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, alphaLevel);
                 }
