@@ -280,9 +280,25 @@ public class PlayerInter : MonoBehaviour
                 {
                     if (triggered == "Vela")
                     {
-                        gameObject.GetComponent<PlayerData>().PlayerDataSave();
-                        string newText = "Game saved.";
-                        StartCoroutine(displayDialogueText(newText, false, true));
+                        if (SceneManager.GetActiveScene().name == "LVL4 - BackHome") {
+                            if (completedMissions == 1)
+                            {
+                                gameObject.GetComponent<PlayerData>().PlayerDataSave();
+                                string newText = "Game saved.";
+                                StartCoroutine(displayDialogueText(newText, false, true));
+                            }
+                            else
+                            {
+                                //light.enable=true;
+                                completedMissions = 1;
+                            }
+                        }
+                        else
+                        {
+                            gameObject.GetComponent<PlayerData>().PlayerDataSave();
+                            string newText = "Game saved.";
+                            StartCoroutine(displayDialogueText(newText, false, true));
+                        }
                     }
                 }
             }
@@ -303,9 +319,26 @@ public class PlayerInter : MonoBehaviour
 
             if (other.tag == "Vela")
             {
-                pressETxt.text = "Save (Press L)";
-                triggered = other.tag;
-                offTrigger = false;
+                if(SceneManager.GetActiveScene().name == "LVL4 - BackHome") {
+                    if (completedMissions == 1)
+                    {
+                        pressETxt.text = "Save (Press L)";
+                        triggered = other.tag;
+                        offTrigger = false;
+                    }
+                    else if (completedMissions == 0 && gameObject.GetComponent<PlayerScript>().isLit)
+                    {
+                        pressETxt.text = "Light the candle";
+                        triggered = other.tag;
+                        offTrigger = false;
+                    }
+                }
+                else
+                {
+                    pressETxt.text = "Save (Press L)";
+                    triggered = other.tag;
+                    offTrigger = false;
+                }
             }
 
             if (other.tag == "Bau")

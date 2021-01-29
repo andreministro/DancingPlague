@@ -52,6 +52,7 @@ TagManager:
   - RockFalling
   - Ceiling1
   - Faca
+  - PortaEndGame
   layers:
   - Default
   - TransparentFX

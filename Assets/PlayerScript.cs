@@ -32,7 +32,7 @@ public class PlayerScript : MonoBehaviour
     private bool isCoveringEars;
     private bool isCoveringEW;
     private bool isWalking;
-    private bool isLit = false;
+    public bool isLit = false;
     private bool isLitWalking;
     public bool canJump = true;
     private bool canUncrouch = true;
