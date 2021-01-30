@@ -20,7 +20,6 @@ public class PlayerScript : MonoBehaviour
     public GameObject cavalo, demon, inventario, demonCollider, MarketToVillageDoor;
     public GameObject luzTocha;
     public GameObject dancerMove;
-    //public UnityEvent crouch;
 
     private bool isGrounded;
     public Transform feetPos;
@@ -96,7 +95,17 @@ public class PlayerScript : MonoBehaviour
 
         if (cutScene)
         {
-            cutscene_Controller(currentSceneName);
+                animator.SetBool("IsCoveringEW", false);
+                animator.SetBool("IsCoveringEars", false);
+                animator.SetBool("IsCrawling", false);
+                animator.SetBool("IsCrouching", false);
+                animator.SetBool("IsLitWalking", false);
+                isLitWalking = false;
+                isCrawling = false;
+                isCoveringEars = false;
+                isCoveringEW = false;
+                isCrouching = false;
+                cutscene_Controller(currentSceneName);
         }
         else
         {
@@ -109,13 +118,10 @@ public class PlayerScript : MonoBehaviour
 
     private static bool firstMonster = true;
 
-
-
-    /*public void whenCrouching (bool isCrouching)
+    public void SetMonster()
     {
-        animator.SetBool("IsCrouching", isCrouching);
-    } */
-
+        firstMonster = true;
+    }
 
     void Player_Movement()
     {
@@ -144,23 +150,6 @@ public class PlayerScript : MonoBehaviour
             }
         }
         rb.velocity = new Vector2(moveX * playerspeed, rb.velocity.y);
-
-       /* if (moveX == 0 || Input.GetButton("Crouch") || Input.GetButton("Ears"))
-        {
-            animator.SetBool("IsRunning", false);
-            isWalking = false;
-        }
-        else
-        {
-            animator.SetBool("IsCoveringEW", false);
-            animator.SetBool("IsCrawling", false);
-
-            if(isCrouching != true)
-            { 
-                animator.SetBool("IsRunning", true);
-                isWalking = true;
-            }
-        }*/
 
         if (moveX == 0 || isCrouching == true || isCoveringEars == true)
         {
@@ -222,17 +211,6 @@ public class PlayerScript : MonoBehaviour
             isCrouching = true;
             animator.SetBool("IsCrouching", true);
             standCollider.enabled = false;
-
-            /*if(moveX!=0)
-            {
-                isCrawling = true;
-                animator.SetBool("IsCrawling", true);
-            }
-            else if(moveX == 0)
-            {
-                isCrawling = false;
-                animator.SetBool("IsCrawling", false);
-            } */
         } 
         else if (Input.GetButtonUp("Crouch") && canUncrouch == true)
         {
@@ -248,7 +226,9 @@ public class PlayerScript : MonoBehaviour
             //Debug.Log(isCrouching);
             standCollider.enabled = false;
             animator.SetBool("IsCrouching", true);
+
         }
+
 
         if (moveX != 0 && isCrouching == true)
         {
@@ -264,12 +244,15 @@ public class PlayerScript : MonoBehaviour
         }
 
         
-        /* if (canUncrouch == true && isCrouching == false && isCrawling == false)
+         if (canUncrouch == true && isCrouching == true && offTrigger == true)
          {
+             isCrouching = false;
              animator.SetBool("IsCrouching", false);
+             standCollider.enabled = true;
+             offTrigger = false;
              Debug.Log("3");
          }
-         */
+         
 
         //COVER EARS
         if (Input.GetButton("Ears") && isGrounded == true)
@@ -510,11 +493,13 @@ public class PlayerScript : MonoBehaviour
         }
         
     }
+    private bool offTrigger = false;
     private void OnTriggerExit2D(Collider2D other)
     {
         if(other.tag== "Ceiling1")
         {
             canUncrouch = true;
+            offTrigger = true;
         }
     }
     public void clearStaticVariables()

@@ -33,8 +33,8 @@ public class BarsController : MonoBehaviour
     private bool lostHunger = false;
     void Start()
     {
-
-        if (SceneManager.GetActiveScene().name == "LVL1 - Home")
+        if (SceneManager.GetActiveScene().name == "Credits") { }
+        else if (SceneManager.GetActiveScene().name == "LVL1 - Home")
         {
             health = 25;
             for (int i = 0; i <= maxHealth; i++)
@@ -84,12 +84,14 @@ public class BarsController : MonoBehaviour
 
     void Update()
     {
-        if (playerEating)
-        {
-            hungerBarGaining();
+        if (SceneManager.GetActiveScene().name != "Credits")
+        { 
+            if (playerEating)
+            {
+                hungerBarGaining();
+            }
+            sanityBarController();
         }
-        sanityBarController();
-        
     }
     public bool notPause = true;
     private IEnumerator hungerBarLoosing()
@@ -308,6 +310,7 @@ public class BarsController : MonoBehaviour
 
     private void LoadSavedScene()
     {
+        gameObject.GetComponent<PlayerScript>().SetMonster();
         isdead = true;
         if (lostHunger)
         {

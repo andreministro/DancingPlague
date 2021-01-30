@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LVL4 - NightVillage.unity
     guid: e832b51ca22cbc449902ee0ff5741943
+  - enabled: 1
+    path: Assets/Scenes/Credits.unity
+    guid: b4be02f5ae22e4549907e323628709e5
   m_configObjects: {}

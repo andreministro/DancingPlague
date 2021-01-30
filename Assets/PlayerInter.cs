@@ -123,11 +123,11 @@ public class PlayerInter : MonoBehaviour
                     if (triggered == "PortaEndGame")
                     {
                         pressETxt.text = "";
-                        if (completedMissions == 1)
+                        if (gameObject.GetComponent<PlayerScript>().getLit()==true)
                         {
                             SoundManager.PlaySound("door");
                             saveDataThroughScenes();
-                            SceneManager.LoadScene("EndGameScene");
+                            SceneManager.LoadScene("Credits");
                         }
                     }
                     if (triggered == "PortaEntrarCasa")
@@ -366,6 +366,16 @@ public class PlayerInter : MonoBehaviour
                     pressETxt.text = "Open";
                 triggered = other.tag;
                 offTrigger = false;
+            }
+            if (other.tag == "PortaEndGame")
+            {
+
+                if (gameObject.GetComponent<PlayerScript>().getLit() == true)
+                { 
+                    pressETxt.text = "Open";
+                    triggered = other.tag;
+                    offTrigger = false;
+                }
             }
 
             if (other.tag == "Pedra")
@@ -614,6 +624,13 @@ public class PlayerInter : MonoBehaviour
             }
 
             if (other.tag == "Porta")
+            {
+                pressETxt.text = "";
+                triggered = "";
+                offTrigger = true;
+            }
+
+            if (other.tag == "PortaEndGame")
             {
                 pressETxt.text = "";
                 triggered = "";
@@ -1063,7 +1080,6 @@ public class PlayerInter : MonoBehaviour
                 {
                     //reborn
                     gameObject.transform.position = gameObject.GetComponent<PlayerData>().getPosition();
-                    gameObject.GetComponent<BarsController>().notDead();
                 }
             }
             sceneMarket++;
