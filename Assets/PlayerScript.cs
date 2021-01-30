@@ -241,19 +241,13 @@ public class PlayerScript : MonoBehaviour
             animator.SetBool("IsCrouching", false);
             standCollider.enabled = true;
         }
-        else if (canUncrouch == false)
+        else if (canUncrouch == false && isCrouching == true)
         {
             Debug.Log("2");
             isCrouching = true;
             //Debug.Log(isCrouching);
             standCollider.enabled = false;
             animator.SetBool("IsCrouching", true);
-
-            if (canUncrouch == true)
-            { 
-                animator.SetBool("IsCrouching", false);
-                Debug.Log("3");
-            }
         }
 
         if (moveX != 0 && isCrouching == true)
@@ -265,8 +259,17 @@ public class PlayerScript : MonoBehaviour
         {
             isCrawling = false;
             animator.SetBool("IsCrawling", false);
+           /* if (isCrawling == false && canUncrouch ==true)
+                animator.SetBool("IsCrouching", false);*/
         }
 
+        
+        /* if (canUncrouch == true && isCrouching == false && isCrawling == false)
+         {
+             animator.SetBool("IsCrouching", false);
+             Debug.Log("3");
+         }
+         */
 
         //COVER EARS
         if (Input.GetButton("Ears") && isGrounded == true)
