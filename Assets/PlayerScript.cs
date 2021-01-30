@@ -517,4 +517,10 @@ public class PlayerScript : MonoBehaviour
             canUncrouch = true;
         }
     }
+    public void clearStaticVariables()
+    {
+        isLit = false;
+        firstBigForest = true;
+        firstMonster = true;
+    }
 }

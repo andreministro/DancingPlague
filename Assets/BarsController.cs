@@ -95,7 +95,7 @@ public class BarsController : MonoBehaviour
     private IEnumerator hungerBarLoosing()
     {
         //30.0f
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(15.0f);
         yield return new WaitUntil(() => notPause);
         hungerBar[health].SetActive(false);
         if (health > 0) { 
@@ -252,44 +252,58 @@ public class BarsController : MonoBehaviour
         }
     }
     private void ContinueGame()
-    { 
-        if (lostHunger) {
-            //IDLE ANIMATION AGAIN
-            gameObject.GetComponent<PlayerScript>().animator.SetBool("IsAlive", true);
-            health = 28;
-            for (int i = 0; i <= maxHealth; i++)
-            {
-                hungerBar[i].SetActive(false);
-            }
-            for (int i = 0; i <= 2; i++)
-            {
-                hungerFaces[i].SetActive(false);
-            }
-            hungerBar[health].SetActive(true);
-            hungerFaces[0].SetActive(true);
-            StartCoroutine(hungerBarLoosing());
+    {
+        if (gameObject.GetComponent<PlayerData>().getHealth() == -1)
+        {
+            StopGame();
         }
         else
         {
-            alphaLevel = 0.5f;
-            madnessImage.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, alphaLevel);
-            Vector2 localScale = new Vector2(maxScale, maxScale);
-            madnessImage.transform.localScale = localScale;
-            madnessImage.SetActive(false);
-        }
-        alphaLevelFill = 0.0f;
-        madnessImageFill.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, alphaLevelFill);
-        madnessImageFill.SetActive(false);
-        gameObject.GetComponent<PlayerInter>().playerInteractionsEnabled = true;
-        gameObject.GetComponent<PlayerScript>().movePlayer = true;
-        GameOver.SetActive(false);
-        gameObject.GetComponent<PlayerInter>().inventory.SetActive(false);
+            if (lostHunger)
+            {
+                //IDLE ANIMATION AGAIN
+                gameObject.GetComponent<PlayerScript>().animator.SetBool("IsAlive", true);
+                health = 28;
+                for (int i = 0; i <= maxHealth; i++)
+                {
+                    hungerBar[i].SetActive(false);
+                }
+                for (int i = 0; i <= 2; i++)
+                {
+                    hungerFaces[i].SetActive(false);
+                }
+                hungerBar[health].SetActive(true);
+                hungerFaces[0].SetActive(true);
+                StartCoroutine(hungerBarLoosing());
+            }
+            else
+            {
+                alphaLevel = 0.5f;
+                madnessImage.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, alphaLevel);
+                Vector2 localScale = new Vector2(maxScale, maxScale);
+                madnessImage.transform.localScale = localScale;
+                madnessImage.SetActive(false);
+            }
+            alphaLevelFill = 0.0f;
+            madnessImageFill.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, alphaLevelFill);
+            madnessImageFill.SetActive(false);
+            gameObject.GetComponent<PlayerInter>().playerInteractionsEnabled = true;
+            gameObject.GetComponent<PlayerScript>().movePlayer = true;
+            GameOver.SetActive(false);
+            gameObject.GetComponent<PlayerInter>().inventory.SetActive(false);
 
-        LoadSavedScene();
-        lostHunger = false;
+            LoadSavedScene();
+            lostHunger = false;
+        }
     }
-    private void StopGame()
+    public void StopGame()
     {
+        gameObject.GetComponent<PlayerInter>().clearStaticVariables();
+        gameObject.GetComponent<PlayerInter>().inventory.GetComponent<InventoryDisplay>().clearStaticVariables();
+        gameObject.GetComponent<PlayerData>().clearStaticVariables();
+        gameObject.GetComponent<PlayerScript>().clearStaticVariables();
+        isdead = false;
+        SceneManager.LoadScene("MainMenu");
     }
 
     private void LoadSavedScene()

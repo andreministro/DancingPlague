@@ -7,18 +7,19 @@ public class PauseMenu : MonoBehaviour
 {
     public GameObject player;
     public Button Resume;
-    public Button Options;
     public Button Quit;
     public GameObject pauseMenu;
 
     void Start()
     {
         pauseMenu.SetActive(false);
-        Button btn = Resume.GetComponent<Button>();
+        Button btn;
+        btn = Resume.GetComponent<Button>();
         btn.onClick.AddListener(Continue);
 
-        /*btn = Quit.GetComponent<Button>();
-        btn.onClick.AddListener(Exit);*/
+        btn = Quit.GetComponent<Button>();
+        btn.onClick.AddListener(Exit);
+
     }
 
     // Update is called once per frame
@@ -52,10 +53,11 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(false);
         Time.timeScale = 1;
     }
-    /*
+    
     private void Exit()
     {
-
-    }*/
+        Debug.Log("Entrou");
+        player.GetComponent<BarsController>().StopGame();
+    }
 }
 

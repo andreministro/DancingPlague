@@ -581,6 +581,7 @@ public class InventoryDisplay : MonoBehaviour
     public List<string> copyItemList()
     {
         List<string> aux= new List<string>();
+        
         foreach (string elem in displayItems)
         {
             aux.Add(elem);
@@ -590,5 +591,9 @@ public class InventoryDisplay : MonoBehaviour
     public void setItemList(List<string> newList)
     {
         displayItems = newList;
+    }
+    public void clearStaticVariables()
+    {
+        displayItems = new List<string>();
     }
 }

@@ -1120,4 +1120,15 @@ public class PlayerInter : MonoBehaviour
             }
         }
     }
+
+    public void clearStaticVariables()
+    {
+        firstInterPoco = true;
+        firstSanity = true;
+        sceneMarket = 0;
+        sceneHome = 0;
+        sceneForest = 0;
+        sceneBigForest = 0;
+        sceneVillage = 0;
+    }
 } 

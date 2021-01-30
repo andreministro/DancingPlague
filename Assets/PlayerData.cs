@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerData : MonoBehaviour
 {
-    public static int health;
+    public static int health=-1; //-1 -> ainda ñ deu save
     public static Vector3 position;
     public static string scene;
     public static List<string> inventoryItems;
@@ -32,5 +32,9 @@ public class PlayerData : MonoBehaviour
     public Vector3 getPosition()
     {
         return position;
+    }
+    public void clearStaticVariables()
+    {
+        health = -1;
     }
 }
