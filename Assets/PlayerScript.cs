@@ -118,10 +118,6 @@ public class PlayerScript : MonoBehaviour
             firstMonster = false;
         }
         moveX = Input.GetAxis("Horizontal");
-       /* if(Input.GetButtonDown("Horizontal"))
-        {
-            SoundManager.PlaySound("dirt_step");
-        } */
         if (moveX < 0)
         {
             if (moveX + sanityPenalty < 0)
@@ -139,7 +135,7 @@ public class PlayerScript : MonoBehaviour
         }
         rb.velocity = new Vector2(moveX * playerspeed, rb.velocity.y);
 
-        if (moveX == 0 || Input.GetButton("Crouch") || Input.GetButton("Ears"))
+       /* if (moveX == 0 || Input.GetButton("Crouch") || Input.GetButton("Ears"))
         {
             animator.SetBool("IsRunning", false);
             isWalking = false;
@@ -148,8 +144,29 @@ public class PlayerScript : MonoBehaviour
         {
             animator.SetBool("IsCoveringEW", false);
             animator.SetBool("IsCrawling", false);
-            animator.SetBool("IsRunning", true);
-            isWalking = true;
+
+            if(isCrouching != true)
+            { 
+                animator.SetBool("IsRunning", true);
+                isWalking = true;
+            }
+        }*/
+
+        if (moveX == 0 || isCrouching == true || isCoveringEars == true)
+        {
+            animator.SetBool("IsRunning", false);
+            isWalking = false;
+        }
+        else
+        {
+            animator.SetBool("IsCoveringEW", false);
+            animator.SetBool("IsCrawling", false);
+
+            if (isCrouching != true)
+            {
+                animator.SetBool("IsRunning", true);
+                isWalking = true;
+            }
         }
 
         //JUMP
@@ -196,27 +213,58 @@ public class PlayerScript : MonoBehaviour
             animator.SetBool("IsCrouching", true);
             standCollider.enabled = false;
 
-            if (moveX!=0)
+            if(moveX!=0)
             {
                 isCrawling = true;
                 animator.SetBool("IsCrawling", true);
             }
-            else
+            else if(moveX == 0)
             {
                 isCrawling = false;
                 animator.SetBool("IsCrawling", false);
             }
         }
-
+        
         if (Input.GetButtonUp("Crouch") && canUncrouch == true)
         {
+            Debug.Log("yo");
             isCrouching = false;
             animator.SetBool("IsCrouching", false);
             standCollider.enabled = true;
         }
 
+        if (Input.GetButtonUp("Crouch") && canUncrouch == false)
+        {
+            Debug.Log("yoyo");
+            //isCrouching = true;
+            //Debug.Log(isCrouching);
+            //animator.SetBool("IsCrouching", true);
+            standCollider.enabled = false;
+            isCrawling = true;
+            animator.SetBool("IsCrawling", true);
+
+            if(canUncrouch == true)
+            {
+                Debug.Log("yoyoFORA");;
+                animator.SetBool("IsCrawling", false);
+            }
+      
+      /* if (moveX != 0)
+         {
+             Debug.Log("yoyoMOOOOVE");
+             isCrawling = true;
+             animator.SetBool("IsCrawling", true);
+         }
+         else if(moveX == 0)
+         {
+             isCrawling = false;
+             animator.SetBool("IsCrawling", false);
+         }*/
+
+        }
+
         //COVER EARS
-        if(Input.GetButton("Ears") && isGrounded == true)
+        if (Input.GetButton("Ears") && isGrounded == true)
         {
             canJump = false;
             isCoveringEars = true;
@@ -259,6 +307,7 @@ public class PlayerScript : MonoBehaviour
             animator.SetBool("IsLit", true);
             isLit = true;
             luzTocha.SetActive(true);
+            SoundManager.PlaySound("tochastart");
             if (firstLitBackHome && SceneManager.GetActiveScene().name == "LVL4 - BackHome")
             {
                 firstLitBackHome = false;

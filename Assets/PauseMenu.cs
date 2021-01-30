@@ -9,8 +9,8 @@ public class PauseMenu : MonoBehaviour
     public Button Resume;
     public Button Options;
     public Button Quit;
-
     public GameObject pauseMenu;
+
     void Start()
     {
         pauseMenu.SetActive(false);
