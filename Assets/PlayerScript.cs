@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -19,7 +20,8 @@ public class PlayerScript : MonoBehaviour
     public GameObject cavalo, demon, inventario, demonCollider, MarketToVillageDoor;
     public GameObject luzTocha;
     public GameObject dancerMove;
-    
+    //public UnityEvent crouch;
+
     private bool isGrounded;
     public Transform feetPos;
     public float checkRadius;
@@ -106,6 +108,14 @@ public class PlayerScript : MonoBehaviour
     }
 
     private static bool firstMonster = true;
+
+
+
+    /*public void whenCrouching (bool isCrouching)
+    {
+        animator.SetBool("IsCrouching", isCrouching);
+    } */
+
 
     void Player_Movement()
     {
@@ -207,13 +217,13 @@ public class PlayerScript : MonoBehaviour
         }
 
         //CROUCH
-        if(Input.GetButton("Crouch") && isGrounded == true)
+        if(Input.GetButtonDown("Crouch") && isGrounded == true)
         {
             isCrouching = true;
             animator.SetBool("IsCrouching", true);
             standCollider.enabled = false;
 
-            if(moveX!=0)
+            /*if(moveX!=0)
             {
                 isCrawling = true;
                 animator.SetBool("IsCrawling", true);
@@ -222,46 +232,41 @@ public class PlayerScript : MonoBehaviour
             {
                 isCrawling = false;
                 animator.SetBool("IsCrawling", false);
-            }
-        }
-        
-        if (Input.GetButtonUp("Crouch") && canUncrouch == true)
+            } */
+        } 
+        else if (Input.GetButtonUp("Crouch") && canUncrouch == true)
         {
-            Debug.Log("yo");
+            Debug.Log("1");
             isCrouching = false;
             animator.SetBool("IsCrouching", false);
             standCollider.enabled = true;
         }
-
-        if (Input.GetButtonUp("Crouch") && canUncrouch == false)
+        else if (canUncrouch == false)
         {
-            Debug.Log("yoyo");
-            //isCrouching = true;
+            Debug.Log("2");
+            isCrouching = true;
             //Debug.Log(isCrouching);
-            //animator.SetBool("IsCrouching", true);
             standCollider.enabled = false;
+            animator.SetBool("IsCrouching", true);
+
+            if (canUncrouch == true)
+            { 
+                animator.SetBool("IsCrouching", false);
+                Debug.Log("3");
+            }
+        }
+
+        if (moveX != 0 && isCrouching == true)
+        {
             isCrawling = true;
             animator.SetBool("IsCrawling", true);
-
-            if(canUncrouch == true)
-            {
-                Debug.Log("yoyoFORA");;
-                animator.SetBool("IsCrawling", false);
-            }
-      
-      /* if (moveX != 0)
-         {
-             Debug.Log("yoyoMOOOOVE");
-             isCrawling = true;
-             animator.SetBool("IsCrawling", true);
-         }
-         else if(moveX == 0)
-         {
-             isCrawling = false;
-             animator.SetBool("IsCrawling", false);
-         }*/
-
         }
+        else if (moveX == 0)
+        {
+            isCrawling = false;
+            animator.SetBool("IsCrawling", false);
+        }
+
 
         //COVER EARS
         if (Input.GetButton("Ears") && isGrounded == true)
