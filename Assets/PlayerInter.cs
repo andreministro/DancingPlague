@@ -479,11 +479,9 @@ public class PlayerInter : MonoBehaviour
             }
             if(other.tag== "TriggerCutSceneMarket")
             {
-                if (sceneMarket == 0)
-                {
-                    if (gameObject.GetComponent<PlayerScript>().cutSceneMarket)
-                        gameObject.GetComponent<PlayerScript>().cutScene = true;
-                }
+                if (gameObject.GetComponent<PlayerScript>().cutSceneMarket)
+                    gameObject.GetComponent<PlayerScript>().cutScene = true;
+                
             }
             if(other.tag == "MarketToVillage")
             {
@@ -1066,7 +1064,6 @@ public class PlayerInter : MonoBehaviour
                     //reborn
                     gameObject.transform.position = gameObject.GetComponent<PlayerData>().getPosition();
                     gameObject.GetComponent<BarsController>().notDead();
-                    //Cutscene do mercado não, dar load do cavalo e dançarinos ?
                 }
             }
             sceneMarket++;
