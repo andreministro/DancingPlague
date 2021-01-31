@@ -62,7 +62,6 @@ public class PlayerScript : MonoBehaviour
         sanityPenalty = 0;
         if (SceneManager.GetActiveScene().name == "LVL1 - Home" && gameObject.GetComponent<BarsController>().isDead()==false)
         {
-            Debug.Log("Entrou");
             movePlayer = false;
             cutScene = true;
             label = true;
@@ -406,7 +405,7 @@ public class PlayerScript : MonoBehaviour
                 cutSceneMarket = false;
                 gameObject.GetComponent<PlayerInter>().playerInteractionsEnabled = false;
                 animator.SetBool("IsRunning", false);
-                MarketToVillageDoor.SetActive(false);
+                //MarketToVillageDoor.SetActive(false);
                 StartCoroutine(CutSceneMarket());
             }
         }
