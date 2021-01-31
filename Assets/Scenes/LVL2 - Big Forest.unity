@@ -652,7 +652,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: e59a7205097a63d46b095c68b97519de, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.261
+  m_Volume: 0.415
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -829,7 +829,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 75843645}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 55.251453, y: -0.61556196, z: -10}
+  m_LocalPosition: {x: 56.58643, y: -0.61556196, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
@@ -8487,7 +8487,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.6367521, y: 1}
+    m_SensorSize: {x: 13.678572, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -8504,7 +8504,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1067790981}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 55.251453, y: -0.61556196, z: -10}
+  m_LocalPosition: {x: 56.58643, y: -0.61556196, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 481029618}
@@ -11900,7 +11900,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 30.512302, y: -3.1755695}
+  m_Offset: {x: 30.57309, y: -3.1755695}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -11911,7 +11911,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4.6098785, y: 0.9573307}
+  m_Size: {x: 4.488306, y: 0.9573307}
   m_EdgeRadius: 0
 --- !u!1 &1482832954
 GameObject:

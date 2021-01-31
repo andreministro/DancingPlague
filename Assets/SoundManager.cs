@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    public static AudioClip door_open, barril, dirt_step, poco, tochastart, tochaContinue;
+    public static AudioClip door_open, barril, dirt_step, poco, tochastart, tochaContinue, gameover;
     static AudioSource audioSrc;
 
     // Start is called before the first frame update
@@ -15,6 +15,7 @@ public class SoundManager : MonoBehaviour
         poco = Resources.Load<AudioClip>("baldepoco");
         tochastart = Resources.Load<AudioClip>("tochastart");
         tochaContinue = Resources.Load<AudioClip>("tochaContinue");
+        gameover = Resources.Load<AudioClip>("gameover");
         audioSrc = GetComponent<AudioSource>();
     }
 
@@ -46,6 +47,10 @@ public class SoundManager : MonoBehaviour
 
             case "tochaContinue":
                 audioSrc.PlayOneShot(tochaContinue);
+                break;
+
+            case "gameover":
+                audioSrc.PlayOneShot(gameover);
                 break;
         }
 

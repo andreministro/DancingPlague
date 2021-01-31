@@ -454,7 +454,7 @@ public class PlayerScript : MonoBehaviour
         cavalo.GetComponent<Animator>().SetTrigger("HorseWalking");
         //yield return new WaitUntil(() => (dialogueText.text == ""));
         yield return new WaitForSeconds(2.0f);
-        string newText = "-What is this filthy plesant doing in here?\n-Think you can just come and steal our food?\npI  am not filthy I just want to buy something for my family to eat.\n-GOSH! HOW DARE A MERE PLEBE ANSWER ME BACK!\n-PREPARE FOR YOUR PUNISHMENT!";
+        string newText = "-What is this filthy peasant doing in here?\n-Think you can just come and steal our food?\npI  am not filthy I just want to buy something for my family to eat.\n-GOSH! HOW DARE A MERE PLEBE ANSWER ME BACK!\n-PREPARE FOR YOUR PUNISHMENT!";
         StartCoroutine(gameObject.GetComponent<PlayerInter>().displayDialogueText(newText, true, false));
 
         // pessoas do mercado comeca a aproximar enquanto dançam

@@ -97,7 +97,7 @@ public class BarsController : MonoBehaviour
     private IEnumerator hungerBarLoosing()
     {
         //30.0f
-        yield return new WaitForSeconds(15.0f);
+        yield return new WaitForSeconds(10.0f);
         yield return new WaitUntil(() => notPause);
         hungerBar[health].SetActive(false);
         if (health > 0) { 
@@ -120,6 +120,7 @@ public class BarsController : MonoBehaviour
             //Dead
             //Animação cair no chão
             gameObject.GetComponent<PlayerScript>().animator.SetTrigger("IsDyingT");
+            SoundManager.PlaySound("gameover");
             madnessPlayer.SetActive(false);
             pressETxt.text = "";
             madnessImageFill.SetActive(true);
