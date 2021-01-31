@@ -781,6 +781,12 @@ public class PlayerInter : MonoBehaviour
                 triggered = "";
                 offTrigger = true;
             }
+            if (other.tag == "NightVillageToHome")
+            {
+                pressETxt.text = "";
+                triggered = "";
+                offTrigger = true;
+            }
         }
     }
     public IEnumerator displayDialogueText(string newText, bool multipleDialogues, bool first)

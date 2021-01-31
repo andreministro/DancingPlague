@@ -56,7 +56,10 @@ public class PauseMenu : MonoBehaviour
     
     private void Exit()
     {
-        Debug.Log("Entrou");
+        player.GetComponent<BarsController>().notPause = true;
+        //pauseMenu.SetActive(false);
+        player.GetComponent<PlayerInter>().playerInteractionsEnabled = true;
+        Time.timeScale = 1;
         player.GetComponent<BarsController>().StopGame();
     }
 }

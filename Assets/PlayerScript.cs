@@ -62,6 +62,7 @@ public class PlayerScript : MonoBehaviour
         sanityPenalty = 0;
         if (SceneManager.GetActiveScene().name == "LVL1 - Home" && gameObject.GetComponent<BarsController>().isDead()==false)
         {
+            Debug.Log("Entrou");
             movePlayer = false;
             cutScene = true;
             label = true;

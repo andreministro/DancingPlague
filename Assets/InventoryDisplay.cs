@@ -406,7 +406,7 @@ public class InventoryDisplay : MonoBehaviour
         }
         else if(item1 == "Pao")
         {
-            janelaTxt.text = ".";
+            janelaTxt.text = "";
         }
     }
     void ItemSelecionado2()
@@ -482,7 +482,7 @@ public class InventoryDisplay : MonoBehaviour
         }
         else if (item2 == "Pao")
         {
-            janelaTxt.text = ".";
+            janelaTxt.text = "";
         }
 
     }
@@ -561,7 +561,7 @@ public class InventoryDisplay : MonoBehaviour
         }
         else if (item3 == "Pao")
         {
-            janelaTxt.text = ".";
+            janelaTxt.text = "";
         }
     }
     public bool checkItemList(string itemName)
