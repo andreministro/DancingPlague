@@ -61,13 +61,13 @@ public class PlayerInter : MonoBehaviour
     {
         if (playerInteractionsEnabled)
         {
-            if (SceneManager.GetActiveScene().name != "LVL1 - Home")
-            {
+           // if (SceneManager.GetActiveScene().name != "LVL1 - Home")
+           // {
                 if (Input.GetButtonDown("Inventory"))
                 {
                     displayInventory();
                 }
-            }
+           // }
 
             if (triggered != "")
             {

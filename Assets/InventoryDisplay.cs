@@ -40,7 +40,7 @@ public class InventoryDisplay : MonoBehaviour
         btn = ItemNaoSelecionado3.GetComponent<Button>();
         btn.onClick.AddListener(ItemSelecionado3);
 
-        //displayItems.Add("BaldeVazio");
+        //displayItems.Add("Balde");
         //displayItems.Add("Torcha");
     }
     private void activeImage(Button itemSelecionado, string itemName)
